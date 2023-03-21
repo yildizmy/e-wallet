@@ -1,0 +1,74 @@
+spring:
+  application:
+    name: e-wallet
+  main:
+    banner-mode: console
+  banner:
+    location: classpath:/banner.txt
+  output:
+    ansi:
+      enabled: always
+  jackson:
+    date-format: 'dd.MM.yyyy'
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: ${db_url}
+    username: ${db_username}
+    password: ${db_password}
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+    properties:
+      hibernate.format_sql: true
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+      open-in-view: false
+      generate-ddl: true
+  flyway:
+    enabled: true
+    placeholderReplacement: false
+    baseline-on-migrate: true
+  mvc:
+    throw-exception-if-no-handler-found: true
+  servlet:
+    multipart:
+      max-file-size: 1MB
+      max-request-size: 10MB
+
+logging:
+  file:
+    name: './logs/application.log'
+    logback:
+      rollingpolicy:
+        max-file-size: 1MB
+        total-size-cap: 10MB
+        max-history: 30
+        clean-history-on-start: true
+  pattern:
+    console: '%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){blue} %clr(%-5p) %clr(${PID}){faint} %clr(---){faint} %clr([%8.15t]){faint} %clr(%-40.40logger{0}){cyan} %clr(:){faint} %clr(%m){faint}%n'
+    file: '%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n'
+  level:
+    com.github.yildizmy: debug
+    org.springframework: warn
+    org.hibernate: error
+    org.springframework.security: error
+
+server:
+  port: 8080
+  error:
+    include-message: always
+    include-binding-errors: always
+    include-stacktrace: on_param
+    include-exception: false
+
+exception:
+  trace: true
+
+app:
+  security:
+    jwtSecret: ${jwt_secret}
+    jwtExpirationMs: 1800000
+    testUser: ${test_user:spring}
+    testPassword: ${test_password:secret}
+    testRole: ${test_role:USER}
