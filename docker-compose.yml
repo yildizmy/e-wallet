@@ -15,7 +15,7 @@ services:
     volumes:
       - db-data:/var/lib/postgresql/data
     networks:
-      - ewbridge
+      - ew-bridge
     expose:
       - 5432
     logging:
@@ -29,5 +29,5 @@ volumes:
     driver: local
 
 networks:
-  ewbridge:
+  ew-bridge:
     driver: bridge

@@ -11,7 +11,7 @@ services:
     depends_on:
       - backend
     networks:
-      - ewbridge
+      - ew-bridge
     logging:
       driver: 'json-file'
       options:
@@ -32,7 +32,7 @@ services:
     depends_on:
       - db
     networks:
-      - ewbridge
+      - ew-bridge
     logging:
       driver: 'json-file'
       options:
@@ -40,5 +40,5 @@ services:
         max-file: '5'
 
 networks:
-  ewbridge:
+  ew-bridge:
     driver: bridge
