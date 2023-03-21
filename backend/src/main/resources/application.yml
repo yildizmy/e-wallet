@@ -1,4 +1,6 @@
 spring:
+  config:
+    import: optional:file:./../.env[.properties] # read environment variables from .env file
   application:
     name: e-wallet
   main:
