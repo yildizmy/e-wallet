@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  db:
+    container_name: e-wallet-db
+    image: postgres:14.6-alpine
+    restart: always
+    env_file: ./.env
+    environment:
+      POSTGRES_DB: ${db_name}
+      POSTGRES_USER: ${db_username}
+      POSTGRES_PASSWORD: ${db_password}
+    ports:
+      - '5432:5432'
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    networks:
+      - ewbridge
+    expose:
+      - 5432
+    logging:
+      driver: 'json-file'
+      options:
+        max-size: '100m'
+        max-file: '5'
+
+volumes:
+  db-data:
+    driver: local
+
+networks:
+  ewbridge:
+    driver: bridge

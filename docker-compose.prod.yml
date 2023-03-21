@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  frontend:
+    container_name: e-wallet-frontend
+    build: ./frontend
+    restart: always
+    env_file: ./.env
+    ports:
+      - '3000:3000'
+    depends_on:
+      - backend
+    networks:
+      - ewbridge
+    logging:
+      driver: 'json-file'
+      options:
+        max-size: '100m'
+        max-file: '5'
+
+  backend:
+    container_name: e-wallet-backend
+    build: ./backend
+    env_file: ./.env
+    restart: always
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/${db_name}
+      SPRING_DATASOURCE_USERNAME: ${db_username}
+      SPRING_DATASOURCE_PASSWORD: ${db_password}
+    ports:
+      - '8080:8080'
+    depends_on:
+      - db
+    networks:
+      - ewbridge
+    logging:
+      driver: 'json-file'
+      options:
+        max-size: '100m'
+        max-file: '5'
+
+networks:
+  ewbridge:
+    driver: bridge
