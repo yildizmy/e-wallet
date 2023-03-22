@@ -71,6 +71,3 @@ app:
   security:
     jwtSecret: ${jwt_secret}
     jwtExpirationMs: 1800000
-    testUser: ${test_user:spring}
-    testPassword: ${test_password:secret}
-    testRole: ${test_role:USER}
