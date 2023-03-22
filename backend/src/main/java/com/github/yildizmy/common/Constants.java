@@ -15,7 +15,7 @@ public final class Constants {
     public static final String UNAUTHORIZED = "Unauthorized";
     public static final String UNAUTHORIZED_ERROR = "Unauthorized error: {}";
     public static final String CANNOT_SET_AUTH = "Cannot set user authentication: {}";
-    public static final String NOT_FOUND_USERNAME = "User Not Found with username: %s";
+    public static final String NOT_FOUND_USERNAME = "User with username of %1$s is not found";
     public static final String INVALID_JWT_SIGN = "Invalid JWT signature: {}";
     public static final String INVALID_JWT_TOKEN = "Invalid JWT token: {}";
     public static final String JWT_EXPIRED = "JWT token is expired: {}";
