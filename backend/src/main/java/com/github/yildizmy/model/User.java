@@ -51,7 +51,7 @@ public class User {
     }
 
     public void removeWallet(Wallet wallet) {
-        this.wallets.remove(wallet);
+        wallets.remove(wallet);
         wallet.setUser(null);
     }
 

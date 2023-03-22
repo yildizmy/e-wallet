@@ -41,7 +41,7 @@ public class Type {
     }
 
     public void removeTransaction(Transaction transaction) {
-        this.transactions.remove(transaction);
+        transactions.remove(transaction);
         transaction.setType(null);
     }
 }
