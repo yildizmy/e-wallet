@@ -25,18 +25,6 @@ public class Transaction {
     )
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "sender_wallet_id", referencedColumnName = "id", nullable = false)
-    private Wallet senderWallet;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "receiver_wallet_id", referencedColumnName = "id", nullable = false)
-    private Wallet receiverWallet;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "type_id", referencedColumnName = "id", nullable = false)
-    private Type type;
-
     @Column(nullable = false)
     private BigDecimal amount;
 
@@ -52,6 +40,18 @@ public class Transaction {
     @Column(length = 20, nullable = false)
     @Enumerated(EnumType.STRING)
     private Status status;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "sender_wallet_id", referencedColumnName = "id", nullable = false)
+    private Wallet senderWallet;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "receiver_wallet_id", referencedColumnName = "id", nullable = false)
+    private Wallet receiverWallet;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "type_id", referencedColumnName = "id", nullable = false)
+    private Type type;
 
     @Override
     public boolean equals(Object o) {
