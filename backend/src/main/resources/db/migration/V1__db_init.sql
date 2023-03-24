@@ -40,7 +40,7 @@ CREATE TABLE type
 CREATE TABLE wallet
 (
     id      BIGINT      NOT NULL,
-    iban    VARCHAR(26) NOT NULL,
+    iban    VARCHAR(34) NOT NULL,
     name    VARCHAR(50) NOT NULL,
     balance DECIMAL     NOT NULL,
     user_id BIGINT      NOT NULL,
