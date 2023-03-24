@@ -35,7 +35,7 @@ public class WalletService {
      * Fetches a single wallet by the given id
      *
      * @param id
-     * @return PetResponse
+     * @return WalletResponse
      */
     @Transactional(readOnly = true)
     public WalletResponse findById(long id) {
@@ -48,7 +48,7 @@ public class WalletService {
      * Fetches a single wallet by the given iban
      *
      * @param iban
-     * @return PetResponse
+     * @return WalletResponse
      */
     @Transactional(readOnly = true)
     public WalletResponse findByIban(String iban) {
@@ -61,7 +61,7 @@ public class WalletService {
      * Fetches all wallets based on the given paging and sorting parameters
      *
      * @param pageable
-     * @return List of PetResponse
+     * @return List of WalletResponse
      */
     @Transactional(readOnly = true)
     public Page<WalletResponse> findAll(Pageable pageable) {
