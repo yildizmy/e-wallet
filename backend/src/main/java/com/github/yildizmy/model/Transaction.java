@@ -1,16 +1,18 @@
 package com.github.yildizmy.model;
 
 import jakarta.persistence.*;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.Instant;
-import java.util.Objects;
+import java.util.UUID;
 
 @Getter
 @Setter
 @Entity
+@EqualsAndHashCode(of = {"referenceNumber"})
 public class Transaction {
 
     @Id
@@ -34,8 +36,8 @@ public class Transaction {
     @Column(nullable = false)
     private Instant date;
 
-    @Column(length = 12, nullable = false, unique = true)
-    private String referenceNumber;
+    @Column(nullable = false, unique = true)
+    private UUID referenceNumber;
 
     @Column(length = 20, nullable = false)
     @Enumerated(EnumType.STRING)
@@ -52,18 +54,4 @@ public class Transaction {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "type_id", referencedColumnName = "id", nullable = false)
     private Type type;
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Transaction)) return false;
-        Transaction transaction = (Transaction) o;
-        return getId() != null &&
-                Objects.equals(getId(), transaction.getId());
-    }
-
-    @Override
-    public int hashCode() {
-        return getClass().hashCode();
-    }
 }
