@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.NaturalId;
 
 import java.math.BigDecimal;
 import java.util.HashSet;
@@ -32,7 +31,6 @@ public class Wallet {
     )
     private Long id;
 
-    @NaturalId
     @Column(length = 26, nullable = false, unique = true)
     private String iban;
 
