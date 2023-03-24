@@ -29,10 +29,10 @@ public class WalletController {
     private final WalletService walletService;
 
     /**
-     * Fetches a single pet by the given id
+     * Fetches a single wallet by the given id
      *
      * @param id
-     * @return
+     * @return WalletResponse wrapped by ResponseEntity<ApiResponse<T>>
      */
     @PreAuthorize("hasRole(T(com.github.yildizmy.model.RoleType).ROLE_USER)")
     @GetMapping("/{id}")
@@ -42,10 +42,23 @@ public class WalletController {
     }
 
     /**
+     * Fetches a single wallet by the given iban
+     *
+     * @param id
+     * @return WalletResponse wrapped by ResponseEntity<ApiResponse<T>>
+     */
+    @PreAuthorize("hasRole(T(com.github.yildizmy.model.RoleType).ROLE_USER)")
+    @GetMapping("/ibans/{iban}")
+    public ResponseEntity<ApiResponse<WalletResponse>> findByIban(@PathVariable String iban) {
+        final WalletResponse response = walletService.findByIban(iban);
+        return ResponseEntity.ok(new ApiResponse<>(Instant.now(clock).toEpochMilli(), SUCCESS, response));
+    }
+
+    /**
      * Fetches all wallets based on the given paging and sorting parameters
      *
      * @param pageable
-     * @return
+     * @return List of WalletResponse wrapped by ResponseEntity<ApiResponse<T>>
      */
     @PreAuthorize("hasRole(T(com.github.yildizmy.model.RoleType).ROLE_USER)")
     @GetMapping
@@ -58,7 +71,7 @@ public class WalletController {
      * Creates a new wallet using the given request parameters
      *
      * @param request
-     * @return
+     * @return id of the created wallet wrapped by ResponseEntity<ApiResponse<T>>
      */
     @PreAuthorize("hasRole(T(com.github.yildizmy.model.RoleType).ROLE_USER)")
     @PostMapping
@@ -73,7 +86,7 @@ public class WalletController {
      * Updates wallet using the given request parameters
      *
      * @param request
-     * @return
+     * @return id of the updated wallet wrapped by ResponseEntity<ApiResponse<T>>
      */
     @PreAuthorize("hasRole(T(com.github.yildizmy.model.RoleType).ROLE_USER)")
     @PutMapping
@@ -86,7 +99,7 @@ public class WalletController {
      * Deletes wallet by the given id
      *
      * @param id
-     * @return
+     * @return ResponseEntity<ApiResponse < Void>>
      */
     @PreAuthorize("hasRole(T(com.github.yildizmy.model.RoleType).ROLE_USER)")
     @DeleteMapping("/{id}")

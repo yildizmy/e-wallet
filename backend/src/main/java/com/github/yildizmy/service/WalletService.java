@@ -27,7 +27,6 @@ import static com.github.yildizmy.common.Constants.*;
 public class WalletService {
 
     private final WalletRepository walletRepository;
-    private final UserService userService;
     private final WalletRequestMapper walletRequestMapper;
     private final WalletResponseMapper walletResponseMapper;
 
@@ -58,6 +57,16 @@ public class WalletService {
     }
 
     /**
+     * Fetches a single wallet reference (entity) by the given id
+     *
+     * @param iban
+     * @return Wallet
+     */
+    public Wallet getReferenceByIban(String iban) {
+        return walletRepository.getReferenceByIban(iban);
+    }
+
+    /**
      * Fetches all wallets based on the given paging and sorting parameters
      *
      * @param pageable
@@ -79,12 +88,12 @@ public class WalletService {
      * @return id of the created wallet
      */
     public CommandResponse create(WalletRequest request) {
-        if (walletRepository.existsByUserIdAndIbanIgnoreCase(request.getUserId(), request.getIban()))
+        if (walletRepository.existsByIbanIgnoreCase(request.getIban()))
             throw new ElementAlreadyExistsException(ALREADY_EXISTS_WALLET_IBAN);
         if (walletRepository.existsByUserIdAndNameIgnoreCase(request.getUserId(), request.getName()))
             throw new ElementAlreadyExistsException(ALREADY_EXISTS_WALLET_NAME);
 
-        final Wallet wallet = walletRequestMapper.toEntity(request, userService);
+        final Wallet wallet = walletRequestMapper.toEntity(request);
         walletRepository.save(wallet);
         log.info(CREATED_WALLET);
         return CommandResponse.builder().id(wallet.getId()).build();
@@ -100,9 +109,9 @@ public class WalletService {
         final Wallet foundWallet = walletRepository.findById(request.getId())
                 .orElseThrow(() -> new NoSuchElementFoundException(NOT_FOUND_WALLET));
 
-        // check if the iban is changed and new iban is already exists in user's wallets
+        // check if the iban is changed and new iban is already exists
         if (!request.getIban().equalsIgnoreCase(foundWallet.getIban()) &&
-                walletRepository.existsByUserIdAndIbanIgnoreCase(request.getUserId(), request.getIban()))
+                walletRepository.existsByIbanIgnoreCase(request.getIban()))
             throw new ElementAlreadyExistsException(ALREADY_EXISTS_WALLET_IBAN);
 
         // check if the name is changed and new name is already exists in user's wallets
@@ -110,7 +119,7 @@ public class WalletService {
                 walletRepository.existsByUserIdAndNameIgnoreCase(request.getUserId(), request.getName()))
             throw new ElementAlreadyExistsException(ALREADY_EXISTS_WALLET_NAME);
 
-        final Wallet wallet = walletRequestMapper.toEntity(request, userService);
+        final Wallet wallet = walletRequestMapper.toEntity(request);
         walletRepository.save(wallet);
         log.info(UPDATED_WALLET);
         return CommandResponse.builder().id(wallet.getId()).build();
