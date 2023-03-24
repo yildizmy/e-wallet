@@ -15,7 +15,7 @@ public class WalletRequest {
 
     private Long id;
 
-    @Size(min = 26, max = 26, message = "{iban.size}")
+    @Size(min = 15, max = 34, message = "{iban.size}")
     @NotBlank(message = "{iban.notblank}")
     private String iban;
 
