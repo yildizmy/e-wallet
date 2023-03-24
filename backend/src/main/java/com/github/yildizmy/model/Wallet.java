@@ -31,7 +31,7 @@ public class Wallet {
     )
     private Long id;
 
-    @Column(length = 26, nullable = false, unique = true)
+    @Column(length = 34, nullable = false, unique = true)
     private String iban;
 
     @Column(length = 50, nullable = false)
