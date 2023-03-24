@@ -83,8 +83,6 @@ ALTER TABLE public."user"
 ALTER TABLE public."user"
     ADD CONSTRAINT uc_user_username UNIQUE (username);
 
-CREATE INDEX wallet_iban_idx ON wallet (iban);
-
 CREATE UNIQUE INDEX wallet_user_id_iban_key ON wallet (user_id, iban);
 
 CREATE UNIQUE INDEX wallet_user_id_name_key ON wallet (user_id, name);
