@@ -42,12 +42,12 @@ public class Transaction {
     private Status status;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "sender_wallet_id", referencedColumnName = "id", nullable = false)
-    private Wallet senderWallet;
+    @JoinColumn(name = "from_wallet_id", referencedColumnName = "id", nullable = false)
+    private Wallet fromWallet;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "receiver_wallet_id", referencedColumnName = "id", nullable = false)
-    private Wallet receiverWallet;
+    @JoinColumn(name = "to_wallet_id", referencedColumnName = "id", nullable = false)
+    private Wallet toWallet;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "type_id", referencedColumnName = "id", nullable = false)
