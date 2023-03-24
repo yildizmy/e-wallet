@@ -35,22 +35,9 @@ public class WalletController {
      * @return
      */
     @PreAuthorize("hasRole(T(com.github.yildizmy.model.RoleType).ROLE_USER)")
-    @GetMapping("/id/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<ApiResponse<WalletResponse>> findById(@PathVariable long id) {
         final WalletResponse response = walletService.findById(id);
-        return ResponseEntity.ok(new ApiResponse<>(Instant.now(clock).toEpochMilli(), SUCCESS, response));
-    }
-
-    /**
-     * Fetches a single wallet by the given iban
-     *
-     * @param iban
-     * @return
-     */
-    @PreAuthorize("hasRole(T(com.github.yildizmy.model.RoleType).ROLE_USER)")
-    @GetMapping("/iban/{iban}")
-    public ResponseEntity<ApiResponse<WalletResponse>> findByIban(@PathVariable String iban) {
-        final WalletResponse response = walletService.findByIban(iban);
         return ResponseEntity.ok(new ApiResponse<>(Instant.now(clock).toEpochMilli(), SUCCESS, response));
     }
 
