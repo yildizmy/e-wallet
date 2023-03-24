@@ -1,17 +1,19 @@
 package com.github.yildizmy.model;
 
 import jakarta.persistence.*;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.NaturalId;
 
 import java.math.BigDecimal;
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 
 @Getter
 @Setter
 @Entity
+@EqualsAndHashCode(of = {"iban"})
 public class Wallet {
 
     @Id
@@ -26,6 +28,10 @@ public class Wallet {
     )
     private Long id;
 
+    @NaturalId
+    @Column(length = 26, nullable = false, unique = true)
+    private String iban;
+
     @Column(length = 50, nullable = false)
     private String name;
 
@@ -36,43 +42,47 @@ public class Wallet {
     @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
     private User user;
 
-    @OneToMany(mappedBy = "senderWallet", cascade = CascadeType.ALL)
-    private Set<Transaction> senderTransactions = new HashSet<>();
+    @OneToMany(mappedBy = "fromWallet", cascade = CascadeType.ALL)
+    private Set<Transaction> fromTransactions = new HashSet<>();
 
-    public void addSenderTransaction(Transaction transaction) {
-        senderTransactions.add(transaction);
-        transaction.setSenderWallet(this);
+    public void addFromTransaction(Transaction transaction) {
+        fromTransactions.add(transaction);
+        transaction.setFromWallet(this);
     }
 
-    public void removeSenderTransaction(Transaction transaction) {
-        senderTransactions.remove(transaction);
-        transaction.setSenderWallet(null);
+    public void removeFromTransaction(Transaction transaction) {
+        fromTransactions.remove(transaction);
+        transaction.setFromWallet(null);
     }
 
-    @OneToMany(mappedBy = "receiverWallet", cascade = CascadeType.ALL)
-    private Set<Transaction> receiverTransactions = new HashSet<>();
+    @OneToMany(mappedBy = "toWallet", cascade = CascadeType.ALL)
+    private Set<Transaction> toTransactions = new HashSet<>();
 
-    public void addReceiverTransaction(Transaction transaction) {
-        receiverTransactions.add(transaction);
-        transaction.setReceiverWallet(this);
+    public void addToTransaction(Transaction transaction) {
+        toTransactions.add(transaction);
+        transaction.setToWallet(this);
     }
 
-    public void removeReceiverTransaction(Transaction transaction) {
-        receiverTransactions.remove(transaction);
-        transaction.setReceiverWallet(null);
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Wallet)) return false;
-        Wallet wallet = (Wallet) o;
-        return getId() != null &&
-                Objects.equals(getId(), wallet.getId());
-    }
-
-    @Override
-    public int hashCode() {
-        return getClass().hashCode();
+    public void removeToTransaction(Transaction transaction) {
+        toTransactions.remove(transaction);
+        transaction.setToWallet(null);
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
