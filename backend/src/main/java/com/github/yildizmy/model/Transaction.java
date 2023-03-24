@@ -34,7 +34,7 @@ public class Transaction {
     private String description;
 
     @Column(nullable = false)
-    private Instant date;
+    private Instant createdAt;
 
     @Column(nullable = false, unique = true)
     private UUID referenceNumber;
