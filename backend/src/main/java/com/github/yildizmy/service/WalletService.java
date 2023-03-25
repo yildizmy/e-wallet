@@ -95,7 +95,7 @@ public class WalletService {
 
         final Wallet wallet = walletRequestMapper.toEntity(request);
         walletRepository.save(wallet);
-        log.info(CREATED_WALLET);
+        log.info(CREATED_WALLET, new Object[]{wallet.getIban(), wallet.getName(), wallet.getBalance()});
         return CommandResponse.builder().id(wallet.getId()).build();
     }
 
@@ -121,7 +121,7 @@ public class WalletService {
 
         final Wallet wallet = walletRequestMapper.toEntity(request);
         walletRepository.save(wallet);
-        log.info(UPDATED_WALLET);
+        log.info(UPDATED_WALLET, new Object[]{wallet.getIban(), wallet.getName(), wallet.getBalance()});
         return CommandResponse.builder().id(wallet.getId()).build();
     }
 
@@ -134,6 +134,6 @@ public class WalletService {
         final Wallet wallet = walletRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementFoundException(NOT_FOUND_WALLET));
         walletRepository.delete(wallet);
-        log.info(DELETED_WALLET);
+        log.info(DELETED_WALLET, new Object[]{wallet.getIban(), wallet.getName(), wallet.getBalance()});
     }
 }

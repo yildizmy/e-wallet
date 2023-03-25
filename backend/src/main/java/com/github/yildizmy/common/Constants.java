@@ -39,9 +39,8 @@ public final class Constants {
     public static final String NOT_FOUND_WALLET = "Requested wallet is not found";
     public static final String NOT_FOUND_TRANSACTION = "Requested transaction is not found";
     public static final String CREATED_USER = "User is created (username: {})";
-    public static final String CREATED_WALLET = "Wallet is created";
-    // public static final String CREATED_TRANSACTION = "Transaction is created (from: {0} --- to: {1} --- amount: {2})";
+    public static final String CREATED_WALLET = "Wallet is created (iban: {} --- name: {} --- balance: {})";
     public static final String CREATED_TRANSACTION = "Transaction is created (from: {} --- to: {} --- amount: {})";
-    public static final String UPDATED_WALLET = "Wallet is updated";
-    public static final String DELETED_WALLET = "Wallet is deleted";
+    public static final String UPDATED_WALLET = "Wallet is updated (iban: {} --- name: {} --- balance: {})";
+    public static final String DELETED_WALLET = "Wallet is deleted (iban: {} --- name: {} --- balance: {})";
 }
