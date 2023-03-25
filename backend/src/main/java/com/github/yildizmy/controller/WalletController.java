@@ -49,7 +49,7 @@ public class WalletController {
      * @return WalletResponse wrapped by ResponseEntity<ApiResponse<T>>
      */
     @PreAuthorize("hasRole(T(com.github.yildizmy.model.RoleType).ROLE_USER)")
-    @GetMapping("/ibans/{iban}")
+    @GetMapping("/iban/{iban}")
     public ResponseEntity<ApiResponse<WalletResponse>> findByIban(@PathVariable String iban) {
         final WalletResponse response = walletService.findByIban(iban);
         return ResponseEntity.ok(new ApiResponse<>(Instant.now(clock).toEpochMilli(), SUCCESS, response));
@@ -90,7 +90,7 @@ public class WalletController {
      * @return id of the created transaction wrapped by ResponseEntity<ApiResponse<T>>
      */
     @PreAuthorize("hasRole(T(com.github.yildizmy.model.RoleType).ROLE_USER)")
-    @PostMapping("/transferFunds")
+    @PostMapping("/transfer")
     public ResponseEntity<ApiResponse<CommandResponse>> transferFunds(@Valid @RequestBody TransactionRequest request) {
         final CommandResponse response = walletService.transferFunds(request);
         return ResponseEntity
