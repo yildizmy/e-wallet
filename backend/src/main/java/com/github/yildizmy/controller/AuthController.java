@@ -1,7 +1,7 @@
 package com.github.yildizmy.controller;
 
 import com.github.yildizmy.dto.request.LoginRequest;
-import com.github.yildizmy.dto.request.UserRequest;
+import com.github.yildizmy.dto.request.SignupRequest;
 import com.github.yildizmy.dto.response.ApiResponse;
 import com.github.yildizmy.dto.response.CommandResponse;
 import com.github.yildizmy.dto.response.JwtResponse;
@@ -45,7 +45,7 @@ public class AuthController {
      * @return id of the registered user
      */
     @PostMapping("/signup")
-    public ResponseEntity<ApiResponse<CommandResponse>> signup(@Valid @RequestBody UserRequest request) {
+    public ResponseEntity<ApiResponse<CommandResponse>> signup(@Valid @RequestBody SignupRequest request) {
         final CommandResponse response = authService.signup(request);
         return ResponseEntity
                 .status(HttpStatus.CREATED)
