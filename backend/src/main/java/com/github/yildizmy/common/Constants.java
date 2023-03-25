@@ -26,8 +26,10 @@ public final class Constants {
     public static final String UNKNOWN_ERROR = "Unknown error occurred";
     public static final String METHOD_ARGUMENT_NOT_VALID = "MethodArgumentNotValid exception";
 
+    public static final String LOGGED_IN_USER = "User logged in (username: {0})";
     public static final String ALREADY_EXISTS = "Requested element already exists";
-    public static final String ALREADY_EXISTS_USER = "User with the same username already exists";
+    public static final String ALREADY_EXISTS_USER_NAME = "User with the same username already exists";
+    public static final String ALREADY_EXISTS_USER_EMAIL = "User with the same email already exists";
     public static final String ALREADY_EXISTS_WALLET_IBAN = "Wallet with the same iban already exists";
     public static final String ALREADY_EXISTS_WALLET_NAME = "Wallet with the same name already exists";
     public static final String ALREADY_EXISTS_TRANSACTION = "Transaction with the same name reference number already exists";
@@ -36,7 +38,7 @@ public final class Constants {
     public static final String NOT_FOUND_USER = "Requested user is not found";
     public static final String NOT_FOUND_WALLET = "Requested wallet is not found";
     public static final String NOT_FOUND_TRANSACTION = "Requested transaction is not found";
-    public static final String CREATED_USER = "User is created";
+    public static final String CREATED_USER = "User is created (username: {0})";
     public static final String CREATED_WALLET = "Wallet is created";
     public static final String CREATED_TRANSACTION = "Type is created";
     public static final String UPDATED_WALLET = "Wallet is updated";
