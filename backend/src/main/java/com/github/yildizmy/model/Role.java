@@ -3,7 +3,6 @@ package com.github.yildizmy.model;
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.HashSet;
@@ -12,7 +11,6 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
-@NoArgsConstructor
 @EqualsAndHashCode(of = {"type"})
 public class Role {
 
@@ -43,10 +41,5 @@ public class Role {
     public void removeUser(User user) {
         users.remove(user);
         user.getRoles().remove(this);
-    }
-
-    public Role(Long id, RoleType type) {
-        this.id = id;
-        this.type = type;
     }
 }
