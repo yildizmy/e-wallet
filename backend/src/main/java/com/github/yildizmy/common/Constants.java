@@ -43,4 +43,7 @@ public final class Constants {
     public static final String CREATED_TRANSACTION = "Transaction is created (from: {} --- to: {} --- amount: {})";
     public static final String UPDATED_WALLET = "Wallet is updated (iban: {} --- name: {} --- balance: {})";
     public static final String DELETED_WALLET = "Wallet is deleted (iban: {} --- name: {} --- balance: {})";
+    public static final String FUNDS_CANNOT_BELOW_ZERO = "Transfer amount should be higher than or equal to wallet balance";
+    public static final String UPDATED_WALLET_BALANCE = "Wallet balance is updated (New Wallet Balance: {})";
+    public static final String UPDATED_WALLET_BALANCES = "Wallet balances are updated (Wallet of sender: {} --- Wallet of receiver: {})";
 }
