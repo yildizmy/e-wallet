@@ -7,6 +7,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -81,6 +82,20 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<Object> handleElementAlreadyExistsException(ElementAlreadyExistsException ex, WebRequest request) {
         log.error(ALREADY_EXISTS, ex);
         return buildErrorResponse(ex, HttpStatus.CONFLICT, request);
+    }
+
+    /**
+     * Handles AuthenticationException
+     *
+     * @param ex
+     * @param request
+     * @return ResponseEntity<Object> with detailed information related to the error
+     */
+    @ExceptionHandler(AuthenticationException.class)
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    public ResponseEntity<Object> handleAuthenticationException(AuthenticationException ex, WebRequest request) {
+        log.error("Failed to authenticate user", ex);
+        return buildErrorResponse(ex, HttpStatus.UNAUTHORIZED, request);
     }
 
     /**
