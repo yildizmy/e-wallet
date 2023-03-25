@@ -18,7 +18,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-import java.text.MessageFormat;
 import java.util.List;
 
 import static com.github.yildizmy.common.Constants.*;
@@ -54,7 +53,7 @@ public class AuthService {
                 .map(item -> item.getAuthority())
                 .toList();
 
-        log.info(MessageFormat.format(LOGGED_IN_USER, request.getUsername()));
+        log.info(LOGGED_IN_USER, new Object[]{request.getUsername()});
         return JwtResponse.builder().token(jwt).id(userDetails.getId()).username(userDetails.getUsername()).roles(roles).build();
     }
 
@@ -72,7 +71,7 @@ public class AuthService {
 
         final User user = signupRequestMapper.toEntity(request);
         userRepository.save(user);
-        log.info(MessageFormat.format(CREATED_USER, user.getUsername()));
+        log.info(CREATED_USER, new Object[]{user.getUsername()});
         return CommandResponse.builder().id(user.getId()).build();
     }
 }
