@@ -1,5 +1,6 @@
 package com.github.yildizmy.controller;
 
+import com.github.yildizmy.dto.request.TransactionRequest;
 import com.github.yildizmy.dto.request.WalletRequest;
 import com.github.yildizmy.dto.response.ApiResponse;
 import com.github.yildizmy.dto.response.CommandResponse;
@@ -77,6 +78,51 @@ public class WalletController {
     @PostMapping
     public ResponseEntity<ApiResponse<CommandResponse>> create(@Valid @RequestBody WalletRequest request) {
         final CommandResponse response = walletService.create(request);
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(new ApiResponse<>(Instant.now(clock).toEpochMilli(), SUCCESS, response));
+    }
+
+    /**
+     * Transfer funds between wallets
+     *
+     * @param request
+     * @return id of the created transaction wrapped by ResponseEntity<ApiResponse<T>>
+     */
+    @PreAuthorize("hasRole(T(com.github.yildizmy.model.RoleType).ROLE_USER)")
+    @PostMapping("/transferFunds")
+    public ResponseEntity<ApiResponse<CommandResponse>> transferFunds(@Valid @RequestBody TransactionRequest request) {
+        final CommandResponse response = walletService.transferFunds(request);
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(new ApiResponse<>(Instant.now(clock).toEpochMilli(), SUCCESS, response));
+    }
+
+    /**
+     * Adds funds to the given wallet
+     *
+     * @param request
+     * @return id of the created transaction wrapped by ResponseEntity<ApiResponse<T>>
+     */
+    @PreAuthorize("hasRole(T(com.github.yildizmy.model.RoleType).ROLE_USER)")
+    @PostMapping("/addFunds")
+    public ResponseEntity<ApiResponse<CommandResponse>> addFunds(@Valid @RequestBody TransactionRequest request) {
+        final CommandResponse response = walletService.addFunds(request);
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(new ApiResponse<>(Instant.now(clock).toEpochMilli(), SUCCESS, response));
+    }
+
+    /**
+     * Withdraw funds from the given wallet
+     *
+     * @param request
+     * @return id of the created transaction wrapped by ResponseEntity<ApiResponse<T>>
+     */
+    @PreAuthorize("hasRole(T(com.github.yildizmy.model.RoleType).ROLE_USER)")
+    @PostMapping("/withdrawFunds")
+    public ResponseEntity<ApiResponse<CommandResponse>> withdrawFunds(@Valid @RequestBody TransactionRequest request) {
+        final CommandResponse response = walletService.withdrawFunds(request);
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(new ApiResponse<>(Instant.now(clock).toEpochMilli(), SUCCESS, response));

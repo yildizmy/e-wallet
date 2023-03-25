@@ -3,10 +3,12 @@ package com.github.yildizmy.service;
 import com.github.yildizmy.dto.mapper.WalletRequestMapper;
 import com.github.yildizmy.dto.mapper.WalletResponseMapper;
 import com.github.yildizmy.dto.mapper.WalletTransactionRequestMapper;
+import com.github.yildizmy.dto.request.TransactionRequest;
 import com.github.yildizmy.dto.request.WalletRequest;
 import com.github.yildizmy.dto.response.CommandResponse;
 import com.github.yildizmy.dto.response.WalletResponse;
 import com.github.yildizmy.exception.ElementAlreadyExistsException;
+import com.github.yildizmy.exception.InsufficientFundsException;
 import com.github.yildizmy.exception.NoSuchElementFoundException;
 import com.github.yildizmy.model.Wallet;
 import com.github.yildizmy.repository.WalletRepository;
@@ -105,6 +107,80 @@ public class WalletService {
         transactionService.create(walletTransactionRequestMapper.toTransactionDto(request));
 
         return CommandResponse.builder().id(wallet.getId()).build();
+    }
+
+    /**
+     * Transfer funds between wallets
+     *
+     * @param request
+     * @return id of the transaction
+     */
+    @Transactional
+    public CommandResponse transferFunds(TransactionRequest request) {
+        final Wallet toWallet = getReferenceByIban(request.getToWalletIban());
+        final Wallet fromWallet = getReferenceByIban(request.getFromWalletIban());
+
+        // check if the balance of sender wallet has equal or higher to/than transfer amount
+        if (fromWallet.getBalance().compareTo(request.getAmount()) < 0)
+            throw new InsufficientFundsException(FUNDS_CANNOT_BELOW_ZERO);
+
+        // update balance of sender wallet (when transferring to another wallet)
+        if (fromWallet.getId() != toWallet.getId()) {
+            fromWallet.setBalance(fromWallet.getBalance().subtract(request.getAmount()));
+            walletRepository.save(fromWallet);
+        }
+
+        // update balance of receiver wallet
+        toWallet.setBalance(toWallet.getBalance().add(request.getAmount()));
+        walletRepository.save(toWallet);
+        log.info(UPDATED_WALLET_BALANCES, new Object[]{fromWallet.getBalance(), toWallet.getBalance()});
+
+        final CommandResponse response = transactionService.create(request);
+        return CommandResponse.builder().id(response.id()).build();
+    }
+
+    /**
+     * Adds funds to the given wallet
+     *
+     * @param request
+     * @return id of the transaction
+     */
+    @Transactional
+    public CommandResponse addFunds(TransactionRequest request) {
+        final Wallet toWallet = getReferenceByIban(request.getToWalletIban());
+
+        // update balance of the wallet
+        toWallet.setBalance(toWallet.getBalance().add(request.getAmount()));
+
+        walletRepository.save(toWallet);
+        log.info(UPDATED_WALLET_BALANCE, new Object[]{toWallet.getBalance()});
+
+        final CommandResponse response = transactionService.create(request);
+        return CommandResponse.builder().id(response.id()).build();
+    }
+
+    /**
+     * Withdraw funds from the given wallet
+     *
+     * @param request
+     * @return id of the transaction
+     */
+    @Transactional
+    public CommandResponse withdrawFunds(TransactionRequest request) {
+        final Wallet fromWallet = getReferenceByIban(request.getFromWalletIban());
+
+        // check if the balance of sender wallet has equal or higher to/than transfer amount
+        if (fromWallet.getBalance().compareTo(request.getAmount()) < 0)
+            throw new InsufficientFundsException(FUNDS_CANNOT_BELOW_ZERO);
+
+        // update balance of the wallet
+        fromWallet.setBalance(fromWallet.getBalance().subtract(request.getAmount()));
+
+        walletRepository.save(fromWallet);
+        log.info(UPDATED_WALLET_BALANCE, new Object[]{fromWallet.getBalance()});
+
+        final CommandResponse response = transactionService.create(request);
+        return CommandResponse.builder().id(response.id()).build();
     }
 
     /**
