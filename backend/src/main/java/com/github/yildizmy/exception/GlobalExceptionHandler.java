@@ -66,7 +66,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(NoSuchElementFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ResponseEntity<Object> handleNoSuchElementFoundException(NoSuchElementFoundException ex, WebRequest request) {
-        log.error("Failed to find the requested element", ex);
+        log.error(NOT_FOUND, ex);
         return buildErrorResponse(ex, HttpStatus.NOT_FOUND, request);
     }
 
@@ -85,6 +85,20 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     /**
+     * Handles InsufficientFundsException
+     *
+     * @param ex
+     * @param request
+     * @return ResponseEntity<Object> with detailed information related to the error
+     */
+    @ExceptionHandler(InsufficientFundsException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ResponseEntity<Object> handleMethodArgumentInvalidException(InsufficientFundsException ex, WebRequest request) {
+        log.error(METHOD_ARGUMENT_NOT_VALID, ex);
+        return buildErrorResponse(ex, HttpStatus.BAD_REQUEST, request);
+    }
+
+    /**
      * Handles AuthenticationException
      *
      * @param ex
@@ -94,7 +108,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(AuthenticationException.class)
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     public ResponseEntity<Object> handleAuthenticationException(AuthenticationException ex, WebRequest request) {
-        log.error("Failed to authenticate user", ex);
+        log.error(UNAUTHORIZED, ex);
         return buildErrorResponse(ex, HttpStatus.UNAUTHORIZED, request);
     }
 
