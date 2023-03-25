@@ -44,7 +44,7 @@ public class WalletController {
     /**
      * Fetches a single wallet by the given iban
      *
-     * @param id
+     * @param iban
      * @return WalletResponse wrapped by ResponseEntity<ApiResponse<T>>
      */
     @PreAuthorize("hasRole(T(com.github.yildizmy.model.RoleType).ROLE_USER)")
