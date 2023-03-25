@@ -45,10 +45,10 @@ public abstract class SignupRequestMapper {
     void setToEntityFields(@MappingTarget User entity, SignupRequest dto) {
         entity.setPassword(passwordEncoder.encode(dto.getPassword()));
 
-        final List<RoleType> rTypes = dto.getRoles().stream()
-                .map(r -> RoleType.valueOf(r))
+        final List<RoleType> roleTypes = dto.getRoles().stream()
+                .map(RoleType::valueOf)
                 .toList();
-        final List<Role> roles = roleService.getReferenceByTypeIsIn(new HashSet<>(rTypes));
+        final List<Role> roles = roleService.getReferenceByTypeIsIn(new HashSet<>(roleTypes));
         entity.setRoles(new HashSet<>(roles));
     }
 }
