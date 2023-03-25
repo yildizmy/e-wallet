@@ -6,6 +6,7 @@ import com.github.yildizmy.service.TypeService;
 import com.github.yildizmy.service.WalletService;
 import org.mapstruct.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 
 /**
  * Mapper used for mapping TransactionRequest fields
@@ -19,7 +20,7 @@ public abstract class TransactionRequestMapper {
     private TypeService typeService;
 
     @Autowired
-    public void setWalletService(WalletService walletService) {
+    public void setWalletService(@Lazy WalletService walletService) {
         this.walletService = walletService;
     }
 

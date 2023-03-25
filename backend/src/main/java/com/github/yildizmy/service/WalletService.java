@@ -2,6 +2,7 @@ package com.github.yildizmy.service;
 
 import com.github.yildizmy.dto.mapper.WalletRequestMapper;
 import com.github.yildizmy.dto.mapper.WalletResponseMapper;
+import com.github.yildizmy.dto.mapper.WalletTransactionRequestMapper;
 import com.github.yildizmy.dto.request.WalletRequest;
 import com.github.yildizmy.dto.response.CommandResponse;
 import com.github.yildizmy.dto.response.WalletResponse;
@@ -27,8 +28,10 @@ import static com.github.yildizmy.common.Constants.*;
 public class WalletService {
 
     private final WalletRepository walletRepository;
+    private final TransactionService transactionService;
     private final WalletRequestMapper walletRequestMapper;
     private final WalletResponseMapper walletResponseMapper;
+    private final WalletTransactionRequestMapper walletTransactionRequestMapper;
 
     /**
      * Fetches a single wallet by the given id
@@ -87,6 +90,7 @@ public class WalletService {
      * @param request
      * @return id of the created wallet
      */
+    @Transactional
     public CommandResponse create(WalletRequest request) {
         if (walletRepository.existsByIbanIgnoreCase(request.getIban()))
             throw new ElementAlreadyExistsException(ALREADY_EXISTS_WALLET_IBAN);
@@ -96,6 +100,10 @@ public class WalletService {
         final Wallet wallet = walletRequestMapper.toEntity(request);
         walletRepository.save(wallet);
         log.info(CREATED_WALLET, new Object[]{wallet.getIban(), wallet.getName(), wallet.getBalance()});
+
+        // add this initial amount to the transactions
+        transactionService.create(walletTransactionRequestMapper.toTransactionDto(request));
+
         return CommandResponse.builder().id(wallet.getId()).build();
     }
 
