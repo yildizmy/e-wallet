@@ -18,10 +18,10 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.text.MessageFormat;
 import java.util.List;
 
-import static com.github.yildizmy.common.Constants.ALREADY_EXISTS_USER;
-import static com.github.yildizmy.common.Constants.CREATED_USER;
+import static com.github.yildizmy.common.Constants.*;
 
 /**
  * Service used for Authentication related operations
@@ -53,6 +53,8 @@ public class AuthService {
         final List<String> roles = userDetails.getAuthorities().stream()
                 .map(item -> item.getAuthority())
                 .toList();
+
+        log.info(MessageFormat.format(LOGGED_IN_USER, request.getUsername()));
         return JwtResponse.builder().token(jwt).id(userDetails.getId()).username(userDetails.getUsername()).roles(roles).build();
     }
 
@@ -64,11 +66,13 @@ public class AuthService {
      */
     public CommandResponse signup(SignupRequest request) {
         if (userRepository.existsByUsernameIgnoreCase(request.getUsername().trim()))
-            throw new ElementAlreadyExistsException(ALREADY_EXISTS_USER);
+            throw new ElementAlreadyExistsException(ALREADY_EXISTS_USER_NAME);
+        if (userRepository.existsByEmailIgnoreCase(request.getEmail().trim()))
+            throw new ElementAlreadyExistsException(ALREADY_EXISTS_USER_EMAIL);
 
         final User user = signupRequestMapper.toEntity(request);
         userRepository.save(user);
-        log.info(CREATED_USER);
+        log.info(MessageFormat.format(CREATED_USER, user.getUsername()));
         return CommandResponse.builder().id(user.getId()).build();
     }
 }
