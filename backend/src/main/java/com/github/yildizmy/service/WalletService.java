@@ -19,6 +19,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 import static com.github.yildizmy.common.Constants.*;
 
 /**
@@ -68,10 +70,10 @@ public class WalletService {
      * @return WalletResponse
      */
     @Transactional(readOnly = true)
-    public WalletResponse findByUserId(long userId) {
-        return walletRepository.findByUserId(userId)
+    public List<WalletResponse> findByUserId(long userId) {
+        return walletRepository.findByUserId(userId).stream()
                 .map(walletResponseMapper::toDto)
-                .orElseThrow(() -> new NoSuchElementFoundException(NOT_FOUND_WALLET));
+                .toList();
     }
 
     /**

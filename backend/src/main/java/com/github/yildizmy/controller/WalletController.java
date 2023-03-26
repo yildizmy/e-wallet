@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.Clock;
 import java.time.Instant;
+import java.util.List;
 
 import static com.github.yildizmy.common.Constants.SUCCESS;
 
@@ -63,8 +64,8 @@ public class WalletController {
      */
     @PreAuthorize("hasRole(T(com.github.yildizmy.model.RoleType).ROLE_USER)")
     @GetMapping("/users/{userId}")
-    public ResponseEntity<ApiResponse<WalletResponse>> findByUserId(@PathVariable long userId) {
-        final WalletResponse response = walletService.findByUserId(userId);
+    public ResponseEntity<ApiResponse<List<WalletResponse>>> findByUserId(@PathVariable long userId) {
+        final List<WalletResponse> response = walletService.findByUserId(userId);
         return ResponseEntity.ok(new ApiResponse<>(Instant.now(clock).toEpochMilli(), SUCCESS, response));
     }
 
