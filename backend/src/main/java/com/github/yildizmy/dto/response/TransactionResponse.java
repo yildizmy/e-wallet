@@ -16,7 +16,7 @@ public class TransactionResponse {
     private Long id;
     private BigDecimal amount;
     private String description;
-    private Instant createdAt;
+    private String createdAt;
     private UUID referenceNumber;
     private Status status;
     private WalletResponse fromWallet;
