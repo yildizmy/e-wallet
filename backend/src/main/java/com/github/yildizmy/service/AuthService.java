@@ -54,7 +54,14 @@ public class AuthService {
                 .toList();
 
         log.info(LOGGED_IN_USER, new Object[]{request.getUsername()});
-        return JwtResponse.builder().token(jwt).id(userDetails.getId()).username(userDetails.getUsername()).roles(roles).build();
+        return JwtResponse
+                .builder()
+                .token(jwt)
+                .id(userDetails.getId())
+                .username(userDetails.getUsername())
+                .firstName(userDetails.getFirstName())
+                .lastName(userDetails.getLastName())
+                .roles(roles).build();
     }
 
     /**
