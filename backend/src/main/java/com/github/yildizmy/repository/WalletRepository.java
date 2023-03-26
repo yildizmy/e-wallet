@@ -11,6 +11,8 @@ public interface WalletRepository extends JpaRepository<Wallet, Long> {
 
     Optional<Wallet> findByIban(String iban);
 
+    Optional<Wallet> findByUserId(Long userId);
+
     boolean existsByIbanIgnoreCase(String iban);
 
     boolean existsByUserIdAndNameIgnoreCase(Long userId, String name);

@@ -62,6 +62,19 @@ public class WalletService {
     }
 
     /**
+     * Fetches a single wallet by the given userId
+     *
+     * @param userId
+     * @return WalletResponse
+     */
+    @Transactional(readOnly = true)
+    public WalletResponse findByUserId(long userId) {
+        return walletRepository.findByUserId(userId)
+                .map(walletResponseMapper::toDto)
+                .orElseThrow(() -> new NoSuchElementFoundException(NOT_FOUND_WALLET));
+    }
+
+    /**
      * Fetches a single wallet reference (entity) by the given id
      *
      * @param iban

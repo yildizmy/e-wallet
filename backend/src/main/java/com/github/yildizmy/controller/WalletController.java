@@ -56,6 +56,19 @@ public class WalletController {
     }
 
     /**
+     * Fetches a single wallet by the given userId
+     *
+     * @param userId
+     * @return WalletResponse wrapped by ResponseEntity<ApiResponse<T>>
+     */
+    @PreAuthorize("hasRole(T(com.github.yildizmy.model.RoleType).ROLE_USER)")
+    @GetMapping("/users/{userId}")
+    public ResponseEntity<ApiResponse<WalletResponse>> findByUserId(@PathVariable long userId) {
+        final WalletResponse response = walletService.findByUserId(userId);
+        return ResponseEntity.ok(new ApiResponse<>(Instant.now(clock).toEpochMilli(), SUCCESS, response));
+    }
+
+    /**
      * Fetches all wallets based on the given paging and sorting parameters
      *
      * @param pageable
