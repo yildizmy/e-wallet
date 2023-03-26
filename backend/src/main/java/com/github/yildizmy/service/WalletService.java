@@ -138,7 +138,7 @@ public class WalletService {
             throw new InsufficientFundsException(FUNDS_CANNOT_BELOW_ZERO);
 
         // update balance of sender wallet (when transferring to another wallet)
-        if (fromWallet.getId() != toWallet.getId()) {
+        if (!fromWallet.getId().equals(toWallet.getId())) {
             fromWallet.setBalance(fromWallet.getBalance().subtract(request.getAmount()));
             walletRepository.save(fromWallet);
         }
