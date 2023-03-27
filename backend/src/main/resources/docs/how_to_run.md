@@ -149,7 +149,7 @@ Alternatively, API requests can be sent to the endpoints using Postman, etc. For
 <br/>
 
 > **Note** <br/>
-> For connecting to the application database, the following url and credentials given in the `.env` file can be used. 
+> For connecting to the application database, the following url and the credentials given in the `.env` file can be used. 
 
 ```
 url: jdbc:postgresql://localhost:5432/<${db_name}>
