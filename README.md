@@ -62,6 +62,7 @@ In order to run and test the application, see details on [How to run?](backend/s
 [React](https://react.dev/)<br/>
 [Material UI](https://mui.com/)<br/>
 [Notistack](https://notistack.com/features/basic)<br/>
+[Register of countries using the IBAN standard](https://www.iban.com/structure)<br/>
 
 <br/>
 
