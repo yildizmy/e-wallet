@@ -139,14 +139,12 @@ public class WalletService {
         if (fromWallet.getBalance().compareTo(request.getAmount()) < 0)
             throw new InsufficientFundsException(FUNDS_CANNOT_BELOW_ZERO);
 
-        // update balance of sender wallet (when transferring to another wallet)
-        if (!fromWallet.getId().equals(toWallet.getId())) {
-            fromWallet.setBalance(fromWallet.getBalance().subtract(request.getAmount()));
-            walletRepository.save(fromWallet);
-        }
+        // update balance of the sender wallet
+        fromWallet.setBalance(fromWallet.getBalance().subtract(request.getAmount()));
 
-        // update balance of receiver wallet
+        // update balance of the receiver wallet
         toWallet.setBalance(toWallet.getBalance().add(request.getAmount()));
+
         walletRepository.save(toWallet);
         log.info(UPDATED_WALLET_BALANCES, new Object[]{fromWallet.getBalance(), toWallet.getBalance()});
 
@@ -164,7 +162,7 @@ public class WalletService {
     public CommandResponse addFunds(TransactionRequest request) {
         final Wallet toWallet = getReferenceByIban(request.getToWalletIban());
 
-        // update balance of the wallet
+        // update balance of the receiver wallet
         toWallet.setBalance(toWallet.getBalance().add(request.getAmount()));
 
         walletRepository.save(toWallet);
@@ -188,7 +186,7 @@ public class WalletService {
         if (fromWallet.getBalance().compareTo(request.getAmount()) < 0)
             throw new InsufficientFundsException(FUNDS_CANNOT_BELOW_ZERO);
 
-        // update balance of the wallet
+        // update balance of the sender wallet
         fromWallet.setBalance(fromWallet.getBalance().subtract(request.getAmount()));
 
         walletRepository.save(fromWallet);
