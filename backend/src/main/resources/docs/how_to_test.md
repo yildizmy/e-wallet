@@ -50,7 +50,6 @@ for testing the endpoints.
 | *TransactionController* | [**findByReferenceNumber**](http://localhost:8080/api/v1/transactions/references/{referenceNumber}) | **GET** /transactions/references/{referenceNumber}                | Retrieves a single transaction by the given reference number |
 | *TransactionController* | [**findAllByUserId**](http://localhost:8080/api/v1/transactions/users/{userId})                     | **GET** /transactions/users/{userId}             | Retrieves all transactions based on the given userId         |
 | *TransactionController* | [**findAll**](http://localhost:8080/api/v1/transactions)                                            | **GET** /transactions?page=0&size=10&sort=id,asc | Retrieves all transactions based on the given parameters     |
-| *TransactionController* | [**create**](http://localhost:8080/api/v1/transactions)                                             | **POST** /transactions                           | Creates a new transaction using the given request parameters |
 
 <br/>
 <br/>

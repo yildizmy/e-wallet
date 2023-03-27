@@ -1,16 +1,12 @@
 package com.github.yildizmy.controller;
 
-import com.github.yildizmy.dto.request.TransactionRequest;
 import com.github.yildizmy.dto.response.ApiResponse;
-import com.github.yildizmy.dto.response.CommandResponse;
 import com.github.yildizmy.dto.response.TransactionResponse;
 import com.github.yildizmy.service.TransactionService;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -80,20 +76,5 @@ public class TransactionController {
     public ResponseEntity<ApiResponse<Page<TransactionResponse>>> findAll(Pageable pageable) {
         final Page<TransactionResponse> response = transactionService.findAll(pageable);
         return ResponseEntity.ok(new ApiResponse<>(Instant.now(clock).toEpochMilli(), SUCCESS, response));
-    }
-
-    /**
-     * Creates a new transaction using the given request parameters
-     *
-     * @param request
-     * @return id of the created transaction wrapped by ResponseEntity<ApiResponse<T>>
-     */
-    @PreAuthorize("hasRole(T(com.github.yildizmy.model.RoleType).ROLE_USER)")
-    @PostMapping
-    public ResponseEntity<ApiResponse<CommandResponse>> create(@Valid @RequestBody TransactionRequest request) {
-        final CommandResponse response = transactionService.create(request);
-        return ResponseEntity
-                .status(HttpStatus.CREATED)
-                .body(new ApiResponse<>(Instant.now(clock).toEpochMilli(), SUCCESS, response));
     }
 }
