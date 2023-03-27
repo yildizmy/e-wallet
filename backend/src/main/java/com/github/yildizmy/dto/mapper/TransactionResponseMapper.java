@@ -1,6 +1,5 @@
 package com.github.yildizmy.dto.mapper;
 
-import com.github.yildizmy.common.Constants;
 import com.github.yildizmy.dto.response.TransactionResponse;
 import com.github.yildizmy.model.Transaction;
 import org.mapstruct.AfterMapping;
@@ -11,6 +10,8 @@ import org.mapstruct.MappingTarget;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
+
+import static com.github.yildizmy.common.Constants.DATE_TIME_FORMAT;
 
 /**
  * Mapper used for mapping TransactionResponse fields
@@ -26,6 +27,6 @@ public interface TransactionResponseMapper {
     @AfterMapping
     default void formatCreatedAt(@MappingTarget TransactionResponse dto, Transaction entity) {
         LocalDateTime datetime = LocalDateTime.ofInstant(entity.getCreatedAt(), ZoneOffset.UTC);
-        dto.setCreatedAt(DateTimeFormatter.ofPattern(Constants.DATE_TIME_FORMAT).format(datetime));
+        dto.setCreatedAt(DateTimeFormatter.ofPattern(DATE_TIME_FORMAT).format(datetime));
     }
 }
