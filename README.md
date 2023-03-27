@@ -12,6 +12,8 @@ Full stack e-wallet app with React, Spring Boot, Spring Security, Spring Data JP
 
 <img src="backend/src/main/resources/docs/images/transactions.png" width="1060"/>
 
+<br/>
+
 ### Description
 This application allows users to implement e-wallet with REST API to create it, top it up, check its balance and withdraw. 
 Users can register and login to the system using their credentials. They can also add any wallets for any account provided by IBAN 
