@@ -1,5 +1,6 @@
 package com.github.yildizmy.exception;
 
+import jakarta.validation.ConstraintViolationException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.beans.factory.annotation.Value;
@@ -57,7 +58,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     /**
-     * Handles NoSuchElementFoundException
+     * Handles custom NoSuchElementFoundException
      *
      * @param ex
      * @param request
@@ -71,7 +72,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     /**
-     * Handles ElementAlreadyExistsException
+     * Handles custom ElementAlreadyExistsException
      *
      * @param ex
      * @param request
@@ -85,7 +86,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     /**
-     * Handles InsufficientFundsException
+     * Handles custom InsufficientFundsException
      *
      * @param ex
      * @param request
@@ -93,7 +94,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
      */
     @ExceptionHandler(InsufficientFundsException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ResponseEntity<Object> handleMethodArgumentInvalidException(InsufficientFundsException ex, WebRequest request) {
+    public ResponseEntity<Object> handleInsufficientFundsException(InsufficientFundsException ex, WebRequest request) {
         log.error(METHOD_ARGUMENT_NOT_VALID, ex);
         return buildErrorResponse(ex, HttpStatus.BAD_REQUEST, request);
     }
@@ -110,6 +111,20 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<Object> handleAuthenticationException(AuthenticationException ex, WebRequest request) {
         log.error(UNAUTHORIZED, ex);
         return buildErrorResponse(ex, HttpStatus.UNAUTHORIZED, request);
+    }
+
+    /**
+     * Handles ConstraintViolationException during field validation
+     *
+     * @param ex
+     * @param request
+     * @return ResponseEntity<Object> with detailed information related to the error
+     */
+    @ExceptionHandler(ConstraintViolationException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ResponseEntity<Object> handleConstraintValidationException(ConstraintViolationException ex, WebRequest request) {
+        log.warn(FIELD_NOT_VALIDATED, ex);
+        return buildErrorResponse(ex, HttpStatus.BAD_REQUEST, request);
     }
 
     /**
