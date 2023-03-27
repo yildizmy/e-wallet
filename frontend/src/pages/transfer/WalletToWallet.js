@@ -54,7 +54,7 @@ export default function WalletToWallet() {
       })
       .catch((error) => {
         if (error.response?.data?.errors) {
-          error.response?.data?.errors.map((e) => enqueueSnackbar(`${e.field} ${e.message}`, { variant: 'error' }));
+          error.response?.data?.errors.map((e) => enqueueSnackbar(e.message, { variant: 'error' }));
         } else if (error.response?.data?.message) {
           enqueueSnackbar(error.response?.data?.message, { variant: 'error' });
         } else {
