@@ -1,5 +1,5 @@
 ## e-wallet 
-Full stack e-wallet app with React, Spring Boot, Spring Security, Spring Data JPA, Hibernate, PostgreSQL, etc.
+Full stack web app with React, Spring Boot, Spring Security, Spring Data JPA, Hibernate, PostgreSQL, etc.
 
 <br/>
 
