@@ -8,7 +8,7 @@ Open API (Swagger) Documentation UI for the endpoints, visit http://localhost:80
 
 ### Postman Collection
 
-The [Postman Collection](postman/e_wallet.postman_collection.json) shared in the resources can be modified and used
+The [Postman Collection](postman/e-wallet.postman_collection.json) shared in the resources can be modified and used
 for testing the endpoints.
 
 <br/>
