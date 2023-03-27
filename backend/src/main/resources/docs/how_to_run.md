@@ -143,7 +143,7 @@ docker compose -f docker-compose.yml -f docker-compose.prod.yml up --build
 
 <br/>
 
-By running this command, application app and database containers are built and start up. After this step is completed, the application will be available on http://localhost:3000 and the accounts given in the "User Accounts" section can be used for logging in to the application. 
+By running this command, application and database containers are built and start up. After this step is completed, the application will be available on http://localhost:3000 and the accounts given in the "User Accounts" section can be used for logging in to the application. 
 Alternatively, API requests can be sent to the endpoints using Postman, etc. For this purpose, see the details on [How to test?](how_to_test.md) section. 
  
 <br/>
