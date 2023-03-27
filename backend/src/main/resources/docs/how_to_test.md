@@ -2,7 +2,7 @@
 
 ### Open API (Swagger) UI
 
-For Open API (Swagger) Documentation UI and the endpoints, visit http://localhost:8080/swagger-ui/index.html after running the app.
+For Open API (Swagger) Documentation UI and the endpoints, open http://localhost:8080/swagger-ui/index.html after running the app.
 
 <br/>
 
