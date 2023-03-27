@@ -5,10 +5,10 @@ Full stack e-wallet app with React, Spring Boot, Spring Security, Spring Data JP
 
 <br/>
 
-<img src="backend/src/main/resources/docs/images/wallets.gif" width="1060"/>
+<img src="backend/src/main/resources/docs/images/wallets.png" width="1060"/>
 <br/>
 
-<img src="backend/src/main/resources/docs/images/transactions.gif" width="1060"/>
+<img src="backend/src/main/resources/docs/images/transactions.png" width="1060"/>
 
 ### Description
 This application allows users to implement e-wallet with REST API to create it, top it up, check its balance and withdraw. 
