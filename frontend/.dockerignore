@@ -1,0 +1,10 @@
+**/.git
+**/.gitignore
+**/.vscode
+**/.env
+**/env
+.git
+.vscode
+Dockerfile
+README.md
+node_modules
