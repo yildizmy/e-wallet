@@ -15,6 +15,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.UUID;
 
 import static com.github.yildizmy.common.Constants.*;
@@ -55,6 +56,23 @@ public class TransactionService {
         return transactionRepository.findByReferenceNumber(referenceNumber)
                 .map(transactionResponseMapper::toDto)
                 .orElseThrow(() -> new NoSuchElementFoundException(NOT_FOUND_TRANSACTION));
+    }
+
+    /**
+     * Fetches all transaction by the given userId
+     *
+     * @param userId
+     * @return List of TransactionResponse
+     */
+    @Transactional(readOnly = true)
+    public List<TransactionResponse> findAllByUserId(Long userId) {
+        final List<TransactionResponse> transactions = transactionRepository.findAllByUserId(userId).stream()
+                .map(transactionResponseMapper::toDto)
+                .toList();
+
+        if (transactions.isEmpty())
+            throw new NoSuchElementFoundException(NOT_FOUND_RECORD);
+        return transactions;
     }
 
     /**
