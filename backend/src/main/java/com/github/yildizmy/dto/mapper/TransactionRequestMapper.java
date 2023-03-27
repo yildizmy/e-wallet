@@ -42,8 +42,8 @@ public abstract class TransactionRequestMapper {
 
     @AfterMapping
     void setToEntityFields(@MappingTarget Transaction entity, TransactionRequest dto) {
-        entity.setFromWallet(walletService.getReferenceByIban(dto.getFromWalletIban()));
-        entity.setToWallet(walletService.getReferenceByIban(dto.getToWalletIban()));
+        entity.setFromWallet(walletService.getByIban(dto.getFromWalletIban()));
+        entity.setToWallet(walletService.getByIban(dto.getToWalletIban()));
         entity.setType(typeService.getReferenceById(dto.getTypeId()));
     }
 }

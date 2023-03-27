@@ -82,8 +82,9 @@ public class WalletService {
      * @param iban
      * @return Wallet
      */
-    public Wallet getReferenceByIban(String iban) {
-        return walletRepository.getReferenceByIban(iban);
+    public Wallet getByIban(String iban) {
+        return walletRepository.findByIban(iban)
+                .orElseThrow(() -> new NoSuchElementFoundException(NOT_FOUND_WALLET));
     }
 
     /**
@@ -132,8 +133,8 @@ public class WalletService {
      */
     @Transactional
     public CommandResponse transferFunds(TransactionRequest request) {
-        final Wallet toWallet = getReferenceByIban(request.getToWalletIban());
-        final Wallet fromWallet = getReferenceByIban(request.getFromWalletIban());
+        final Wallet toWallet = getByIban(request.getToWalletIban());
+        final Wallet fromWallet = getByIban(request.getFromWalletIban());
 
         // check if the balance of sender wallet has equal or higher to/than transfer amount
         if (fromWallet.getBalance().compareTo(request.getAmount()) < 0)
@@ -160,7 +161,7 @@ public class WalletService {
      */
     @Transactional
     public CommandResponse addFunds(TransactionRequest request) {
-        final Wallet toWallet = getReferenceByIban(request.getToWalletIban());
+        final Wallet toWallet = getByIban(request.getToWalletIban());
 
         // update balance of the receiver wallet
         toWallet.setBalance(toWallet.getBalance().add(request.getAmount()));
@@ -180,7 +181,7 @@ public class WalletService {
      */
     @Transactional
     public CommandResponse withdrawFunds(TransactionRequest request) {
-        final Wallet fromWallet = getReferenceByIban(request.getFromWalletIban());
+        final Wallet fromWallet = getByIban(request.getFromWalletIban());
 
         // check if the balance of sender wallet has equal or higher to/than transfer amount
         if (fromWallet.getBalance().compareTo(request.getAmount()) < 0)
