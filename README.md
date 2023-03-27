@@ -15,7 +15,7 @@ This application allows users to implement e-wallet with REST API to create it, 
 Users can register and login to the system using their credentials. They can also add any wallets for any account provided by IBAN 
 and transfer to their wallet or any other wallet defined in the system.
 
-<img src="backend/src/main/resources/docs/images/statistic_view.png" width="1060"/>
+<img src="backend/src/main/resources/docs/images/transfers.png" width="1060"/>
 
 <br/>
 
