@@ -1,5 +1,6 @@
 package com.github.yildizmy.dto.request;
 
+import com.github.yildizmy.validator.ValidIban;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -15,7 +16,7 @@ public class WalletRequest {
 
     private Long id;
 
-    @Size(min = 15, max = 34, message = "{iban.size}")
+    @ValidIban(message = "{iban.valid}")
     @NotBlank(message = "{iban.notblank}")
     private String iban;
 
