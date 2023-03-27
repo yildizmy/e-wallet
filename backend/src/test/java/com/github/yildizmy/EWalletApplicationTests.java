@@ -9,5 +9,4 @@ class EWalletApplicationTests {
 	@Test
 	void contextLoads() {
 	}
-
 }
