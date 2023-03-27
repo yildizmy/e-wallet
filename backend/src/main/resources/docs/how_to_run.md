@@ -80,8 +80,13 @@ npm start
 ```
 <br/>
 
-At this step, the application starts on your default browser (http://localhost:3000/). For logging in to the application, the accounts given in the "User Accounts" section can be used.
-API requests can be sent to the endpoints using Postman, etc. For this purpose, see the details on [How to test?](how_to_test.md) section.
+At this step, the application starts on your default browser (http://localhost:3000/) and can be tested. 
+Alternatively, API requests can be sent to the endpoints using Postman, etc. For this purpose, see the details on [How to test?](how_to_test.md) section. 
+
+<br/>
+
+For logging in to the application, the accounts given in the "User Accounts" section can be used or a new account can be created via sign up page. 
+
 
 <br/>
 
