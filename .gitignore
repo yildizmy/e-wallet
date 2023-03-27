@@ -43,6 +43,7 @@ replay_pid*
 .sts4-cache
 
 ### IntelliJ IDEA ###
+.idea
 backend/.idea
 backend/*.iws
 backend/*.iml
