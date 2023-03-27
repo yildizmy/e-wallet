@@ -11,6 +11,10 @@ public final class Constants {
     public static final String TRACE = "trace";
     public static final String DATE_FORMAT = "dd.MM.yyyy";
     public static final String DATE_TIME_FORMAT = "dd.MM.yyyy HH:mm:ss";
+    public static final int IBAN_MIN_SIZE = 15;
+    public static final int IBAN_MAX_SIZE = 34;
+    public static final long IBAN_MAX = 999999999;
+    public static final long IBAN_MODULUS = 97;
 
     public static final String SUCCESS = "Success";
     public static final String UNAUTHORIZED = "Unauthorized";
@@ -25,6 +29,7 @@ public final class Constants {
     public static final String VALIDATION_ERROR = "Validation error. Check 'errors' field for details";
     public static final String UNKNOWN_ERROR = "Unknown error occurred";
     public static final String METHOD_ARGUMENT_NOT_VALID = "MethodArgumentNotValid exception";
+    public static final String FIELD_NOT_VALIDATED = "Field is not validated";
 
     public static final String LOGGED_IN_USER = "User logged in (username: {})";
     public static final String ALREADY_EXISTS = "Requested element already exists";
@@ -32,10 +37,8 @@ public final class Constants {
     public static final String ALREADY_EXISTS_USER_EMAIL = "User with the same email already exists";
     public static final String ALREADY_EXISTS_WALLET_IBAN = "Wallet with the same iban already exists";
     public static final String ALREADY_EXISTS_WALLET_NAME = "Wallet with the same name already exists";
-    public static final String ALREADY_EXISTS_TRANSACTION = "Transaction with the same name reference number already exists";
     public static final String NOT_FOUND = "Requested element is not found";
     public static final String NOT_FOUND_RECORD = "Not found any record";
-    public static final String NOT_FOUND_USER = "Requested user is not found";
     public static final String NOT_FOUND_WALLET = "Requested wallet is not found";
     public static final String NOT_FOUND_TRANSACTION = "Requested transaction is not found";
     public static final String CREATED_USER = "User is created (username: {})";
