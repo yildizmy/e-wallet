@@ -10,10 +10,6 @@ Full stack web app with React, Spring Boot, Spring Security, Spring Data JPA, Hi
 <img src="backend/src/main/resources/docs/images/wallets.png" width="1060"/>
 <br/>
 
-<img src="backend/src/main/resources/docs/images/transactions.png" width="1060"/>
-
-<br/>
-
 ### Description
 This application allows users to implement e-wallet with REST API to create it, top it up, check its balance and withdraw. 
 Users can register and login to the system using their credentials. They can also add any wallets for any account provided by IBAN 
@@ -25,6 +21,10 @@ The application also has a custom IBAN validator that can easily be applied any 
 @ValidIban(message = "{iban.valid}")
 private String iban;
 ```
+
+<br/>
+
+<img src="backend/src/main/resources/docs/images/transactions.png" width="1060"/>
 
 <br/>
 
