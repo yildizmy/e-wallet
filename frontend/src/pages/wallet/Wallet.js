@@ -90,7 +90,7 @@ export default function Wallet() {
       <Container sx={{ minWidth: '100%' }}>
         <Stack direction="row" alignItems="center" justifyContent="space-between" mb={1}>
           <Typography variant="h4" gutterBottom>
-            Wallets
+            My Wallets
           </Typography>
           <Button
             variant="contained"

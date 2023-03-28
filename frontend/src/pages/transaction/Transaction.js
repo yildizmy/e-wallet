@@ -93,7 +93,7 @@ export default function Transaction() {
       <Container sx={{ minWidth: '100%' }}>
         <Stack direction="row" alignItems="center" justifyContent="space-between" mb={1}>
           <Typography variant="h4" gutterBottom>
-            Transactions
+            My Transactions
           </Typography>
         </Stack>
         <Card>
