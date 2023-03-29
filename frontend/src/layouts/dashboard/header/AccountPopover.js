@@ -36,7 +36,7 @@ export default function AccountPopover() {
 
   const handleLogout = () => {
     AuthService.logout();
-    navigate("/login");
+    navigate('/login');
   };
 
   return (
@@ -81,7 +81,7 @@ export default function AccountPopover() {
       >
         <Box sx={{ my: 1.5, px: 2.5 }}>
           <Typography variant="subtitle2" noWrap>
-            {currentUser.firstName} {currentUser.lastName}
+            {currentUser?.firstName} {currentUser?.lastName}
           </Typography>
         </Box>
         <Divider sx={{ borderStyle: 'dashed' }} />
