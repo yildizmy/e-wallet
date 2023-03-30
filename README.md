@@ -32,9 +32,9 @@ private String iban;
 
 <br/>
 
-### Domain Model
+### Architecture
 
-The information about the entities is given on [Entity Relationship Diagram](backend/src/main/resources/docs/er_diagram.md) section.
+The relations between the entities are shown on [Entity Relationship Diagram](backend/src/main/resources/docs/architecture.md) section.
 
 <br/>
 
