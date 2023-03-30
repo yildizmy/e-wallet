@@ -34,7 +34,7 @@ private String iban;
 
 ### Architecture
 
-The relationship between the entities is shown on [Entity Relationship Diagram](backend/src/main/resources/docs/architecture.md) section.
+The relationship between the entities is shown on [Architecture](backend/src/main/resources/docs/architecture.md) section.
 
 <br/>
 
