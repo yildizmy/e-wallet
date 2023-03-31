@@ -20,36 +20,36 @@ for testing the endpoints.
 
 <br/>
 
-| Class            | Method                                          | HTTP request   | Description                                           |
-|------------------|-------------------------------------------------|----------------|-------------------------------------------------------|
-| *AuthController* | [**login**](http://localhost:8080/api/v1/auth)  | **POST** /auth | Authenticates users by their credentials              |
-| *AuthController* | [**signup**](http://localhost:8080/api/v1/auth) | **POST** /auth | Registers users using their credentials and user info |
+| Class              | Method                                                                     | HTTP request                                | Description                                             |
+|--------------------|----------------------------------------------------------------------------|---------------------------------------------|---------------------------------------------------------|
+| *AuthController*   | [**login**](http://localhost:8080/api/v1/auth/login)                       | **POST** /auth/login                        | Authenticates users by their credentials                |
+| *AuthController*   | [**signup**](http://localhost:8080/api/v1/auth/signup)                     | **POST** /auth/signup                       | Registers users using their credentials and user info   |
 
 <br/>
 <br/>
 
-| Class           | Method                                                                     | HTTP request                                | Description                                             |
-|-----------------|----------------------------------------------------------------------------|---------------------------------------------|---------------------------------------------------------|
+| Class              | Method                                                                     | HTTP request                                | Description                                             |
+|--------------------|----------------------------------------------------------------------------|---------------------------------------------|---------------------------------------------------------|
 | *WalletController* | [**findById**](http://localhost:8080/api/v1/wallets/{id})                  | **GET** /wallets/{id}                       | Retrieves a single wallet by the given id               |
 | *WalletController* | [**findByIban**](http://localhost:8080/api/v1/wallets/iban/{iban})         | **GET** /wallets/iban/{iban}                | Retrieves a single wallet by the given iban             |
 | *WalletController* | [**findAllByUserId**](http://localhost:8080/api/v1/wallets/users/{userId}) | **GET** /wallets/users/{userId}             | Retrieves all wallets based on the given userId         |
 | *WalletController* | [**findAll**](http://localhost:8080/api/v1/wallets)                        | **GET** /wallets?page=0&size=10&sort=id,asc | Retrieves all wallets based on the given parameters     |
 | *WalletController* | [**create**](http://localhost:8080/api/v1/wallets)                         | **POST** /wallets                           | Creates a new wallet using the given request parameters |
-| *WalletController* | [**transferFunds**](http://localhost:8080/api/v1/wallets/transfer)                 | **POST** /wallets/transfer                          | Transfer funds between wallets                          |
-| *WalletController* | [**addFunds**](http://localhost:8080/api/v1/wallets/addFunds)                 | **POST** /wallets/addFunds                          | Adds funds to the given wallet of the user              |
-| *WalletController* | [**withdrawFunds**](http://localhost:8080/api/v1/wallets/withdrawFunds)                 | **POST** /wallets/withdrawFunds                          | Withdraws funds from the given wallet of the user       |
+| *WalletController* | [**transferFunds**](http://localhost:8080/api/v1/wallets/transfer)         | **POST** /wallets/transfer                  | Transfer funds between wallets                          |
+| *WalletController* | [**addFunds**](http://localhost:8080/api/v1/wallets/addFunds)              | **POST** /wallets/addFunds                  | Adds funds to the given wallet of the user              |
+| *WalletController* | [**withdrawFunds**](http://localhost:8080/api/v1/wallets/withdrawFunds)    | **POST** /wallets/withdrawFunds             | Withdraws funds from the given wallet of the user       |
 | *WalletController* | [**update**](http://localhost:8080/api/v1/wallets)                         | **PUT** /wallets                            | Updates wallet using the given request parameters       |
 | *WalletController* | [**deleteById**](http://localhost:8080/api/v1/wallets/{id})                | **DELETE** /wallets                         | Deletes wallet by id                                    |
 
 <br/>
 <br/>
 
-| Class           | Method                                                                                              | HTTP request                                | Description                                                  |
-|-----------------|-----------------------------------------------------------------------------------------------------|---------------------------------------------|--------------------------------------------------------------|
-| *TransactionController* | [**findById**](http://localhost:8080/api/v1/transactions/{id})                                      | **GET** /transactions/{id}                       | Retrieves a single transaction by the given id               |
-| *TransactionController* | [**findByReferenceNumber**](http://localhost:8080/api/v1/transactions/references/{referenceNumber}) | **GET** /transactions/references/{referenceNumber}                | Retrieves a single transaction by the given reference number |
-| *TransactionController* | [**findAllByUserId**](http://localhost:8080/api/v1/transactions/users/{userId})                     | **GET** /transactions/users/{userId}             | Retrieves all transactions based on the given userId         |
-| *TransactionController* | [**findAll**](http://localhost:8080/api/v1/transactions)                                            | **GET** /transactions?page=0&size=10&sort=id,asc | Retrieves all transactions based on the given parameters     |
+| Class                   | Method                                                                                              | HTTP request                                       | Description                                                  |
+|-------------------------|-----------------------------------------------------------------------------------------------------|----------------------------------------------------|--------------------------------------------------------------|
+| *TransactionController* | [**findById**](http://localhost:8080/api/v1/transactions/{id})                                      | **GET** /transactions/{id}                         | Retrieves a single transaction by the given id               |
+| *TransactionController* | [**findByReferenceNumber**](http://localhost:8080/api/v1/transactions/references/{referenceNumber}) | **GET** /transactions/references/{referenceNumber} | Retrieves a single transaction by the given reference number |
+| *TransactionController* | [**findAllByUserId**](http://localhost:8080/api/v1/transactions/users/{userId})                     | **GET** /transactions/users/{userId}               | Retrieves all transactions based on the given userId         |
+| *TransactionController* | [**findAll**](http://localhost:8080/api/v1/transactions)                                            | **GET** /transactions?page=0&size=10&sort=id,asc   | Retrieves all transactions based on the given parameters     |
 
 <br/>
 <br/>
