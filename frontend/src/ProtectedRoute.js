@@ -1,4 +1,5 @@
 import { Navigate, Outlet } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import AuthService from './services/AuthService';
 
 const ProtectedRoute = ({ roles = [] }) => {
@@ -7,5 +8,9 @@ const ProtectedRoute = ({ roles = [] }) => {
 
   return isAuthorized ? <Outlet /> : <Navigate to="/unauthorized" replace />;
 };
+
+ProtectedRoute.propTypes = {
+  roles: PropTypes.array,
+}
 
 export default ProtectedRoute;
