@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom/client';
 import { HelmetProvider } from 'react-helmet-async';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App';
-// import { StyledChart } from './components/chart';
 import ScrollToTop from './components/scroll-to-top';
 import reportWebVitals from './reportWebVitals';
 import * as serviceWorker from './serviceWorker';
@@ -16,7 +15,6 @@ root.render(
     <BrowserRouter>
       <ThemeProvider>
         <ScrollToTop />
-        {/* <StyledChart /> */}
         <SnackbarProvider preventDuplicate>
           <App />
         </SnackbarProvider>
