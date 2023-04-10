@@ -3,8 +3,6 @@ import { forwardRef } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { Box, Link } from '@mui/material';
 
-// ----------------------------------------------------------------------
-
 const Logo = forwardRef(({ disabledLink = false, sx, ...other }, ref) => {
 
   const logo = (
