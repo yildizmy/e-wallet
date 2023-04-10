@@ -1,5 +1,3 @@
-// ----------------------------------------------------------------------
-
 export default function Table(theme) {
   return {
     MuiTableCell: {
