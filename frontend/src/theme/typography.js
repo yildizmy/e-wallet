@@ -1,5 +1,3 @@
-// ----------------------------------------------------------------------
-
 export function remToPx(value) {
   return Math.round(parseFloat(value) * 16);
 }
