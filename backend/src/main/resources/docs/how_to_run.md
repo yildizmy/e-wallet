@@ -50,7 +50,7 @@ cd e-wallet
 > **Note** <br/>
 > If you want to use different environment variables than predefined, you can update them via `.env` file located in the project root before running this command.
 
-```
+```shell
 docker compose up --build
 ```
 <br/>
