@@ -64,7 +64,7 @@ docker compose up --build
 
 6. Open another command prompt window/tab and change the current directory to the frontend project:
 
-```
+```shell
 cd e-wallet/frontend
 ```
 <br/>
