@@ -221,6 +221,8 @@ public class WalletService {
                 walletRepository.existsByUserIdAndNameIgnoreCase(request.getUserId(), request.getName()))
             throw new ElementAlreadyExistsException(ALREADY_EXISTS_WALLET_NAME);
 
+        ibanValidator.isValid(request.getIban(), null);
+
         final Wallet wallet = walletRequestMapper.toEntity(request);
         walletRepository.save(wallet);
         log.info(UPDATED_WALLET, new Object[]{wallet.getIban(), wallet.getName(), wallet.getBalance()});
