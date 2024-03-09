@@ -137,7 +137,7 @@ cd e-wallet
 > Before running this command, if exists, delete previously composed containers (`db`, `backend`, `frontend`), images (`e-wallet-backend`, `e-wallet-frontend`) and volumes (`e-wallet_db-data`) belonging to the application. 
 On the other hand, if the app is running on IntelliJ IDEA, stop it to prevent a possible port error. 
 
-```
+```shell
 docker compose -f docker-compose.yml -f docker-compose.prod.yml up --build
 ```
 
