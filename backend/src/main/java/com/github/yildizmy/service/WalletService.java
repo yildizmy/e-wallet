@@ -12,6 +12,7 @@ import com.github.yildizmy.exception.InsufficientFundsException;
 import com.github.yildizmy.exception.NoSuchElementFoundException;
 import com.github.yildizmy.model.Wallet;
 import com.github.yildizmy.repository.WalletRepository;
+import com.github.yildizmy.validator.IbanValidator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -36,6 +37,7 @@ public class WalletService {
     private final WalletRequestMapper walletRequestMapper;
     private final WalletResponseMapper walletResponseMapper;
     private final WalletTransactionRequestMapper walletTransactionRequestMapper;
+    private final IbanValidator ibanValidator;
 
     /**
      * Fetches a single wallet by the given id
@@ -114,6 +116,8 @@ public class WalletService {
             throw new ElementAlreadyExistsException(ALREADY_EXISTS_WALLET_IBAN);
         if (walletRepository.existsByUserIdAndNameIgnoreCase(request.getUserId(), request.getName()))
             throw new ElementAlreadyExistsException(ALREADY_EXISTS_WALLET_NAME);
+
+        ibanValidator.isValid(request.getIban(), null);
 
         final Wallet wallet = walletRequestMapper.toEntity(request);
         walletRepository.save(wallet);
