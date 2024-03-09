@@ -75,7 +75,7 @@ cd e-wallet/frontend
 npm install
 ```
 
-```
+```shell
 npm start
 ```
 <br/>
