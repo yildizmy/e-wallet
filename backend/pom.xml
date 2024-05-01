@@ -129,6 +129,7 @@
 					</annotationProcessorPaths>
 					<!-- Change generated MapStruct file location from project root to backend directory -->
 					<generatedSourcesDirectory>${project.basedir}/backend/target/generated-sources</generatedSourcesDirectory>
+					<generatedTestSourcesDirectory>${project.basedir}/backend/target/generated-test-sources</generatedTestSourcesDirectory>
 				</configuration>
 			</plugin>
 			<plugin>
