@@ -127,6 +127,8 @@
 							<version>${mapstruct.version}</version>
 						</path>
 					</annotationProcessorPaths>
+					<!-- Change generated MapStruct file location from project root to backend directory -->
+					<generatedSourcesDirectory>${project.basedir}/backend/target/generated-sources</generatedSourcesDirectory>
 				</configuration>
 			</plugin>
 			<plugin>
