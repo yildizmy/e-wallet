@@ -19,25 +19,6 @@ The following apps should be installed before running the application:
 
 <br/>
 
-
-> [!NOTE]
-> Useful information that users should know, even when skimming content.
-
-> [!TIP]
-> Helpful advice for doing things better or more easily.
-
-> [!IMPORTANT]
-> Key information users need to know to achieve their goal.
-
-> [!WARNING]
-> Urgent info that needs immediate user attention to avoid problems.
-
-> [!CAUTION]
-> Advises about risks or negative outcomes of certain actions.
-
-
-
-
 ### Running app in Development mode
 
 In order to run the application in development mode, apply the following steps:
@@ -66,7 +47,7 @@ cd e-wallet
 
 4. Run the following command to compose and start up database container of the application on Docker. 
 
-> **Note** <br/>
+> [!NOTE]
 > If you want to use different environment variables than predefined, you can update them via `.env` file located in the project root before running this command.
 
 ```shell
@@ -74,9 +55,9 @@ docker compose up --build
 ```
 <br/>
 
-5. After database container starts on Docker, open backend project using IntelliJ IDEA. Then select Java 17 version via File > Project Structure > Project > SDK menu and run the application.
+5. After database container starts on Docker, open backend project using `IntelliJ IDEA`. Then select `Java 17` version via `File > Project Structure > Project > SDK` menu and run the application.
 
-> **Note** <br/>
+> [!IMPORTANT]
 > If _Lombok requires enabled annotation processing_ dialog appears at this stage, click _Enable annotation processing_ button.
 
 <br/>
@@ -152,7 +133,7 @@ cd e-wallet
 
 4. Run the following command:
 
-> **Warning** <br/>
+> [!WARNING]
 > Before running this command, if exists, delete previously composed containers (`db`, `backend`, `frontend`), images (`e-wallet-backend`, `e-wallet-frontend`) and volumes (`e-wallet_db-data`) belonging to the application. 
 On the other hand, if the app is running on IntelliJ IDEA, stop it to prevent a possible port error. 
 
@@ -167,7 +148,7 @@ By using Postman, etc. API endpoints can also be tested. For this purpose, see t
 
 <br/>
 
-> **Note** <br/>
+> [!TIP]
 > For connecting to the application database, the following url and the credentials given in the `.env` file can be used. 
 
 ```
