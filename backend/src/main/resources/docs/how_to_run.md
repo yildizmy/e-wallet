@@ -55,7 +55,7 @@ docker compose up --build
 ```
 <br/>
 
-5. After database container starts on Docker, open backend project using IntelliJ IDEA and run the application.
+5. After database container starts on Docker, open backend project using IntelliJ IDEA. Then select Java 17 version via File > Project Structure > Project > SDK menu and run the application.
 
 > **Note** <br/>
 > If _Lombok requires enabled annotation processing_ dialog appears at this stage, click _Enable annotation processing_ button.
