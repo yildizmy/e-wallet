@@ -15,7 +15,7 @@
 	<description>Spring Boot app used for digital wallet transactions</description>
 	<properties>
 		<java.version>17</java.version>
-		<projectlombok.version>1.18.26</projectlombok.version>
+		<projectlombok.version>1.18.32</projectlombok.version>
 		<mapstruct.version>1.5.5.Final</mapstruct.version>
 	</properties>
 	<dependencies>
