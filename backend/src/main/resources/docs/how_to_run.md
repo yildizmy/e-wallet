@@ -85,8 +85,8 @@ API endpoints can also be tested. For this purpose, see the details on [How to t
 
 <br/>
 
-For logging in to the application, the accounts given in the "User Accounts" section can be used or a new account can be created via sign up page. 
-
+> [!TIP]
+> For logging into the application, the accounts given in the "User Accounts" section can be used or a new account can be created via sign up page. 
 
 <br/>
 
