@@ -37,7 +37,7 @@ git clone https://github.com/yildizmy/e-wallet.git
 
 
 
-3. Change the current directory to the project directory where the `docker-compose.yml` file is located in:
+3. Change the current directory to the project directory where the `docker-compose.yml` file located in:
 
 ```shell
 cd e-wallet
