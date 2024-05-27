@@ -11,7 +11,7 @@ The following apps should be installed before running the application:
 - Docker Desktop 
 <br/>
 
-> **Note** <br/>
+> [!NOTE]
 > For more information regarding the system requirements, etc. refer to the following pages: <br/>
 > [Install on Mac](https://docs.docker.com/desktop/install/mac-install/)<br/>
 > [Install on Windows](https://docs.docker.com/desktop/install/windows-install/)<br/>
