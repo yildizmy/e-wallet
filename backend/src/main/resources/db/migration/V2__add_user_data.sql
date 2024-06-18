@@ -5,4 +5,4 @@ VALUES (2, 'Linda', 'Calvin', 'lindacalvin', 'linda@calvin.com', '$2a$10$I5hOscI
 INSERT INTO public.user (id, first_name, last_name, username, email, "password")
 VALUES (3, 'Jeffrey', 'Taylor', 'jeffreytaylor', 'jeffrey@taylor.com', '$2a$10$0grDMvQ7mSRLDAS6zuGOp.0ycwhgAzyE2FgLHzCV8KaXXP2TtGJ/W');
 
-SELECT setval('sequence_user', max(id)) FROM public.user;
+SELECT setval('user_seq', max(id)) FROM public.user;
