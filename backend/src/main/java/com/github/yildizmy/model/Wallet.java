@@ -22,11 +22,11 @@ public class Wallet {
     @Id
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
-            generator = "sequence-wallet"
+            generator = "wallet_seq_gen"
     )
     @SequenceGenerator(
-            name = "sequence-wallet",
-            sequenceName = "sequence_wallet",
+            name = "wallet_seq_gen",
+            sequenceName = "wallet_seq",
             allocationSize = 5
     )
     private Long id;
