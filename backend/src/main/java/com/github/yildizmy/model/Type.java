@@ -17,11 +17,11 @@ public class Type {
     @Id
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
-            generator = "sequence-type"
+            generator = "type_seq_gen"
     )
     @SequenceGenerator(
-            name = "sequence-type",
-            sequenceName = "sequence_type",
+            name = "type_seq_gen",
+            sequenceName = "type_seq",
             allocationSize = 5
     )
     private Long id;
