@@ -17,11 +17,11 @@ public class Role {
     @Id
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
-            generator = "sequence-role"
+            generator = "role_seq_gen"
     )
     @SequenceGenerator(
-            name = "sequence-role",
-            sequenceName = "sequence_role",
+            name = "role_seq_gen",
+            sequenceName = "role_seq",
             allocationSize = 5
     )
     private Long id;
