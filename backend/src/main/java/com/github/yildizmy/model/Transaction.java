@@ -18,11 +18,11 @@ public class Transaction {
     @Id
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
-            generator = "sequence-transaction"
+            generator = "transaction_seq_gen"
     )
     @SequenceGenerator(
-            name = "sequence-transaction",
-            sequenceName = "sequence_transaction",
+            name = "transaction_seq_gen",
+            sequenceName = "transaction_seq",
             allocationSize = 5
     )
     private Long id;
