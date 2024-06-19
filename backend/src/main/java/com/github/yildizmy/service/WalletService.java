@@ -226,7 +226,7 @@ public class WalletService {
         final Wallet wallet = walletRequestMapper.toEntity(request);
         walletRepository.save(wallet);
         log.info(UPDATED_WALLET, new Object[]{wallet.getIban(), wallet.getName(), wallet.getBalance()});
-        return CommandResponse.builder().id(wallet.getId()).build();
+        return CommandResponse.builder().id(id).build();
     }
 
     /**
