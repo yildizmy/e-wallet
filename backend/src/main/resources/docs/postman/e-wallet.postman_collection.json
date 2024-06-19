@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "dfe0fac0-db44-49d8-b388-6bd58d1bdaa9",
+		"_postman_id": "a467dd19-960e-456f-b4d3-fc5fb0573632",
 		"name": "e-wallet",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "17805997"
@@ -454,7 +454,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\": 1,\r\n    \"iban\": \"DE95500105174378831849\",\r\n    \"name\": \"PayPall\",\r\n    \"balance\": 2000,\r\n    \"userId\": 1\r\n}",
+							"raw": "{\r\n    \"iban\": \"DE95500105174378831849\",\r\n    \"name\": \"PayPall\",\r\n    \"balance\": 2000,\r\n    \"userId\": 1\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -462,14 +462,21 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/api/v1/wallets",
+							"raw": "{{baseUrl}}/api/v1/wallets/:id",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"api",
 								"v1",
-								"wallets"
+								"wallets",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
 							]
 						}
 					},
