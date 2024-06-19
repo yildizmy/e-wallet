@@ -28,18 +28,18 @@ for testing the endpoints.
 <br/>
 <br/>
 
-| Class              | Method                                                                     | HTTP request                                | Description                                             |
-|--------------------|----------------------------------------------------------------------------|---------------------------------------------|---------------------------------------------------------|
-| *WalletController* | [**findById**](http://localhost:8080/api/v1/wallets/{id})                  | **GET** /wallets/{id}                       | Retrieves a single wallet by the given id               |
-| *WalletController* | [**findByIban**](http://localhost:8080/api/v1/wallets/iban/{iban})         | **GET** /wallets/iban/{iban}                | Retrieves a single wallet by the given iban             |
-| *WalletController* | [**findAllByUserId**](http://localhost:8080/api/v1/wallets/users/{userId}) | **GET** /wallets/users/{userId}             | Retrieves all wallets based on the given userId         |
+| Class              | Method                                                                     | HTTP request                               | Description                                             |
+|--------------------|----------------------------------------------------------------------------|--------------------------------------------|---------------------------------------------------------|
+| *WalletController* | [**findById**](http://localhost:8080/api/v1/wallets/{id})                  | **GET** /wallets/{id}                      | Retrieves a single wallet by the given id               |
+| *WalletController* | [**findByIban**](http://localhost:8080/api/v1/wallets/iban/{iban})         | **GET** /wallets/iban/{iban}               | Retrieves a single wallet by the given iban             |
+| *WalletController* | [**findAllByUserId**](http://localhost:8080/api/v1/wallets/users/{userId}) | **GET** /wallets/users/{userId}            | Retrieves all wallets based on the given userId         |
 | *WalletController* | [**findAll**](http://localhost:8080/api/v1/wallets)                        | **GET** /wallets?page=0&size=10&sort=id,asc | Retrieves all wallets based on the given parameters     |
-| *WalletController* | [**create**](http://localhost:8080/api/v1/wallets)                         | **POST** /wallets                           | Creates a new wallet using the given request parameters |
-| *WalletController* | [**transferFunds**](http://localhost:8080/api/v1/wallets/transfer)         | **POST** /wallets/transfer                  | Transfer funds between wallets                          |
-| *WalletController* | [**addFunds**](http://localhost:8080/api/v1/wallets/addFunds)              | **POST** /wallets/addFunds                  | Adds funds to the given wallet of the user              |
-| *WalletController* | [**withdrawFunds**](http://localhost:8080/api/v1/wallets/withdrawFunds)    | **POST** /wallets/withdrawFunds             | Withdraws funds from the given wallet of the user       |
-| *WalletController* | [**update**](http://localhost:8080/api/v1/wallets)                         | **PUT** /wallets                            | Updates wallet using the given request parameters       |
-| *WalletController* | [**deleteById**](http://localhost:8080/api/v1/wallets/{id})                | **DELETE** /wallets                         | Deletes wallet by id                                    |
+| *WalletController* | [**create**](http://localhost:8080/api/v1/wallets)                         | **POST** /wallets                          | Creates a new wallet using the given request parameters |
+| *WalletController* | [**transferFunds**](http://localhost:8080/api/v1/wallets/transfer)         | **POST** /wallets/transfer                 | Transfer funds between wallets                          |
+| *WalletController* | [**addFunds**](http://localhost:8080/api/v1/wallets/addFunds)              | **POST** /wallets/addFunds                 | Adds funds to the given wallet of the user              |
+| *WalletController* | [**withdrawFunds**](http://localhost:8080/api/v1/wallets/withdrawFunds)    | **POST** /wallets/withdrawFunds            | Withdraws funds from the given wallet of the user       |
+| *WalletController* | [**update**](http://localhost:8080/api/v1/wallets)                         | **PUT** /wallets/{id}                            | Updates wallet using the given request parameters       |
+| *WalletController* | [**deleteById**](http://localhost:8080/api/v1/wallets/{id})                | **DELETE** /wallets/{id}                         | Deletes wallet by id                                    |
 
 <br/>
 <br/>
