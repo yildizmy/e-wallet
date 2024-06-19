@@ -207,8 +207,8 @@ public class WalletService {
      * @param request
      * @return id of the updated wallet
      */
-    public CommandResponse update(WalletRequest request) {
-        final Wallet foundWallet = walletRepository.findById(request.getId())
+    public CommandResponse update(long id, WalletRequest request) {
+        final Wallet foundWallet = walletRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementFoundException(NOT_FOUND_WALLET));
 
         // check if the iban is changed and new iban is already exists

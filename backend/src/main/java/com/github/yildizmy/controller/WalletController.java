@@ -149,9 +149,9 @@ public class WalletController {
      * @return id of the updated wallet wrapped by ResponseEntity<ApiResponse<T>>
      */
     @PreAuthorize("hasRole(T(com.github.yildizmy.model.RoleType).ROLE_USER)")
-    @PutMapping
-    public ResponseEntity<ApiResponse<CommandResponse>> update(@Valid @RequestBody WalletRequest request) {
-        final CommandResponse response = walletService.update(request);
+    @PutMapping("/{id}")
+    public ResponseEntity<ApiResponse<CommandResponse>> update(@PathVariable long id, @Valid @RequestBody WalletRequest request) {
+        final CommandResponse response = walletService.update(id, request);
         return ResponseEntity.ok(new ApiResponse<>(Instant.now(clock).toEpochMilli(), SUCCESS, response));
     }
 
