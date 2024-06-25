@@ -66,13 +66,12 @@ public class TransactionService {
      */
     @Transactional(readOnly = true)
     public List<TransactionResponse> findAllByUserId(Long userId) {
-        final List<TransactionResponse> transactions = transactionRepository.findAllByUserId(userId).stream()
-                .map(transactionResponseMapper::toDto)
-                .toList();
-
+        final List<Transaction> transactions = transactionRepository.findAllByUserId(userId);
         if (transactions.isEmpty())
             throw new NoSuchElementFoundException(NOT_FOUND_RECORD);
-        return transactions;
+
+        return transactions.stream().map(transactionResponseMapper::toDto)
+                .toList();
     }
 
     /**
@@ -83,11 +82,11 @@ public class TransactionService {
      */
     @Transactional(readOnly = true)
     public Page<TransactionResponse> findAll(Pageable pageable) {
-        final Page<TransactionResponse> transactions = transactionRepository.findAll(pageable)
-                .map(transactionResponseMapper::toDto);
+        final Page<Transaction> transactions = transactionRepository.findAll(pageable);
         if (transactions.isEmpty())
             throw new NoSuchElementFoundException(NOT_FOUND_RECORD);
-        return transactions;
+
+        return transactions.map(transactionResponseMapper::toDto);
     }
 
     /**
