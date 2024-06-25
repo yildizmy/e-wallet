@@ -97,11 +97,10 @@ public class WalletService {
      */
     @Transactional(readOnly = true)
     public Page<WalletResponse> findAll(Pageable pageable) {
-        final Page<WalletResponse> wallets = walletRepository.findAll(pageable)
-                .map(walletResponseMapper::toDto);
+        final Page<Wallet> wallets = walletRepository.findAll(pageable);
         if (wallets.isEmpty())
             throw new NoSuchElementFoundException(NOT_FOUND_RECORD);
-        return wallets;
+        return wallets.map(walletResponseMapper::toDto);
     }
 
     /**
