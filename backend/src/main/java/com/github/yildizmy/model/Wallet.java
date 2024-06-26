@@ -65,7 +65,7 @@ public class Wallet {
         transaction.setToWallet(this);
     }
 
-    public void removeFromTransaction(Transaction transaction) {
+    public void removeToTransaction(Transaction transaction) {
         toTransactions.remove(transaction);
         transaction.setToWallet(null);
     }
