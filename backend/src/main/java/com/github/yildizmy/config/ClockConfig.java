@@ -6,8 +6,8 @@ import org.springframework.context.annotation.Configuration;
 import java.time.Clock;
 
 /**
- * Configuration file used for obtaining a clock that contains a clock
- * that returns the current instant using the best available system clock
+ * Configuration class for creating a {@link Clock} bean.
+ * This bean returns the current instant using the best available system clock in UTC time zone.
  */
 @Configuration
 public class ClockConfig {
