@@ -93,10 +93,10 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
      * @return ResponseEntity<Object> with detailed information related to the error
      */
     @ExceptionHandler(InsufficientFundsException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseStatus(HttpStatus.PRECONDITION_FAILED )
     public ResponseEntity<Object> handleInsufficientFundsException(InsufficientFundsException ex, WebRequest request) {
         log.error(METHOD_ARGUMENT_NOT_VALID, ex);
-        return buildErrorResponse(ex, HttpStatus.BAD_REQUEST, request);
+        return buildErrorResponse(ex, HttpStatus.PRECONDITION_FAILED, request);
     }
 
     /**
