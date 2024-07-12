@@ -80,7 +80,7 @@ npm start
 ```
 <br/>
 
-At this step, the application starts on your default browser (http://localhost:3000/) and can be tested. By using Postman, etc. 
+At this step, the application starts on your default browser (http://localhost:3000/) and can be tested by using Postman, etc. 
 API endpoints can also be tested. For this purpose, see the details on [How to test?](how_to_test.md) section.
 
 <br/>
