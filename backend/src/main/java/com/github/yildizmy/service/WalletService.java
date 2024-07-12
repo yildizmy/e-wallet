@@ -120,7 +120,7 @@ public class WalletService {
 
         final Wallet wallet = walletRequestMapper.toEntity(request);
         walletRepository.save(wallet);
-        log.info(CREATED_WALLET, new Object[]{wallet.getIban(), wallet.getName(), wallet.getBalance()});
+        log.info(CREATED_WALLET, wallet.getIban(), wallet.getName(), wallet.getBalance());
 
         // add this initial amount to the transactions
         transactionService.create(walletTransactionRequestMapper.toTransactionDto(request));
@@ -150,7 +150,7 @@ public class WalletService {
         toWallet.setBalance(toWallet.getBalance().add(request.getAmount()));
 
         walletRepository.save(toWallet);
-        log.info(UPDATED_WALLET_BALANCES, new Object[]{fromWallet.getBalance(), toWallet.getBalance()});
+        log.info(UPDATED_WALLET_BALANCES, fromWallet.getBalance(), toWallet.getBalance());
 
         final CommandResponse response = transactionService.create(request);
         return CommandResponse.builder().id(response.id()).build();
@@ -170,7 +170,7 @@ public class WalletService {
         toWallet.setBalance(toWallet.getBalance().add(request.getAmount()));
 
         walletRepository.save(toWallet);
-        log.info(UPDATED_WALLET_BALANCE, new Object[]{toWallet.getBalance()});
+        log.info(UPDATED_WALLET_BALANCE, toWallet.getBalance());
 
         final CommandResponse response = transactionService.create(request);
         return CommandResponse.builder().id(response.id()).build();
@@ -194,7 +194,7 @@ public class WalletService {
         fromWallet.setBalance(fromWallet.getBalance().subtract(request.getAmount()));
 
         walletRepository.save(fromWallet);
-        log.info(UPDATED_WALLET_BALANCE, new Object[]{fromWallet.getBalance()});
+        log.info(UPDATED_WALLET_BALANCE, fromWallet.getBalance());
 
         final CommandResponse response = transactionService.create(request);
         return CommandResponse.builder().id(response.id()).build();
@@ -224,7 +224,7 @@ public class WalletService {
 
         final Wallet wallet = walletRequestMapper.toEntity(request);
         walletRepository.save(wallet);
-        log.info(UPDATED_WALLET, new Object[]{wallet.getIban(), wallet.getName(), wallet.getBalance()});
+        log.info(UPDATED_WALLET, wallet.getIban(), wallet.getName(), wallet.getBalance());
         return CommandResponse.builder().id(id).build();
     }
 
@@ -237,6 +237,6 @@ public class WalletService {
         final Wallet wallet = walletRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementFoundException(NOT_FOUND_WALLET));
         walletRepository.delete(wallet);
-        log.info(DELETED_WALLET, new Object[]{wallet.getIban(), wallet.getName(), wallet.getBalance()});
+        log.info(DELETED_WALLET, wallet.getIban(), wallet.getName(), wallet.getBalance());
     }
 }
