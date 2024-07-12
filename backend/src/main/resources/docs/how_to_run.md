@@ -55,7 +55,7 @@ docker compose up --build
 ```
 <br/>
 
-5. After database container starts on Docker, open backend project in using `IntelliJ IDEA` (open `e-wallet\backend` folder rather than `e-wallet` folder). Then select `Java 17` version via `File > Project Structure > Project > SDK` menu and run the application.
+5. After database container starts on Docker, open backend project using `IntelliJ IDEA` (open `e-wallet\backend` folder rather than `e-wallet` folder). Then select `Java 17` version via `File > Project Structure > Project > SDK` menu and run the application.
 
 > [!IMPORTANT]
 > If _Lombok requires enabled annotation processing_ dialog appears at this stage, click _Enable annotation processing_ button.
