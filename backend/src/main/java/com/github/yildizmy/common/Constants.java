@@ -1,11 +1,12 @@
 package com.github.yildizmy.common;
 
 /**
- * Constant variables used in the project
+ * Constant variables used in the project. A private constructor is added to prevent instantiation.
  */
 public final class Constants {
 
     private Constants() {
+        throw new UnsupportedOperationException(CLASS_CANNOT_BE_INSTANTIATED);
     }
 
     public static final String TRACE = "trace";
@@ -30,6 +31,7 @@ public final class Constants {
     public static final String UNKNOWN_ERROR = "Unknown error occurred";
     public static final String METHOD_ARGUMENT_NOT_VALID = "MethodArgumentNotValid exception";
     public static final String FIELD_NOT_VALIDATED = "Field is not validated";
+    public static final String CLASS_CANNOT_BE_INSTANTIATED = "This is a utility class and cannot be instantiated";
 
     public static final String LOGGED_IN_USER = "User logged in (username: {})";
     public static final String ALREADY_EXISTS = "Requested element already exists";
