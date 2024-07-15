@@ -35,7 +35,8 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     private boolean printStackTrace;
 
     /**
-     * Handles MethodArgumentNotValidException
+     * Handles MethodArgumentNotValidException to validate requests and display formatted validation messages.
+     * In order to display validation messages properly, keep this method in GlobalExceptionHandler class.
      *
      * @param ex
      * @param headers
