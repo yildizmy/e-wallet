@@ -136,4 +136,13 @@ class TransactionServiceTest {
         verify(transactionRepository).findAll(pageable);
         verify(transactionResponseMapper).toDto(testTransaction);
     }
+
+    @Test
+    void findAll_shouldThrowExceptionWhenNoTransactionsFound() {
+        Pageable pageable = Pageable.unpaged();
+        when(transactionRepository.findAll(pageable)).thenReturn(Page.empty());
+
+        assertThrows(NoSuchElementFoundException.class, () -> transactionService.findAll(pageable));
+        verify(transactionRepository).findAll(pageable);
+    }
 }
