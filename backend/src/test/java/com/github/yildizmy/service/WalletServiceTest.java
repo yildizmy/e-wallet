@@ -10,9 +10,13 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -106,6 +110,34 @@ class WalletServiceTest {
         assertNotNull(result);
         assertEquals(expectedWallet, result);
         verify(walletRepository).findByIban("TEST123");
+    }
+
+    @Test
+    void getByIban_shouldThrowExceptionWhenWalletNotFound() {
+        when(walletRepository.findByIban("TEST123")).thenReturn(Optional.empty());
+
+        assertThrows(NoSuchElementFoundException.class, () -> walletService.getByIban("TEST123"));
+        verify(walletRepository).findByIban("TEST123");
+    }
+
+    @Test
+    void findAll_shouldReturnPageOfWalletResponses() {
+        Page<Wallet> walletPage = new PageImpl<>(Collections.singletonList(
+                createTestWallet(1L, "TEST123", "Test Wallet", BigDecimal.valueOf(1000))
+        ));
+        Pageable pageable = Pageable.unpaged();
+        WalletResponse expectedResponse = createTestWalletResponse(1L, "TEST123", "Test Wallet", BigDecimal.valueOf(1000));
+
+        when(walletRepository.findAll(pageable)).thenReturn(walletPage);
+        when(walletResponseMapper.toDto(any(Wallet.class))).thenReturn(expectedResponse);
+
+        Page<WalletResponse> result = walletService.findAll(pageable);
+
+        assertNotNull(result);
+        assertEquals(1, result.getContent().size());
+        assertEquals(expectedResponse, result.getContent().get(0));
+        verify(walletRepository).findAll(pageable);
+        verify(walletResponseMapper).toDto(any(Wallet.class));
     }
 
     private Wallet createTestWallet(Long id, String iban, String name, BigDecimal balance) {
