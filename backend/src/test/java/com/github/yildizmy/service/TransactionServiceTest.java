@@ -13,12 +13,14 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class TransactionServiceTest {
@@ -91,5 +93,22 @@ class TransactionServiceTest {
 
         assertThrows(NoSuchElementFoundException.class, () -> transactionService.findByReferenceNumber(referenceNumber));
         verify(transactionRepository).findByReferenceNumber(referenceNumber);
+    }
+
+    @Test
+    void findAllByUserId_shouldReturnListOfTransactionResponses() {
+        Long userId = 1L;
+        List<Transaction> transactions = Arrays.asList(testTransaction, testTransaction);
+        when(transactionRepository.findAllByUserId(userId)).thenReturn(transactions);
+        when(transactionResponseMapper.toDto(any(Transaction.class))).thenReturn(testTransactionResponse);
+
+        List<TransactionResponse> result = transactionService.findAllByUserId(userId);
+
+        assertNotNull(result);
+        assertEquals(2, result.size());
+        assertEquals(testTransactionResponse, result.get(0));
+        assertEquals(testTransactionResponse, result.get(1));
+        verify(transactionRepository).findAllByUserId(userId);
+        verify(transactionResponseMapper, times(2)).toDto(any(Transaction.class));
     }
 }
