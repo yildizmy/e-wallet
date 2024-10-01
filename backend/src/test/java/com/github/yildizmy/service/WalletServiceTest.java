@@ -252,6 +252,23 @@ class WalletServiceTest {
         verify(transactionService).create(request);
     }
 
+    @Test
+    void withdrawFunds_shouldWithdrawFundsFromWallet() {
+        Wallet fromWallet = createTestWallet(1L, "FROM123", "From Wallet", BigDecimal.valueOf(1000));
+        TransactionRequest request = createTestTransactionRequest("FROM123", null, BigDecimal.valueOf(200));
+
+        when(walletRepository.findByIban("FROM123")).thenReturn(Optional.of(fromWallet));
+        when(transactionService.create(request)).thenReturn(new CommandResponse(1L));
+
+        CommandResponse result = walletService.withdrawFunds(request);
+
+        assertNotNull(result);
+        assertEquals(1L, result.id());
+        assertEquals(BigDecimal.valueOf(800), fromWallet.getBalance());
+        verify(walletRepository).save(fromWallet);
+        verify(transactionService).create(request);
+    }
+
     private Wallet createTestWallet(Long id, String iban, String name, BigDecimal balance) {
         Wallet wallet = new Wallet();
         wallet.setId(id);
