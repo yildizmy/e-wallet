@@ -202,6 +202,26 @@ class WalletServiceTest {
         verify(walletRepository).existsByIbanIgnoreCase(request.getIban());
     }
 
+    @Test
+    void transferFunds_shouldTransferFundsBetweenWallets() {
+        Wallet fromWallet = createTestWallet(1L, "FROM123", "From Wallet", BigDecimal.valueOf(1000));
+        Wallet toWallet = createTestWallet(2L, "TO123", "To Wallet", BigDecimal.valueOf(500));
+        TransactionRequest request = createTestTransactionRequest("FROM123", "TO123", BigDecimal.valueOf(200));
+
+        when(walletRepository.findByIban("FROM123")).thenReturn(Optional.of(fromWallet));
+        when(walletRepository.findByIban("TO123")).thenReturn(Optional.of(toWallet));
+        when(transactionService.create(request)).thenReturn(new CommandResponse(1L));
+
+        CommandResponse result = walletService.transferFunds(request);
+
+        assertNotNull(result);
+        assertEquals(1L, result.id());
+        assertEquals(BigDecimal.valueOf(800), fromWallet.getBalance());
+        assertEquals(BigDecimal.valueOf(700), toWallet.getBalance());
+        verify(walletRepository).save(toWallet);
+        verify(transactionService).create(request);
+    }
+
     private Wallet createTestWallet(Long id, String iban, String name, BigDecimal balance) {
         Wallet wallet = new Wallet();
         wallet.setId(id);
@@ -227,5 +247,13 @@ class WalletServiceTest {
         response.setName(name);
         response.setBalance(balance);
         return response;
+    }
+
+    private TransactionRequest createTestTransactionRequest(String fromWalletIban, String toWalletIban, BigDecimal amount) {
+        TransactionRequest request = new TransactionRequest();
+        request.setFromWalletIban(fromWalletIban);
+        request.setToWalletIban(toWalletIban);
+        request.setAmount(amount);
+        return request;
     }
 }
