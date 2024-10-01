@@ -269,6 +269,16 @@ class WalletServiceTest {
         verify(transactionService).create(request);
     }
 
+    @Test
+    void withdrawFunds_shouldThrowExceptionWhenInsufficientFunds() {
+        Wallet fromWallet = createTestWallet(1L, "FROM123", "From Wallet", BigDecimal.valueOf(100));
+        TransactionRequest request = createTestTransactionRequest("FROM123", null, BigDecimal.valueOf(200));
+
+        when(walletRepository.findByIban("FROM123")).thenReturn(Optional.of(fromWallet));
+
+        assertThrows(InsufficientFundsException.class, () -> walletService.withdrawFunds(request));
+    }
+
     private Wallet createTestWallet(Long id, String iban, String name, BigDecimal balance) {
         Wallet wallet = new Wallet();
         wallet.setId(id);
