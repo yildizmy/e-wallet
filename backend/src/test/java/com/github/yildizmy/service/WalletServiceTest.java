@@ -8,6 +8,7 @@ import com.github.yildizmy.dto.request.WalletRequest;
 import com.github.yildizmy.dto.response.CommandResponse;
 import com.github.yildizmy.dto.response.WalletResponse;
 import com.github.yildizmy.exception.ElementAlreadyExistsException;
+import com.github.yildizmy.exception.InsufficientFundsException;
 import com.github.yildizmy.exception.NoSuchElementFoundException;
 import com.github.yildizmy.model.Wallet;
 import com.github.yildizmy.repository.WalletRepository;
@@ -220,6 +221,18 @@ class WalletServiceTest {
         assertEquals(BigDecimal.valueOf(700), toWallet.getBalance());
         verify(walletRepository).save(toWallet);
         verify(transactionService).create(request);
+    }
+
+    @Test
+    void transferFunds_shouldThrowExceptionWhenInsufficientFunds() {
+        Wallet fromWallet = createTestWallet(1L, "FROM123", "From Wallet", BigDecimal.valueOf(100));
+        Wallet toWallet = createTestWallet(2L, "TO123", "To Wallet", BigDecimal.valueOf(500));
+        TransactionRequest request = createTestTransactionRequest("FROM123", "TO123", BigDecimal.valueOf(200));
+
+        when(walletRepository.findByIban("FROM123")).thenReturn(Optional.of(fromWallet));
+        when(walletRepository.findByIban("TO123")).thenReturn(Optional.of(toWallet));
+
+        assertThrows(InsufficientFundsException.class, () -> walletService.transferFunds(request));
     }
 
     private Wallet createTestWallet(Long id, String iban, String name, BigDecimal balance) {
