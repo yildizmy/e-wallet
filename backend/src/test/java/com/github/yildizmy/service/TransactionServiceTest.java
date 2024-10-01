@@ -2,6 +2,7 @@ package com.github.yildizmy.service;
 
 import com.github.yildizmy.dto.mapper.TransactionResponseMapper;
 import com.github.yildizmy.dto.response.TransactionResponse;
+import com.github.yildizmy.exception.NoSuchElementFoundException;
 import com.github.yildizmy.model.Transaction;
 import com.github.yildizmy.repository.TransactionRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -15,8 +16,7 @@ import java.math.BigDecimal;
 import java.util.Optional;
 import java.util.UUID;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -33,6 +33,7 @@ class TransactionServiceTest {
     private TransactionService transactionService;
 
     private Transaction testTransaction;
+
     private TransactionResponse testTransactionResponse;
 
     @BeforeEach
@@ -59,5 +60,13 @@ class TransactionServiceTest {
         assertEquals(testTransactionResponse, result);
         verify(transactionRepository).findById(1L);
         verify(transactionResponseMapper).toDto(testTransaction);
+    }
+
+    @Test
+    void findById_shouldThrowExceptionWhenTransactionNotFound() {
+        when(transactionRepository.findById(1L)).thenReturn(Optional.empty());
+
+        assertThrows(NoSuchElementFoundException.class, () -> transactionService.findById(1L));
+        verify(transactionRepository).findById(1L);
     }
 }
