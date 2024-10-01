@@ -95,6 +95,19 @@ class WalletServiceTest {
         verify(walletResponseMapper, times(2)).toDto(any(Wallet.class));
     }
 
+    @Test
+    void getByIban_shouldReturnWallet() {
+        Wallet expectedWallet = createTestWallet(1L, "TEST123", "Test Wallet", BigDecimal.valueOf(1000));
+
+        when(walletRepository.findByIban("TEST123")).thenReturn(Optional.of(expectedWallet));
+
+        Wallet result = walletService.getByIban("TEST123");
+
+        assertNotNull(result);
+        assertEquals(expectedWallet, result);
+        verify(walletRepository).findByIban("TEST123");
+    }
+
     private Wallet createTestWallet(Long id, String iban, String name, BigDecimal balance) {
         Wallet wallet = new Wallet();
         wallet.setId(id);
