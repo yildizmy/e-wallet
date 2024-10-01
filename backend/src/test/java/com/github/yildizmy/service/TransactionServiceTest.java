@@ -11,6 +11,9 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 
 import java.math.BigDecimal;
 import java.util.*;
@@ -116,5 +119,21 @@ class TransactionServiceTest {
 
         assertThrows(NoSuchElementFoundException.class, () -> transactionService.findAllByUserId(userId));
         verify(transactionRepository).findAllByUserId(userId);
+    }
+
+    @Test
+    void findAll_shouldReturnPageOfTransactionResponses() {
+        Pageable pageable = Pageable.unpaged();
+        Page<Transaction> transactionPage = new PageImpl<>(Collections.singletonList(testTransaction));
+        when(transactionRepository.findAll(pageable)).thenReturn(transactionPage);
+        when(transactionResponseMapper.toDto(testTransaction)).thenReturn(testTransactionResponse);
+
+        Page<TransactionResponse> result = transactionService.findAll(pageable);
+
+        assertNotNull(result);
+        assertEquals(1, result.getContent().size());
+        assertEquals(testTransactionResponse, result.getContent().get(0));
+        verify(transactionRepository).findAll(pageable);
+        verify(transactionResponseMapper).toDto(testTransaction);
     }
 }
