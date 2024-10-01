@@ -304,6 +304,17 @@ class WalletServiceTest {
         verify(walletRepository).save(updatedWallet);
     }
 
+    @Test
+    void update_shouldThrowExceptionWhenWalletNotFound() {
+        long walletId = 1L;
+        WalletRequest request = createTestWalletRequest(1L, "NEW123", "Updated Wallet", BigDecimal.valueOf(1000));
+
+        when(walletRepository.findById(walletId)).thenReturn(Optional.empty());
+
+        assertThrows(NoSuchElementFoundException.class, () -> walletService.update(walletId, request));
+        verify(walletRepository).findById(walletId);
+    }
+
     private Wallet createTestWallet(Long id, String iban, String name, BigDecimal balance) {
         Wallet wallet = new Wallet();
         wallet.setId(id);
