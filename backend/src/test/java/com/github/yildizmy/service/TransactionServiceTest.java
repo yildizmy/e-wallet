@@ -1,9 +1,13 @@
 package com.github.yildizmy.service;
 
+import com.github.yildizmy.dto.mapper.TransactionRequestMapper;
 import com.github.yildizmy.dto.mapper.TransactionResponseMapper;
+import com.github.yildizmy.dto.request.TransactionRequest;
+import com.github.yildizmy.dto.response.CommandResponse;
 import com.github.yildizmy.dto.response.TransactionResponse;
 import com.github.yildizmy.exception.NoSuchElementFoundException;
 import com.github.yildizmy.model.Transaction;
+import com.github.yildizmy.model.Wallet;
 import com.github.yildizmy.repository.TransactionRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -29,13 +33,15 @@ class TransactionServiceTest {
     private TransactionRepository transactionRepository;
 
     @Mock
+    private TransactionRequestMapper transactionRequestMapper;
+
+    @Mock
     private TransactionResponseMapper transactionResponseMapper;
 
     @InjectMocks
     private TransactionService transactionService;
 
     private Transaction testTransaction;
-
     private TransactionResponse testTransactionResponse;
 
     @BeforeEach
@@ -144,5 +150,29 @@ class TransactionServiceTest {
 
         assertThrows(NoSuchElementFoundException.class, () -> transactionService.findAll(pageable));
         verify(transactionRepository).findAll(pageable);
+    }
+
+    @Test
+    void create_shouldCreateNewTransaction() {
+        TransactionRequest request = new TransactionRequest();
+        request.setAmount(BigDecimal.valueOf(100));
+
+        Wallet fromWallet = new Wallet();
+        fromWallet.setIban("FROM123");
+        Wallet toWallet = new Wallet();
+        toWallet.setIban("TO123");
+
+        testTransaction.setFromWallet(fromWallet);
+        testTransaction.setToWallet(toWallet);
+
+        when(transactionRequestMapper.toEntity(request)).thenReturn(testTransaction);
+        when(transactionRepository.save(testTransaction)).thenReturn(testTransaction);
+
+        CommandResponse result = transactionService.create(request);
+
+        assertNotNull(result);
+        assertEquals(1L, result.id());
+        verify(transactionRequestMapper).toEntity(request);
+        verify(transactionRepository).save(testTransaction);
     }
 }
