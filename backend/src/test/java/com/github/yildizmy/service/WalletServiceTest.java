@@ -315,6 +315,16 @@ class WalletServiceTest {
         verify(walletRepository).findById(walletId);
     }
 
+    @Test
+    void deleteById_shouldThrowExceptionWhenWalletNotFound() {
+        long walletId = 1L;
+
+        when(walletRepository.findById(walletId)).thenReturn(Optional.empty());
+
+        assertThrows(NoSuchElementFoundException.class, () -> walletService.deleteById(walletId));
+        verify(walletRepository).findById(walletId);
+    }
+
     private Wallet createTestWallet(Long id, String iban, String name, BigDecimal balance) {
         Wallet wallet = new Wallet();
         wallet.setId(id);
