@@ -29,7 +29,6 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -316,6 +315,19 @@ class WalletServiceTest {
     }
 
     @Test
+    void deleteById_shouldDeleteWallet() {
+        long walletId = 1L;
+        Wallet wallet = createTestWallet(walletId, "TEST123", "Test Wallet", BigDecimal.valueOf(1000));
+
+        when(walletRepository.findById(walletId)).thenReturn(Optional.of(wallet));
+
+        walletService.deleteById(walletId);
+
+        verify(walletRepository).findById(walletId);
+        verify(walletRepository).delete(wallet);
+    }
+
+    @Test
     void deleteById_shouldThrowExceptionWhenWalletNotFound() {
         long walletId = 1L;
 
@@ -334,15 +346,6 @@ class WalletServiceTest {
         return wallet;
     }
 
-    private WalletRequest createTestWalletRequest(Long userId, String iban, String name, BigDecimal balance) {
-        WalletRequest request = new WalletRequest();
-        request.setUserId(userId);
-        request.setIban(iban);
-        request.setName(name);
-        request.setBalance(balance);
-        return request;
-    }
-
     private WalletResponse createTestWalletResponse(Long id, String iban, String name, BigDecimal balance) {
         WalletResponse response = new WalletResponse();
         response.setId(id);
@@ -350,6 +353,15 @@ class WalletServiceTest {
         response.setName(name);
         response.setBalance(balance);
         return response;
+    }
+
+    private WalletRequest createTestWalletRequest(Long userId, String iban, String name, BigDecimal balance) {
+        WalletRequest request = new WalletRequest();
+        request.setUserId(userId);
+        request.setIban(iban);
+        request.setName(name);
+        request.setBalance(balance);
+        return request;
     }
 
     private TransactionRequest createTestTransactionRequest(String fromWalletIban, String toWalletIban, BigDecimal amount) {
