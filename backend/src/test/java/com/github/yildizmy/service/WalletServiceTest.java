@@ -1,10 +1,16 @@
 package com.github.yildizmy.service;
 
+import com.github.yildizmy.dto.mapper.WalletRequestMapper;
 import com.github.yildizmy.dto.mapper.WalletResponseMapper;
+import com.github.yildizmy.dto.mapper.WalletTransactionRequestMapper;
+import com.github.yildizmy.dto.request.TransactionRequest;
+import com.github.yildizmy.dto.request.WalletRequest;
+import com.github.yildizmy.dto.response.CommandResponse;
 import com.github.yildizmy.dto.response.WalletResponse;
 import com.github.yildizmy.exception.NoSuchElementFoundException;
 import com.github.yildizmy.model.Wallet;
 import com.github.yildizmy.repository.WalletRepository;
+import com.github.yildizmy.validator.IbanValidator;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -31,7 +37,19 @@ class WalletServiceTest {
     private WalletRepository walletRepository;
 
     @Mock
+    private TransactionService transactionService;
+
+    @Mock
+    private WalletRequestMapper walletRequestMapper;
+
+    @Mock
     private WalletResponseMapper walletResponseMapper;
+
+    @Mock
+    private WalletTransactionRequestMapper walletTransactionRequestMapper;
+
+    @Mock
+    private IbanValidator ibanValidator;
 
     @InjectMocks
     private WalletService walletService;
@@ -149,6 +167,30 @@ class WalletServiceTest {
         verify(walletRepository).findAll(pageable);
     }
 
+    @Test
+    void create_shouldCreateNewWallet() {
+        WalletRequest request = createTestWalletRequest(1L, "TEST123", "Test Wallet", BigDecimal.valueOf(1000));
+        Wallet wallet = createTestWallet(1L, "TEST123", "Test Wallet", BigDecimal.valueOf(1000));
+
+        when(walletRepository.existsByIbanIgnoreCase(anyString())).thenReturn(false);
+        when(walletRepository.existsByUserIdAndNameIgnoreCase(anyLong(), anyString())).thenReturn(false);
+        when(walletRequestMapper.toEntity(request)).thenReturn(wallet);
+        when(walletRepository.save(wallet)).thenReturn(wallet);
+        when(walletTransactionRequestMapper.toTransactionDto(request)).thenReturn(new TransactionRequest());
+        when(transactionService.create(any(TransactionRequest.class))).thenReturn(new CommandResponse(1L));
+
+        CommandResponse result = walletService.create(request);
+
+        assertNotNull(result);
+        assertEquals(1L, result.id());
+        verify(walletRepository).existsByIbanIgnoreCase(request.getIban());
+        verify(walletRepository).existsByUserIdAndNameIgnoreCase(request.getUserId(), request.getName());
+        verify(ibanValidator).isValid(request.getIban(), null);
+        verify(walletRequestMapper).toEntity(request);
+        verify(walletRepository).save(wallet);
+        verify(transactionService).create(any(TransactionRequest.class));
+    }
+
     private Wallet createTestWallet(Long id, String iban, String name, BigDecimal balance) {
         Wallet wallet = new Wallet();
         wallet.setId(id);
@@ -156,6 +198,15 @@ class WalletServiceTest {
         wallet.setName(name);
         wallet.setBalance(balance);
         return wallet;
+    }
+
+    private WalletRequest createTestWalletRequest(Long userId, String iban, String name, BigDecimal balance) {
+        WalletRequest request = new WalletRequest();
+        request.setUserId(userId);
+        request.setIban(iban);
+        request.setName(name);
+        request.setBalance(balance);
+        return request;
     }
 
     private WalletResponse createTestWalletResponse(Long id, String iban, String name, BigDecimal balance) {
