@@ -140,6 +140,15 @@ class WalletServiceTest {
         verify(walletResponseMapper).toDto(any(Wallet.class));
     }
 
+    @Test
+    void findAll_shouldThrowExceptionWhenNoWalletsFound() {
+        Pageable pageable = Pageable.unpaged();
+        when(walletRepository.findAll(pageable)).thenReturn(Page.empty());
+
+        assertThrows(NoSuchElementFoundException.class, () -> walletService.findAll(pageable));
+        verify(walletRepository).findAll(pageable);
+    }
+
     private Wallet createTestWallet(Long id, String iban, String name, BigDecimal balance) {
         Wallet wallet = new Wallet();
         wallet.setId(id);
