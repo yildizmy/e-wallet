@@ -12,11 +12,13 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class WalletServiceTest {
@@ -68,6 +70,29 @@ class WalletServiceTest {
         assertEquals(expectedResponse, result);
         verify(walletRepository).findByIban("TEST123");
         verify(walletResponseMapper).toDto(wallet);
+    }
+
+    @Test
+    void findByUserId_shouldReturnListOfWalletResponses() {
+        List<Wallet> wallets = Arrays.asList(
+                createTestWallet(1L, "TEST123", "Test Wallet 1", BigDecimal.valueOf(1000)),
+                createTestWallet(2L, "TEST456", "Test Wallet 2", BigDecimal.valueOf(2000))
+        );
+        List<WalletResponse> expectedResponses = Arrays.asList(
+                createTestWalletResponse(1L, "TEST123", "Test Wallet 1", BigDecimal.valueOf(1000)),
+                createTestWalletResponse(2L, "TEST456", "Test Wallet 2", BigDecimal.valueOf(2000))
+        );
+
+        when(walletRepository.findByUserId(1L)).thenReturn(wallets);
+        when(walletResponseMapper.toDto(any(Wallet.class))).thenReturn(expectedResponses.get(0), expectedResponses.get(1));
+
+        List<WalletResponse> result = walletService.findByUserId(1L);
+
+        assertNotNull(result);
+        assertEquals(2, result.size());
+        assertEquals(expectedResponses, result);
+        verify(walletRepository).findByUserId(1L);
+        verify(walletResponseMapper, times(2)).toDto(any(Wallet.class));
     }
 
     private Wallet createTestWallet(Long id, String iban, String name, BigDecimal balance) {
