@@ -7,6 +7,7 @@ import com.github.yildizmy.dto.request.TransactionRequest;
 import com.github.yildizmy.dto.request.WalletRequest;
 import com.github.yildizmy.dto.response.CommandResponse;
 import com.github.yildizmy.dto.response.WalletResponse;
+import com.github.yildizmy.exception.ElementAlreadyExistsException;
 import com.github.yildizmy.exception.NoSuchElementFoundException;
 import com.github.yildizmy.model.Wallet;
 import com.github.yildizmy.repository.WalletRepository;
@@ -189,6 +190,16 @@ class WalletServiceTest {
         verify(walletRequestMapper).toEntity(request);
         verify(walletRepository).save(wallet);
         verify(transactionService).create(any(TransactionRequest.class));
+    }
+
+    @Test
+    void create_shouldThrowExceptionWhenIbanAlreadyExists() {
+        WalletRequest request = createTestWalletRequest(1L, "TEST123", "Test Wallet", BigDecimal.valueOf(1000));
+
+        when(walletRepository.existsByIbanIgnoreCase(anyString())).thenReturn(true);
+
+        assertThrows(ElementAlreadyExistsException.class, () -> walletService.create(request));
+        verify(walletRepository).existsByIbanIgnoreCase(request.getIban());
     }
 
     private Wallet createTestWallet(Long id, String iban, String name, BigDecimal balance) {
