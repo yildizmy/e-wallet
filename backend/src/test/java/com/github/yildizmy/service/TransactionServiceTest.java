@@ -83,4 +83,13 @@ class TransactionServiceTest {
         verify(transactionRepository).findByReferenceNumber(referenceNumber);
         verify(transactionResponseMapper).toDto(testTransaction);
     }
+
+    @Test
+    void findByReferenceNumber_shouldThrowExceptionWhenTransactionNotFound() {
+        UUID referenceNumber = UUID.randomUUID();
+        when(transactionRepository.findByReferenceNumber(referenceNumber)).thenReturn(Optional.empty());
+
+        assertThrows(NoSuchElementFoundException.class, () -> transactionService.findByReferenceNumber(referenceNumber));
+        verify(transactionRepository).findByReferenceNumber(referenceNumber);
+    }
 }
