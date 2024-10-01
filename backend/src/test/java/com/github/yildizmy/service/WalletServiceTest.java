@@ -1,9 +1,13 @@
 package com.github.yildizmy.service;
 
+import com.github.yildizmy.dto.mapper.WalletRequestMapper;
 import com.github.yildizmy.dto.mapper.WalletResponseMapper;
+import com.github.yildizmy.dto.mapper.WalletTransactionRequestMapper;
 import com.github.yildizmy.dto.response.WalletResponse;
+import com.github.yildizmy.exception.NoSuchElementFoundException;
 import com.github.yildizmy.model.Wallet;
 import com.github.yildizmy.repository.WalletRepository;
+import com.github.yildizmy.validator.IbanValidator;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -13,8 +17,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.math.BigDecimal;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -46,6 +49,14 @@ class WalletServiceTest {
         verify(walletResponseMapper).toDto(wallet);
     }
 
+    @Test
+    void findById_shouldThrowExceptionWhenWalletNotFound() {
+        when(walletRepository.findById(1L)).thenReturn(Optional.empty());
+
+        assertThrows(NoSuchElementFoundException.class, () -> walletService.findById(1L));
+        verify(walletRepository).findById(1L);
+    }
+
     private Wallet createTestWallet(Long id, String iban, String name, BigDecimal balance) {
         Wallet wallet = new Wallet();
         wallet.setId(id);
@@ -63,5 +74,4 @@ class WalletServiceTest {
         response.setBalance(balance);
         return response;
     }
-
 }
