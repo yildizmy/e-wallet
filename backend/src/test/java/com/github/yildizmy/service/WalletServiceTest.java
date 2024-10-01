@@ -235,6 +235,23 @@ class WalletServiceTest {
         assertThrows(InsufficientFundsException.class, () -> walletService.transferFunds(request));
     }
 
+    @Test
+    void addFunds_shouldAddFundsToWallet() {
+        Wallet toWallet = createTestWallet(1L, "TO123", "To Wallet", BigDecimal.valueOf(500));
+        TransactionRequest request = createTestTransactionRequest(null, "TO123", BigDecimal.valueOf(200));
+
+        when(walletRepository.findByIban("TO123")).thenReturn(Optional.of(toWallet));
+        when(transactionService.create(request)).thenReturn(new CommandResponse(1L));
+
+        CommandResponse result = walletService.addFunds(request);
+
+        assertNotNull(result);
+        assertEquals(1L, result.id());
+        assertEquals(BigDecimal.valueOf(700), toWallet.getBalance());
+        verify(walletRepository).save(toWallet);
+        verify(transactionService).create(request);
+    }
+
     private Wallet createTestWallet(Long id, String iban, String name, BigDecimal balance) {
         Wallet wallet = new Wallet();
         wallet.setId(id);
