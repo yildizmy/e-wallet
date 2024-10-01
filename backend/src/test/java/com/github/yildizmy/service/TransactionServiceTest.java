@@ -69,4 +69,18 @@ class TransactionServiceTest {
         assertThrows(NoSuchElementFoundException.class, () -> transactionService.findById(1L));
         verify(transactionRepository).findById(1L);
     }
+
+    @Test
+    void findByReferenceNumber_shouldReturnTransactionResponse() {
+        UUID referenceNumber = testTransaction.getReferenceNumber();
+        when(transactionRepository.findByReferenceNumber(referenceNumber)).thenReturn(Optional.of(testTransaction));
+        when(transactionResponseMapper.toDto(testTransaction)).thenReturn(testTransactionResponse);
+
+        TransactionResponse result = transactionService.findByReferenceNumber(referenceNumber);
+
+        assertNotNull(result);
+        assertEquals(testTransactionResponse, result);
+        verify(transactionRepository).findByReferenceNumber(referenceNumber);
+        verify(transactionResponseMapper).toDto(testTransaction);
+    }
 }
