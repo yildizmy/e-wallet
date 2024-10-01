@@ -13,10 +13,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.math.BigDecimal;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -110,5 +107,14 @@ class TransactionServiceTest {
         assertEquals(testTransactionResponse, result.get(1));
         verify(transactionRepository).findAllByUserId(userId);
         verify(transactionResponseMapper, times(2)).toDto(any(Transaction.class));
+    }
+
+    @Test
+    void findAllByUserId_shouldThrowExceptionWhenNoTransactionsFound() {
+        Long userId = 1L;
+        when(transactionRepository.findAllByUserId(userId)).thenReturn(Collections.emptyList());
+
+        assertThrows(NoSuchElementFoundException.class, () -> transactionService.findAllByUserId(userId));
+        verify(transactionRepository).findAllByUserId(userId);
     }
 }
