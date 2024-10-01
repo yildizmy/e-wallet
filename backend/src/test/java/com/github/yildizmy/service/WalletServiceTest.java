@@ -279,6 +279,31 @@ class WalletServiceTest {
         assertThrows(InsufficientFundsException.class, () -> walletService.withdrawFunds(request));
     }
 
+    @Test
+    void update_shouldUpdateWallet() {
+        long walletId = 1L;
+        WalletRequest request = createTestWalletRequest(1L, "NEW123", "Updated Wallet", BigDecimal.valueOf(1000));
+        Wallet existingWallet = createTestWallet(walletId, "OLD123", "Old Wallet", BigDecimal.valueOf(500));
+        Wallet updatedWallet = createTestWallet(walletId, "NEW123", "Updated Wallet", BigDecimal.valueOf(1000));
+
+        when(walletRepository.findById(walletId)).thenReturn(Optional.of(existingWallet));
+        when(walletRepository.existsByIbanIgnoreCase(anyString())).thenReturn(false);
+        when(walletRepository.existsByUserIdAndNameIgnoreCase(anyLong(), anyString())).thenReturn(false);
+        when(walletRequestMapper.toEntity(request)).thenReturn(updatedWallet);
+        when(walletRepository.save(updatedWallet)).thenReturn(updatedWallet);
+
+        CommandResponse result = walletService.update(walletId, request);
+
+        assertNotNull(result);
+        assertEquals(walletId, result.id());
+        verify(walletRepository).findById(walletId);
+        verify(walletRepository).existsByIbanIgnoreCase(request.getIban());
+        verify(walletRepository).existsByUserIdAndNameIgnoreCase(request.getUserId(), request.getName());
+        verify(ibanValidator).isValid(request.getIban(), null);
+        verify(walletRequestMapper).toEntity(request);
+        verify(walletRepository).save(updatedWallet);
+    }
+
     private Wallet createTestWallet(Long id, String iban, String name, BigDecimal balance) {
         Wallet wallet = new Wallet();
         wallet.setId(id);
