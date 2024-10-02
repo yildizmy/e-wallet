@@ -41,6 +41,18 @@ class RoleServiceTest {
         verify(roleRepository, times(1)).getReferenceByTypeIsIn(types);
     }
 
+    @Test
+    void getReferenceByTypeIsIn_shouldReturnEmptyListForNonExistentTypes() {
+        Set<RoleType> nonExistentTypes = new HashSet<>(Collections.emptySet());
+        when(roleRepository.getReferenceByTypeIsIn(nonExistentTypes)).thenReturn(Collections.emptyList());
+
+        List<Role> result = roleService.getReferenceByTypeIsIn(nonExistentTypes);
+
+        assertNotNull(result);
+        assertTrue(result.isEmpty());
+        verify(roleRepository, times(1)).getReferenceByTypeIsIn(nonExistentTypes);
+    }
+
     private Role createRole(Long id, RoleType type) {
         Role role = new Role();
         role.setId(id);
