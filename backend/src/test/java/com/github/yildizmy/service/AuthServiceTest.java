@@ -5,6 +5,7 @@ import com.github.yildizmy.dto.request.LoginRequest;
 import com.github.yildizmy.dto.request.SignupRequest;
 import com.github.yildizmy.dto.response.CommandResponse;
 import com.github.yildizmy.dto.response.JwtResponse;
+import com.github.yildizmy.exception.ElementAlreadyExistsException;
 import com.github.yildizmy.model.User;
 import com.github.yildizmy.repository.UserRepository;
 import com.github.yildizmy.security.JwtUtils;
@@ -23,8 +24,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import java.util.Collections;
 import java.util.Set;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -78,6 +78,7 @@ class AuthServiceTest {
 
     @Test
     void signup_shouldCreateNewUser() {
+        // Arrange
         SignupRequest signupRequest = new SignupRequest(1L, "New", "User", "newuser", "new@example.com", "password", Set.of("ROLE_USER"));
         User newUser = new User();
         newUser.setId(2L);
@@ -97,5 +98,17 @@ class AuthServiceTest {
         verify(userRepository).existsByEmailIgnoreCase("new@example.com");
         verify(signupRequestMapper).toEntity(signupRequest);
         verify(userRepository).save(newUser);
+    }
+
+    @Test
+    void signup_shouldThrowExceptionWhenUsernameExists() {
+        SignupRequest signupRequest = new SignupRequest(1L, "Existing", "User", "existinguser", "existing@example.com", "password", Set.of("ROLE_USER"));
+        when(userRepository.existsByUsernameIgnoreCase("existinguser")).thenReturn(true);
+
+        assertThrows(ElementAlreadyExistsException.class, () -> authService.signup(signupRequest));
+        verify(userRepository).existsByUsernameIgnoreCase("existinguser");
+        verify(userRepository, never()).existsByEmailIgnoreCase(anyString());
+        verify(signupRequestMapper, never()).toEntity(any());
+        verify(userRepository, never()).save(any());
     }
 }
