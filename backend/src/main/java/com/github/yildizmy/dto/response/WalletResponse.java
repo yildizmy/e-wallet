@@ -1,6 +1,8 @@
 package com.github.yildizmy.dto.response;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 
@@ -8,6 +10,8 @@ import java.math.BigDecimal;
  * Data Transfer Object for Wallet response
  */
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class WalletResponse {
 
     private Long id;
