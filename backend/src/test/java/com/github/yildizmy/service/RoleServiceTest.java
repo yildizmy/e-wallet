@@ -53,6 +53,22 @@ class RoleServiceTest {
         verify(roleRepository, times(1)).getReferenceByTypeIsIn(nonExistentTypes);
     }
 
+    @Test
+    void findAll_shouldReturnAllRoles() {
+        List<Role> expectedRoles = Arrays.asList(
+                createRole(1L, RoleType.ROLE_ADMIN),
+                createRole(2L, RoleType.ROLE_USER)
+        );
+        when(roleRepository.findAll()).thenReturn(expectedRoles);
+
+        List<Role> result = roleService.findAll();
+
+        assertNotNull(result);
+        assertEquals(2, result.size());
+        assertEquals(expectedRoles, result);
+        verify(roleRepository, times(1)).findAll();
+    }
+
     private Role createRole(Long id, RoleType type) {
         Role role = new Role();
         role.setId(id);
