@@ -69,6 +69,17 @@ class RoleServiceTest {
         verify(roleRepository, times(1)).findAll();
     }
 
+    @Test
+    void findAll_shouldReturnEmptyListWhenNoRolesExist() {
+        when(roleRepository.findAll()).thenReturn(Collections.emptyList());
+
+        List<Role> result = roleService.findAll();
+
+        assertNotNull(result);
+        assertTrue(result.isEmpty());
+        verify(roleRepository, times(1)).findAll();
+    }
+
     private Role createRole(Long id, RoleType type) {
         Role role = new Role();
         role.setId(id);
