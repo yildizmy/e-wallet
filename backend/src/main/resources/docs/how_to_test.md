@@ -55,7 +55,7 @@ for testing the endpoints.
 <br/>
 
 ### Unit & Integration Tests
-Unit and Integration Tests will be provided for services and controllers in the corresponding packages.
+Unit Tests for the services are provided in the corresponding packages.
 
 <br/>
 <br/>
