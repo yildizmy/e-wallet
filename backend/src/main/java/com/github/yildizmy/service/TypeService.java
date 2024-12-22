@@ -1,6 +1,6 @@
 package com.github.yildizmy.service;
 
-import com.github.yildizmy.model.Type;
+import com.github.yildizmy.domain.Type;
 import com.github.yildizmy.repository.TypeRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

@@ -1,4 +1,4 @@
-package com.github.yildizmy.model;
+package com.github.yildizmy.domain;
 
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;

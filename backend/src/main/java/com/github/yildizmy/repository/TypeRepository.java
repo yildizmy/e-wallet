@@ -1,6 +1,6 @@
 package com.github.yildizmy.repository;
 
-import com.github.yildizmy.model.Type;
+import com.github.yildizmy.domain.Type;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -6,7 +6,7 @@ import com.github.yildizmy.dto.request.TransactionRequest;
 import com.github.yildizmy.dto.response.CommandResponse;
 import com.github.yildizmy.dto.response.TransactionResponse;
 import com.github.yildizmy.exception.NoSuchElementFoundException;
-import com.github.yildizmy.model.Transaction;
+import com.github.yildizmy.domain.Transaction;
 import com.github.yildizmy.repository.TransactionRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

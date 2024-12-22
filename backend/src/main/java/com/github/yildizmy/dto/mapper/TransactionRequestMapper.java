@@ -1,7 +1,7 @@
 package com.github.yildizmy.dto.mapper;
 
 import com.github.yildizmy.dto.request.TransactionRequest;
-import com.github.yildizmy.model.Transaction;
+import com.github.yildizmy.domain.Transaction;
 import com.github.yildizmy.service.TypeService;
 import com.github.yildizmy.service.WalletService;
 import org.mapstruct.*;

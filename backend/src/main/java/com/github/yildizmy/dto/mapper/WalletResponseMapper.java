@@ -2,8 +2,8 @@ package com.github.yildizmy.dto.mapper;
 
 import com.github.yildizmy.dto.response.UserResponse;
 import com.github.yildizmy.dto.response.WalletResponse;
-import com.github.yildizmy.model.User;
-import com.github.yildizmy.model.Wallet;
+import com.github.yildizmy.domain.User;
+import com.github.yildizmy.domain.Wallet;
 import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;

@@ -36,7 +36,7 @@ public class WalletController {
      * @param id
      * @return WalletResponse wrapped by ResponseEntity<ApiResponse<T>>
      */
-    @PreAuthorize("hasRole(T(com.github.yildizmy.model.RoleType).ROLE_USER)")
+    @PreAuthorize("hasRole(T(com.github.yildizmy.domain.RoleType).ROLE_USER)")
     @GetMapping("/{id}")
     public ResponseEntity<ApiResponse<WalletResponse>> findById(@PathVariable long id) {
         final WalletResponse response = walletService.findById(id);
@@ -49,7 +49,7 @@ public class WalletController {
      * @param iban
      * @return WalletResponse wrapped by ResponseEntity<ApiResponse<T>>
      */
-    @PreAuthorize("hasRole(T(com.github.yildizmy.model.RoleType).ROLE_USER)")
+    @PreAuthorize("hasRole(T(com.github.yildizmy.domain.RoleType).ROLE_USER)")
     @GetMapping("/iban/{iban}")
     public ResponseEntity<ApiResponse<WalletResponse>> findByIban(@PathVariable String iban) {
         final WalletResponse response = walletService.findByIban(iban);
@@ -62,7 +62,7 @@ public class WalletController {
      * @param userId
      * @return WalletResponse wrapped by ResponseEntity<ApiResponse<T>>
      */
-    @PreAuthorize("hasRole(T(com.github.yildizmy.model.RoleType).ROLE_USER)")
+    @PreAuthorize("hasRole(T(com.github.yildizmy.domain.RoleType).ROLE_USER)")
     @GetMapping("/users/{userId}")
     public ResponseEntity<ApiResponse<List<WalletResponse>>> findByUserId(@PathVariable long userId) {
         final List<WalletResponse> response = walletService.findByUserId(userId);
@@ -75,7 +75,7 @@ public class WalletController {
      * @param pageable
      * @return List of WalletResponse wrapped by ResponseEntity<ApiResponse<T>>
      */
-    @PreAuthorize("hasRole(T(com.github.yildizmy.model.RoleType).ROLE_USER)")
+    @PreAuthorize("hasRole(T(com.github.yildizmy.domain.RoleType).ROLE_USER)")
     @GetMapping
     public ResponseEntity<ApiResponse<Page<WalletResponse>>> findAll(Pageable pageable) {
         final Page<WalletResponse> response = walletService.findAll(pageable);
@@ -88,7 +88,7 @@ public class WalletController {
      * @param request
      * @return id of the created wallet wrapped by ResponseEntity<ApiResponse<T>>
      */
-    @PreAuthorize("hasRole(T(com.github.yildizmy.model.RoleType).ROLE_USER)")
+    @PreAuthorize("hasRole(T(com.github.yildizmy.domain.RoleType).ROLE_USER)")
     @PostMapping
     public ResponseEntity<ApiResponse<CommandResponse>> create(@Valid @RequestBody WalletRequest request) {
         final CommandResponse response = walletService.create(request);
@@ -103,7 +103,7 @@ public class WalletController {
      * @param request
      * @return id of the created transaction wrapped by ResponseEntity<ApiResponse<T>>
      */
-    @PreAuthorize("hasRole(T(com.github.yildizmy.model.RoleType).ROLE_USER)")
+    @PreAuthorize("hasRole(T(com.github.yildizmy.domain.RoleType).ROLE_USER)")
     @PostMapping("/transfer")
     public ResponseEntity<ApiResponse<CommandResponse>> transferFunds(@Valid @RequestBody TransactionRequest request) {
         final CommandResponse response = walletService.transferFunds(request);
@@ -118,7 +118,7 @@ public class WalletController {
      * @param request
      * @return id of the created transaction wrapped by ResponseEntity<ApiResponse<T>>
      */
-    @PreAuthorize("hasRole(T(com.github.yildizmy.model.RoleType).ROLE_USER)")
+    @PreAuthorize("hasRole(T(com.github.yildizmy.domain.RoleType).ROLE_USER)")
     @PostMapping("/addFunds")
     public ResponseEntity<ApiResponse<CommandResponse>> addFunds(@Valid @RequestBody TransactionRequest request) {
         final CommandResponse response = walletService.addFunds(request);
@@ -133,7 +133,7 @@ public class WalletController {
      * @param request
      * @return id of the created transaction wrapped by ResponseEntity<ApiResponse<T>>
      */
-    @PreAuthorize("hasRole(T(com.github.yildizmy.model.RoleType).ROLE_USER)")
+    @PreAuthorize("hasRole(T(com.github.yildizmy.domain.RoleType).ROLE_USER)")
     @PostMapping("/withdrawFunds")
     public ResponseEntity<ApiResponse<CommandResponse>> withdrawFunds(@Valid @RequestBody TransactionRequest request) {
         final CommandResponse response = walletService.withdrawFunds(request);
@@ -148,7 +148,7 @@ public class WalletController {
      * @param request
      * @return id of the updated wallet wrapped by ResponseEntity<ApiResponse<T>>
      */
-    @PreAuthorize("hasRole(T(com.github.yildizmy.model.RoleType).ROLE_USER)")
+    @PreAuthorize("hasRole(T(com.github.yildizmy.domain.RoleType).ROLE_USER)")
     @PutMapping("/{id}")
     public ResponseEntity<ApiResponse<CommandResponse>> update(@PathVariable long id, @Valid @RequestBody WalletRequest request) {
         final CommandResponse response = walletService.update(id, request);
@@ -161,7 +161,7 @@ public class WalletController {
      * @param id
      * @return ResponseEntity<ApiResponse < Void>>
      */
-    @PreAuthorize("hasRole(T(com.github.yildizmy.model.RoleType).ROLE_USER)")
+    @PreAuthorize("hasRole(T(com.github.yildizmy.domain.RoleType).ROLE_USER)")
     @DeleteMapping("/{id}")
     public ResponseEntity<ApiResponse<Void>> deleteById(@PathVariable long id) {
         walletService.deleteById(id);

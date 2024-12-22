@@ -1,6 +1,6 @@
 package com.github.yildizmy.dto.response;
 
-import com.github.yildizmy.model.RoleType;
+import com.github.yildizmy.domain.RoleType;
 import lombok.Data;
 
 /**

@@ -1,6 +1,6 @@
 package com.github.yildizmy.repository;
 
-import com.github.yildizmy.model.Transaction;
+import com.github.yildizmy.domain.Transaction;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

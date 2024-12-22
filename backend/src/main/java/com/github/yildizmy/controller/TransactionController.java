@@ -32,7 +32,7 @@ public class TransactionController {
      * @param id
      * @return TransactionResponse wrapped by ResponseEntity<ApiResponse<T>>
      */
-    @PreAuthorize("hasRole(T(com.github.yildizmy.model.RoleType).ROLE_USER)")
+    @PreAuthorize("hasRole(T(com.github.yildizmy.domain.RoleType).ROLE_USER)")
     @GetMapping("/{id}")
     public ResponseEntity<ApiResponse<TransactionResponse>> findById(@PathVariable long id) {
         final TransactionResponse response = transactionService.findById(id);
@@ -45,7 +45,7 @@ public class TransactionController {
      * @param referenceNumber
      * @return TransactionResponse wrapped by ResponseEntity<ApiResponse<T>>
      */
-    @PreAuthorize("hasRole(T(com.github.yildizmy.model.RoleType).ROLE_USER)")
+    @PreAuthorize("hasRole(T(com.github.yildizmy.domain.RoleType).ROLE_USER)")
     @GetMapping("/references/{referenceNumber}")
     public ResponseEntity<ApiResponse<TransactionResponse>> findByReferenceNumber(@PathVariable UUID referenceNumber) {
         final TransactionResponse response = transactionService.findByReferenceNumber(referenceNumber);
@@ -58,7 +58,7 @@ public class TransactionController {
      * @param userId
      * @return List of TransactionResponse wrapped by ResponseEntity<ApiResponse<T>>
      */
-    @PreAuthorize("hasRole(T(com.github.yildizmy.model.RoleType).ROLE_USER)")
+    @PreAuthorize("hasRole(T(com.github.yildizmy.domain.RoleType).ROLE_USER)")
     @GetMapping("/users/{userId}")
     public ResponseEntity<ApiResponse<Page<TransactionResponse>>> findAllByUserId(@PathVariable long userId) {
         final Page<TransactionResponse> response = new PageImpl<>(transactionService.findAllByUserId(userId));
@@ -71,7 +71,7 @@ public class TransactionController {
      * @param pageable
      * @return List of TransactionResponse wrapped by ResponseEntity<ApiResponse<T>>
      */
-    @PreAuthorize("hasRole(T(com.github.yildizmy.model.RoleType).ROLE_USER)")
+    @PreAuthorize("hasRole(T(com.github.yildizmy.domain.RoleType).ROLE_USER)")
     @GetMapping
     public ResponseEntity<ApiResponse<Page<TransactionResponse>>> findAll(Pageable pageable) {
         final Page<TransactionResponse> response = transactionService.findAll(pageable);
