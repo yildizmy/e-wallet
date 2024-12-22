@@ -1,6 +1,6 @@
 package com.github.yildizmy.domain.entity;
 
-import com.github.yildizmy.domain.RoleType;
+import com.github.yildizmy.domain.enums.RoleType;
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

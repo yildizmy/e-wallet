@@ -1,6 +1,6 @@
 package com.github.yildizmy.dto.response;
 
-import com.github.yildizmy.domain.Status;
+import com.github.yildizmy.domain.enums.Status;
 import lombok.Data;
 
 import java.math.BigDecimal;

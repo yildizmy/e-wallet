@@ -1,7 +1,7 @@
 package com.github.yildizmy.service;
 
 import com.github.yildizmy.domain.entity.Role;
-import com.github.yildizmy.domain.RoleType;
+import com.github.yildizmy.domain.enums.RoleType;
 import com.github.yildizmy.repository.RoleRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

@@ -1,6 +1,6 @@
 package com.github.yildizmy.dto.request;
 
-import com.github.yildizmy.domain.Status;
+import com.github.yildizmy.domain.enums.Status;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
