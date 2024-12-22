@@ -1,6 +1,6 @@
 package com.github.yildizmy.service;
 
-import com.github.yildizmy.domain.User;
+import com.github.yildizmy.domain.entity.User;
 import com.github.yildizmy.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.Test;

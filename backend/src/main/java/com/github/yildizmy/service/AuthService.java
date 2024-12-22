@@ -6,7 +6,7 @@ import com.github.yildizmy.dto.request.SignupRequest;
 import com.github.yildizmy.dto.response.CommandResponse;
 import com.github.yildizmy.dto.response.JwtResponse;
 import com.github.yildizmy.exception.ElementAlreadyExistsException;
-import com.github.yildizmy.domain.User;
+import com.github.yildizmy.domain.entity.User;
 import com.github.yildizmy.repository.UserRepository;
 import com.github.yildizmy.security.JwtUtils;
 import com.github.yildizmy.security.UserDetailsImpl;

@@ -1,7 +1,7 @@
 package com.github.yildizmy.dto.mapper;
 
 import com.github.yildizmy.dto.response.TransactionResponse;
-import com.github.yildizmy.domain.Transaction;
+import com.github.yildizmy.domain.entity.Transaction;
 import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

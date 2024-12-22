@@ -1,7 +1,7 @@
 package com.github.yildizmy.security;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.github.yildizmy.domain.User;
+import com.github.yildizmy.domain.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

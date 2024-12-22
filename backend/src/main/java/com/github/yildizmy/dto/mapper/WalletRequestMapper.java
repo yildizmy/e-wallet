@@ -1,7 +1,7 @@
 package com.github.yildizmy.dto.mapper;
 
 import com.github.yildizmy.dto.request.WalletRequest;
-import com.github.yildizmy.domain.Wallet;
+import com.github.yildizmy.domain.entity.Wallet;
 import com.github.yildizmy.service.UserService;
 import org.mapstruct.*;
 import org.springframework.beans.factory.annotation.Autowired;

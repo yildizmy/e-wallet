@@ -1,9 +1,9 @@
 package com.github.yildizmy.dto.mapper;
 
 import com.github.yildizmy.dto.request.SignupRequest;
-import com.github.yildizmy.domain.Role;
+import com.github.yildizmy.domain.entity.Role;
 import com.github.yildizmy.domain.RoleType;
-import com.github.yildizmy.domain.User;
+import com.github.yildizmy.domain.entity.User;
 import com.github.yildizmy.service.RoleService;
 import org.mapstruct.*;
 import org.springframework.beans.factory.annotation.Autowired;

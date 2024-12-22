@@ -10,7 +10,7 @@ import com.github.yildizmy.dto.response.WalletResponse;
 import com.github.yildizmy.exception.ElementAlreadyExistsException;
 import com.github.yildizmy.exception.InsufficientFundsException;
 import com.github.yildizmy.exception.NoSuchElementFoundException;
-import com.github.yildizmy.domain.Wallet;
+import com.github.yildizmy.domain.entity.Wallet;
 import com.github.yildizmy.repository.WalletRepository;
 import com.github.yildizmy.validator.IbanValidator;
 import lombok.RequiredArgsConstructor;

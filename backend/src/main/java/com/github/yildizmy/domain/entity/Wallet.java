@@ -1,4 +1,4 @@
-package com.github.yildizmy.domain;
+package com.github.yildizmy.domain.entity;
 
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
