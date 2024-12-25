@@ -23,7 +23,7 @@ public class User {
     @SequenceGenerator(
             name = "user_seq_gen",
             sequenceName = "user_seq",
-            allocationSize = 5
+            allocationSize = 1
     )
     private Long id;
 

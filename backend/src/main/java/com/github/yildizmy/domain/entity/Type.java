@@ -22,7 +22,7 @@ public class Type {
     @SequenceGenerator(
             name = "type_seq_gen",
             sequenceName = "type_seq",
-            allocationSize = 5
+            allocationSize = 1
     )
     private Long id;
 

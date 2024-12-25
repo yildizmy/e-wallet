@@ -24,7 +24,7 @@ public class Transaction {
     @SequenceGenerator(
             name = "transaction_seq_gen",
             sequenceName = "transaction_seq",
-            allocationSize = 5
+            allocationSize = 1
     )
     private Long id;
 

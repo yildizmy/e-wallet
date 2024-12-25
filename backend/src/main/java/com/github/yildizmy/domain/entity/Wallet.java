@@ -27,7 +27,7 @@ public class Wallet {
     @SequenceGenerator(
             name = "wallet_seq_gen",
             sequenceName = "wallet_seq",
-            allocationSize = 5
+            allocationSize = 1
     )
     private Long id;
 
