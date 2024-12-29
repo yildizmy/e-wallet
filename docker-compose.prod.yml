@@ -9,7 +9,7 @@ services:
     depends_on:
       - backend
     networks:
-      - ew-network
+      - ewallet_network
     logging:
       driver: 'json-file'
       options:
@@ -30,7 +30,7 @@ services:
     depends_on:
       - db
     networks:
-      - ew-network
+      - ewallet_network
     logging:
       driver: 'json-file'
       options:
@@ -38,5 +38,5 @@ services:
         max-file: '5'
 
 networks:
-  ew-network:
+  ewallet_network:
     driver: bridge
