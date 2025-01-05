@@ -17,7 +17,7 @@ public final class Constants {
     public static final long IBAN_MAX = 999999999;
     public static final long IBAN_MODULUS = 97;
 
-    public static final String SUCCESS = "Success";
+    public static final String SUCCESS = "Operation completed successfully";
     public static final String UNAUTHORIZED = "Unauthorized";
     public static final String UNAUTHORIZED_ERROR = "Unauthorized error: {}";
     public static final String CANNOT_SET_AUTH = "Cannot set user authentication: {}";
