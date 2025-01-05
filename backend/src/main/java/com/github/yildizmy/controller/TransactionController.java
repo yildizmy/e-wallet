@@ -36,7 +36,7 @@ public class TransactionController {
     @GetMapping("/{id}")
     public ResponseEntity<ApiResponse<TransactionResponse>> findById(@PathVariable long id) {
         final TransactionResponse response = transactionService.findById(id);
-        return ResponseEntity.ok(new ApiResponse<>(Instant.now(clock).toEpochMilli(), SUCCESS, response));
+        return ResponseEntity.ok(new ApiResponse<>(Instant.now(clock).toEpochMilli(), SUCCESS, true, response));
     }
 
     /**
@@ -49,7 +49,7 @@ public class TransactionController {
     @GetMapping("/references/{referenceNumber}")
     public ResponseEntity<ApiResponse<TransactionResponse>> findByReferenceNumber(@PathVariable UUID referenceNumber) {
         final TransactionResponse response = transactionService.findByReferenceNumber(referenceNumber);
-        return ResponseEntity.ok(new ApiResponse<>(Instant.now(clock).toEpochMilli(), SUCCESS, response));
+        return ResponseEntity.ok(new ApiResponse<>(Instant.now(clock).toEpochMilli(), SUCCESS, true, response));
     }
 
     /**
@@ -62,7 +62,7 @@ public class TransactionController {
     @GetMapping("/users/{userId}")
     public ResponseEntity<ApiResponse<Page<TransactionResponse>>> findAllByUserId(@PathVariable long userId) {
         final Page<TransactionResponse> response = new PageImpl<>(transactionService.findAllByUserId(userId));
-        return ResponseEntity.ok(new ApiResponse<>(Instant.now(clock).toEpochMilli(), SUCCESS, response));
+        return ResponseEntity.ok(new ApiResponse<>(Instant.now(clock).toEpochMilli(), SUCCESS, true, response));
     }
 
     /**
@@ -75,6 +75,6 @@ public class TransactionController {
     @GetMapping
     public ResponseEntity<ApiResponse<Page<TransactionResponse>>> findAll(Pageable pageable) {
         final Page<TransactionResponse> response = transactionService.findAll(pageable);
-        return ResponseEntity.ok(new ApiResponse<>(Instant.now(clock).toEpochMilli(), SUCCESS, response));
+        return ResponseEntity.ok(new ApiResponse<>(Instant.now(clock).toEpochMilli(), SUCCESS, true, response));
     }
 }
