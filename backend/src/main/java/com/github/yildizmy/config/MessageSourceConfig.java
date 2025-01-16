@@ -3,6 +3,7 @@ package com.github.yildizmy.config;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
@@ -19,8 +20,8 @@ public class MessageSourceConfig {
         ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
         messageSource.setBasename("classpath:messages");
         messageSource.setDefaultEncoding("UTF-8");
-        messageSource.setDefaultLocale(Locale.ENGLISH); // Set default locale
-        messageSource.setFallbackToSystemLocale(false); // Prevent fallback to system locale
+        messageSource.setDefaultLocale(Locale.ENGLISH);
+        messageSource.setFallbackToSystemLocale(false);
         return messageSource;
     }
 
@@ -29,5 +30,13 @@ public class MessageSourceConfig {
         LocalValidatorFactoryBean bean = new LocalValidatorFactoryBean();
         bean.setValidationMessageSource(messageSource());
         return bean;
+    }
+
+    public String translate(String key) {
+        return messageSource().getMessage(key, new Object[]{}, LocaleContextHolder.getLocale());
+    }
+
+    public String translate(String key, Object... args) {
+        return messageSource().getMessage(key, args, LocaleContextHolder.getLocale());
     }
 }
