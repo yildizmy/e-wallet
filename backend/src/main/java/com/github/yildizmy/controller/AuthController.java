@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.time.Clock;
 import java.time.Instant;
 
-import static com.github.yildizmy.common.Constants.SUCCESS;
+import static com.github.yildizmy.common.MessageKeys.INFO_OPERATION_SUCCESS;
 
 @CrossOrigin(origins = "http://localhost:3000/")
 @RestController
@@ -35,7 +35,7 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<ApiResponse<JwtResponse>> login(@Valid @RequestBody LoginRequest request) {
         final JwtResponse response = authService.login(request);
-        return ResponseEntity.ok(new ApiResponse<>(Instant.now(clock).toEpochMilli(), SUCCESS, true, response));
+        return ResponseEntity.ok(new ApiResponse<>(Instant.now(clock).toEpochMilli(), INFO_OPERATION_SUCCESS, true, response));
     }
 
     /**
@@ -49,6 +49,6 @@ public class AuthController {
         final CommandResponse response = authService.signup(request);
         return ResponseEntity
                 .status(HttpStatus.CREATED)
-                .body(new ApiResponse<>(Instant.now(clock).toEpochMilli(), SUCCESS, true, response));
+                .body(new ApiResponse<>(Instant.now(clock).toEpochMilli(), INFO_OPERATION_SUCCESS, true, response));
     }
 }
