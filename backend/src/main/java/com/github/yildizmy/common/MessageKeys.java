@@ -21,6 +21,7 @@ public final class MessageKeys {
     public static final String INFO_WALLET_BALANCES_UPDATED = "info.wallet.balances.updated";
 
     // exception messages
+    public static final String ERROR_UNKNOWN = "error.unknown";
     public static final String ERROR_UNAUTHORIZED = "error.unauthorized";
     public static final String ERROR_UNAUTHORIZED_DETAILS = "error.unauthorized.details";
     public static final String ERROR_AUTH_SETUP = "error.auth.setup";
@@ -31,7 +32,6 @@ public final class MessageKeys {
     public static final String ERROR_JWT_UNSUPPORTED = "error.jwt.unsupported";
     public static final String ERROR_JWT_EMPTY_CLAIMS = "error.jwt.empty.claims";
     public static final String ERROR_VALIDATION = "error.validation";
-    public static final String ERROR_UNKNOWN = "error.unknown";
     public static final String ERROR_METHOD_ARGUMENT = "error.method.argument";
     public static final String ERROR_FIELD_VALIDATION = "error.field.validation";
     public static final String ERROR_ALREADY_EXISTS = "error.already.exists";
