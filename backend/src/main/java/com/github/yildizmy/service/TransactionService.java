@@ -1,12 +1,12 @@
 package com.github.yildizmy.service;
 
+import com.github.yildizmy.domain.entity.Transaction;
 import com.github.yildizmy.dto.mapper.TransactionRequestMapper;
 import com.github.yildizmy.dto.mapper.TransactionResponseMapper;
 import com.github.yildizmy.dto.request.TransactionRequest;
 import com.github.yildizmy.dto.response.CommandResponse;
 import com.github.yildizmy.dto.response.TransactionResponse;
 import com.github.yildizmy.exception.NoSuchElementFoundException;
-import com.github.yildizmy.domain.entity.Transaction;
 import com.github.yildizmy.repository.TransactionRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,7 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.UUID;
 
-import static com.github.yildizmy.common.Constants.*;
+import static com.github.yildizmy.common.MessageKeys.*;
 
 /**
  * Service used for Transaction related operations
@@ -42,7 +42,7 @@ public class TransactionService {
     public TransactionResponse findById(long id) {
         return transactionRepository.findById(id)
                 .map(transactionResponseMapper::toDto)
-                .orElseThrow(() -> new NoSuchElementFoundException(NOT_FOUND_TRANSACTION));
+                .orElseThrow(() -> new NoSuchElementFoundException(ERROR_TRANSACTION_NOT_FOUND));
     }
 
     /**
@@ -55,7 +55,7 @@ public class TransactionService {
     public TransactionResponse findByReferenceNumber(UUID referenceNumber) {
         return transactionRepository.findByReferenceNumber(referenceNumber)
                 .map(transactionResponseMapper::toDto)
-                .orElseThrow(() -> new NoSuchElementFoundException(NOT_FOUND_TRANSACTION));
+                .orElseThrow(() -> new NoSuchElementFoundException(ERROR_TRANSACTION_NOT_FOUND));
     }
 
     /**
@@ -68,7 +68,7 @@ public class TransactionService {
     public List<TransactionResponse> findAllByUserId(Long userId) {
         final List<Transaction> transactions = transactionRepository.findAllByUserId(userId);
         if (transactions.isEmpty())
-            throw new NoSuchElementFoundException(NOT_FOUND_RECORD);
+            throw new NoSuchElementFoundException(ERROR_NO_RECORDS);
 
         return transactions.stream().map(transactionResponseMapper::toDto)
                 .toList();
@@ -84,7 +84,7 @@ public class TransactionService {
     public Page<TransactionResponse> findAll(Pageable pageable) {
         final Page<Transaction> transactions = transactionRepository.findAll(pageable);
         if (transactions.isEmpty())
-            throw new NoSuchElementFoundException(NOT_FOUND_RECORD);
+            throw new NoSuchElementFoundException(ERROR_NO_RECORDS);
 
         return transactions.map(transactionResponseMapper::toDto);
     }
@@ -98,7 +98,7 @@ public class TransactionService {
     public CommandResponse create(TransactionRequest request) {
         final Transaction transaction = transactionRequestMapper.toEntity(request);
         transactionRepository.save(transaction);
-        log.info(CREATED_TRANSACTION, new Object[]{transaction.getFromWallet().getIban(), transaction.getToWallet().getIban(), transaction.getAmount()});
+        log.info(INFO_TRANSACTION_CREATED, new Object[]{transaction.getFromWallet().getIban(), transaction.getToWallet().getIban(), transaction.getAmount()});
         return CommandResponse.builder().id(transaction.getId()).build();
     }
 }
