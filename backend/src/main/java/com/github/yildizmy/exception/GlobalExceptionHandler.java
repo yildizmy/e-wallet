@@ -60,7 +60,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         for (FieldError fieldError : ex.getBindingResult().getFieldErrors()) {
             errorResponse.addValidationError(fieldError.getField(), fieldError.getDefaultMessage());
         }
-        log.error(ERROR_METHOD_ARGUMENT, ex);
+        log.error(messageConfig.translate(ERROR_METHOD_ARGUMENT, ex));
         return ResponseEntity.unprocessableEntity().body(errorResponse);
     }
 
@@ -74,7 +74,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(NoSuchElementFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ResponseEntity<Object> handleNoSuchElementFoundException(NoSuchElementFoundException ex, WebRequest request) {
-        log.error(ERROR_NOT_FOUND, ex);
+        log.error(messageConfig.translate(ERROR_NOT_FOUND, ex));
         return buildErrorResponse(ex, HttpStatus.NOT_FOUND, request);
     }
 
@@ -88,7 +88,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(ElementAlreadyExistsException.class)
     @ResponseStatus(HttpStatus.CONFLICT)
     public ResponseEntity<Object> handleElementAlreadyExistsException(ElementAlreadyExistsException ex, WebRequest request) {
-        log.error(ERROR_ALREADY_EXISTS, ex);
+        log.error(messageConfig.translate(ERROR_ALREADY_EXISTS, ex));
         return buildErrorResponse(ex, HttpStatus.CONFLICT, request);
     }
 
@@ -102,7 +102,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(InsufficientFundsException.class)
     @ResponseStatus(HttpStatus.PRECONDITION_FAILED)
     public ResponseEntity<Object> handleInsufficientFundsException(InsufficientFundsException ex, WebRequest request) {
-        log.error(ERROR_METHOD_ARGUMENT, ex);
+        log.error(messageConfig.translate(ERROR_METHOD_ARGUMENT, ex));
         return buildErrorResponse(ex, HttpStatus.PRECONDITION_FAILED, request);
     }
 
@@ -130,7 +130,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(ConstraintViolationException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ResponseEntity<Object> handleConstraintValidationException(ConstraintViolationException ex, WebRequest request) {
-        log.warn(ERROR_FIELD_VALIDATION, ex);
+        log.warn(messageConfig.translate(ERROR_FIELD_VALIDATION, ex));
         return buildErrorResponse(ex, HttpStatus.BAD_REQUEST, request);
     }
 
@@ -144,7 +144,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ResponseEntity<Object> handleAllUncaughtException(Exception ex, WebRequest request) {
-        log.error(ex.getMessage(), ex);
+        log.error(messageConfig.translate(ex.getMessage(), ex));
         return buildErrorResponse(ex, HttpStatus.INTERNAL_SERVER_ERROR, request);
     }
 
