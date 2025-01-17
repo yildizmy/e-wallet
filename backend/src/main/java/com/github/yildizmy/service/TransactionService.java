@@ -70,7 +70,7 @@ public class TransactionService {
     public List<TransactionResponse> findAllByUserId(Long userId) {
         final List<Transaction> transactions = transactionRepository.findAllByUserId(userId);
         if (transactions.isEmpty())
-            throw new NoSuchElementFoundException(ERROR_NO_RECORDS);
+            throw new NoSuchElementFoundException(messageConfig.translate(ERROR_NO_RECORDS));
 
         return transactions.stream().map(transactionResponseMapper::toDto)
                 .toList();
@@ -86,7 +86,7 @@ public class TransactionService {
     public Page<TransactionResponse> findAll(Pageable pageable) {
         final Page<Transaction> transactions = transactionRepository.findAll(pageable);
         if (transactions.isEmpty())
-            throw new NoSuchElementFoundException(ERROR_NO_RECORDS);
+            throw new NoSuchElementFoundException(messageConfig.translate(ERROR_NO_RECORDS));
 
         return transactions.map(transactionResponseMapper::toDto);
     }

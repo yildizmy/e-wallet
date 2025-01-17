@@ -101,7 +101,7 @@ public class WalletService {
     public Page<WalletResponse> findAll(Pageable pageable) {
         final Page<Wallet> wallets = walletRepository.findAll(pageable);
         if (wallets.isEmpty())
-            throw new NoSuchElementFoundException(ERROR_NO_RECORDS);
+            throw new NoSuchElementFoundException(messageConfig.translate(ERROR_NO_RECORDS));
         return wallets.map(walletResponseMapper::toDto);
     }
 
@@ -114,9 +114,9 @@ public class WalletService {
     @Transactional
     public CommandResponse create(WalletRequest request) {
         if (walletRepository.existsByIbanIgnoreCase(request.getIban()))
-            throw new ElementAlreadyExistsException(ERROR_WALLET_IBAN_EXISTS);
+            throw new ElementAlreadyExistsException(messageConfig.translate(ERROR_WALLET_IBAN_EXISTS));
         if (walletRepository.existsByUserIdAndNameIgnoreCase(request.getUserId(), request.getName()))
-            throw new ElementAlreadyExistsException(ERROR_WALLET_NAME_EXISTS);
+            throw new ElementAlreadyExistsException(messageConfig.translate(ERROR_WALLET_NAME_EXISTS));
 
         ibanValidator.isValid(request.getIban(), null);
 
@@ -215,12 +215,12 @@ public class WalletService {
         // check if the iban is changed and new iban is already exists
         if (!request.getIban().equalsIgnoreCase(foundWallet.getIban()) &&
                 walletRepository.existsByIbanIgnoreCase(request.getIban()))
-            throw new ElementAlreadyExistsException(ERROR_WALLET_IBAN_EXISTS);
+            throw new ElementAlreadyExistsException(messageConfig.translate(ERROR_WALLET_IBAN_EXISTS));
 
         // check if the name is changed and new name is already exists in user's wallets
         if (!request.getName().equalsIgnoreCase(foundWallet.getName()) &&
                 walletRepository.existsByUserIdAndNameIgnoreCase(request.getUserId(), request.getName()))
-            throw new ElementAlreadyExistsException(ERROR_WALLET_NAME_EXISTS);
+            throw new ElementAlreadyExistsException(messageConfig.translate(ERROR_WALLET_NAME_EXISTS));
 
         ibanValidator.isValid(request.getIban(), null);
 
