@@ -1,5 +1,6 @@
 package com.github.yildizmy.service;
 
+import com.github.yildizmy.config.MessageSourceConfig;
 import com.github.yildizmy.domain.entity.Transaction;
 import com.github.yildizmy.dto.mapper.TransactionRequestMapper;
 import com.github.yildizmy.dto.mapper.TransactionResponseMapper;
@@ -28,6 +29,7 @@ import static com.github.yildizmy.common.MessageKeys.*;
 @RequiredArgsConstructor
 public class TransactionService {
 
+    private final MessageSourceConfig messageConfig;
     private final TransactionRepository transactionRepository;
     private final TransactionRequestMapper transactionRequestMapper;
     private final TransactionResponseMapper transactionResponseMapper;
@@ -98,7 +100,7 @@ public class TransactionService {
     public CommandResponse create(TransactionRequest request) {
         final Transaction transaction = transactionRequestMapper.toEntity(request);
         transactionRepository.save(transaction);
-        log.info(INFO_TRANSACTION_CREATED, new Object[]{transaction.getFromWallet().getIban(), transaction.getToWallet().getIban(), transaction.getAmount()});
+        log.info(messageConfig.translate(INFO_TRANSACTION_CREATED, transaction.getFromWallet().getIban(), transaction.getToWallet().getIban(), transaction.getAmount()));
         return CommandResponse.builder().id(transaction.getId()).build();
     }
 }
