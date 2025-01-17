@@ -80,7 +80,7 @@ public class AuthService {
 
         final User user = signupRequestMapper.toEntity(request);
         userRepository.save(user);
-        log.info(INFO_USER_CREATED, new Object[]{user.getUsername()});
+        log.info(messageConfig.translate(INFO_USER_CREATED, user.getUsername()));
         return CommandResponse.builder().id(user.getId()).build();
     }
 }
