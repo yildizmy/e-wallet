@@ -15,7 +15,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 
-import static com.github.yildizmy.common.Constants.CANNOT_SET_AUTH;
+import static com.github.yildizmy.common.MessageKeys.ERROR_AUTH_SETUP;
 
 /**
  * Makes a single execution for each request to our API. It provides a doFilterInternal() method
@@ -50,7 +50,7 @@ public class AuthTokenFilter extends OncePerRequestFilter {
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             }
         } catch (Exception e) {
-            log.error(CANNOT_SET_AUTH, e);
+            log.error(ERROR_AUTH_SETUP, e);
         }
         filterChain.doFilter(request, response);
     }
