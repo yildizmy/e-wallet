@@ -13,8 +13,8 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.github.yildizmy.common.Constants.UNAUTHORIZED;
-import static com.github.yildizmy.common.Constants.UNAUTHORIZED_ERROR;
+import static com.github.yildizmy.common.MessageKeys.ERROR_UNAUTHORIZED;
+import static com.github.yildizmy.common.MessageKeys.ERROR_UNAUTHORIZED_DETAILS;
 
 /**
  * Implements AuthenticationEntryPoint interface that is used for catching authentication errors
@@ -27,14 +27,14 @@ public class AuthEntryPointJwt implements AuthenticationEntryPoint {
     public void commence(HttpServletRequest request,
                          HttpServletResponse response,
                          AuthenticationException authException) throws IOException {
-        log.error(UNAUTHORIZED_ERROR, authException.getMessage());
+        log.error(ERROR_UNAUTHORIZED_DETAILS, authException.getMessage());
 
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 
         final Map<String, Object> body = new HashMap<>();
         body.put("status", HttpServletResponse.SC_UNAUTHORIZED);
-        body.put("error", UNAUTHORIZED);
+        body.put("error", ERROR_UNAUTHORIZED);
         body.put("message", authException.getMessage());
         body.put("path", request.getServletPath());
 
