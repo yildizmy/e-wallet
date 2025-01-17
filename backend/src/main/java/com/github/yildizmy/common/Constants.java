@@ -1,14 +1,12 @@
 package com.github.yildizmy.common;
 
-import static com.github.yildizmy.common.MessageKeys.ERROR_CLASS_INSTANTIATION;
-
 /**
  * Constant variables used in the project. A private constructor is added to prevent instantiation.
  */
 public final class Constants {
 
     private Constants() {
-        throw new UnsupportedOperationException(ERROR_CLASS_INSTANTIATION);
+        throw new UnsupportedOperationException();
     }
 
     public static final String TRACE = "trace";

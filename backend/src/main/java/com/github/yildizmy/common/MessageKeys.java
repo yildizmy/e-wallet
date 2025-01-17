@@ -6,7 +6,7 @@ package com.github.yildizmy.common;
 public final class MessageKeys {
 
     private MessageKeys() {
-        throw new UnsupportedOperationException(ERROR_CLASS_INSTANTIATION);
+        throw new UnsupportedOperationException();
     }
 
     // info messages
@@ -34,7 +34,6 @@ public final class MessageKeys {
     public static final String ERROR_UNKNOWN = "error.unknown";
     public static final String ERROR_METHOD_ARGUMENT = "error.method.argument";
     public static final String ERROR_FIELD_VALIDATION = "error.field.validation";
-    public static final String ERROR_CLASS_INSTANTIATION = "error.class.instantiation";
     public static final String ERROR_ALREADY_EXISTS = "error.already.exists";
     public static final String ERROR_USERNAME_EXISTS = "error.username.exists";
     public static final String ERROR_EMAIL_EXISTS = "error.email.exists";
