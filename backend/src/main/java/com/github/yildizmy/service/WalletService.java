@@ -152,7 +152,7 @@ public class WalletService {
         toWallet.setBalance(toWallet.getBalance().add(request.getAmount()));
 
         walletRepository.save(toWallet);
-        log.info(INFO_WALLET_BALANCES_UPDATED, fromWallet.getBalance(), toWallet.getBalance());
+        log.info(messageConfig.translate(INFO_WALLET_BALANCES_UPDATED, fromWallet.getBalance(), toWallet.getBalance()));
 
         final CommandResponse response = transactionService.create(request);
         return CommandResponse.builder().id(response.id()).build();
