@@ -20,17 +20,17 @@ public class WalletRequest {
 
     private Long id;
 
-    @ValidIban(message = "{iban.valid}")
-    @NotBlank(message = "{iban.notblank}")
+    @ValidIban(message = "{validation.iban.format}")
+    @NotBlank(message = "{validation.iban.required}")
     private String iban;
 
-    @Size(min = 3, max = 50, message = "{name.size}")
-    @NotBlank(message = "{name.notblank}")
+    @Size(min = 3, max = 50, message = "{validation.field.name.length}")
+    @NotBlank(message = "{validation.field.name.required}")
     private String name;
 
-    @NotNull(message = "{balance.notnull}")
+    @NotNull(message = "{validation.field.balance.required}")
     private BigDecimal balance;
 
-    @NotNull(message = "{userId.notnull}")
+    @NotNull(message = "{validation.field.user.required}")
     private Long userId;
 }
