@@ -74,9 +74,9 @@ public class AuthService {
      */
     public CommandResponse signup(SignupRequest request) {
         if (userRepository.existsByUsernameIgnoreCase(request.getUsername().trim()))
-            throw new ElementAlreadyExistsException(ERROR_USERNAME_EXISTS);
+            throw new ElementAlreadyExistsException(messageConfig.translate(ERROR_USERNAME_EXISTS));
         if (userRepository.existsByEmailIgnoreCase(request.getEmail().trim()))
-            throw new ElementAlreadyExistsException(ERROR_EMAIL_EXISTS);
+            throw new ElementAlreadyExistsException(messageConfig.translate(ERROR_EMAIL_EXISTS));
 
         final User user = signupRequestMapper.toEntity(request);
         userRepository.save(user);
