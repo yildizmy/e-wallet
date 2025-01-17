@@ -14,11 +14,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class LoginRequest {
 
-    @Size(min = 3, max = 20, message = "{username.size}")
-    @NotBlank
+    @Size(min = 3, max = 20, message = "{validation.user.username.length}")
+    @NotBlank(message = "{validation.user.username.required}")
     private String username;
 
-    @Size(min = 6, max = 100, message = "{password.size}")
-    @NotBlank
+    @Size(min = 6, max = 100, message = "{validation.user.password.length}")
+    @NotBlank(message = "{validation.user.password.required}")
     private String password;
 }
