@@ -1,8 +1,10 @@
 package com.github.yildizmy.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.yildizmy.config.MessageSourceConfig;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.AuthenticationException;
@@ -21,7 +23,10 @@ import static com.github.yildizmy.common.MessageKeys.ERROR_UNAUTHORIZED_DETAILS;
  */
 @Slf4j(topic = "AuthEntryPointJwt")
 @Component
+@RequiredArgsConstructor
 public class AuthEntryPointJwt implements AuthenticationEntryPoint {
+
+    private final MessageSourceConfig messageConfig;
 
     @Override
     public void commence(HttpServletRequest request,
@@ -34,7 +39,7 @@ public class AuthEntryPointJwt implements AuthenticationEntryPoint {
 
         final Map<String, Object> body = new HashMap<>();
         body.put("status", HttpServletResponse.SC_UNAUTHORIZED);
-        body.put("error", ERROR_UNAUTHORIZED);
+        body.put("error", messageConfig.translate(ERROR_UNAUTHORIZED));
         body.put("message", authException.getMessage());
         body.put("path", request.getServletPath());
 
