@@ -22,10 +22,10 @@ public class TransactionRequest {
 
     private Long id;
 
-    @NotNull(message = "{amount.notnull}")
+    @NotNull(message = "{validation.field.amount.required}")
     private BigDecimal amount;
 
-    @Size(max = 50, message = "{description.size}")
+    @Size(max = 50, message = "{validation.field.description.length}")
     private String description;
 
     private Instant createdAt;
@@ -34,12 +34,12 @@ public class TransactionRequest {
 
     private Status status;
 
-    @NotBlank(message = "fromWalletIban.notblank}")
+    @NotBlank(message = "{validation.iban.sender.required}")
     private String fromWalletIban;
 
-    @NotBlank(message = "{toWalletIban.notblank}")
+    @NotBlank(message = "{validation.iban.receiver.required}")
     private String toWalletIban;
 
-    @NotNull(message = "{typeId.notnull}")
+    @NotNull(message = "{validation.field.type.required}")
     private Long typeId;
 }
