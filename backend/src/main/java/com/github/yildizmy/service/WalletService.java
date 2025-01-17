@@ -51,7 +51,7 @@ public class WalletService {
     public WalletResponse findById(long id) {
         return walletRepository.findById(id)
                 .map(walletResponseMapper::toDto)
-                .orElseThrow(() -> new NoSuchElementFoundException(ERROR_WALLET_NOT_FOUND));
+                .orElseThrow(() -> new NoSuchElementFoundException(messageConfig.translate(ERROR_WALLET_NOT_FOUND)));
     }
 
     /**
@@ -64,7 +64,7 @@ public class WalletService {
     public WalletResponse findByIban(String iban) {
         return walletRepository.findByIban(iban)
                 .map(walletResponseMapper::toDto)
-                .orElseThrow(() -> new NoSuchElementFoundException(ERROR_WALLET_NOT_FOUND));
+                .orElseThrow(() -> new NoSuchElementFoundException(messageConfig.translate(ERROR_WALLET_NOT_FOUND)));
     }
 
     /**
@@ -88,7 +88,7 @@ public class WalletService {
      */
     public Wallet getByIban(String iban) {
         return walletRepository.findByIban(iban)
-                .orElseThrow(() -> new NoSuchElementFoundException(ERROR_WALLET_NOT_FOUND));
+                .orElseThrow(() -> new NoSuchElementFoundException(messageConfig.translate(ERROR_WALLET_NOT_FOUND)));
     }
 
     /**
@@ -210,7 +210,7 @@ public class WalletService {
      */
     public CommandResponse update(long id, WalletRequest request) {
         final Wallet foundWallet = walletRepository.findById(id)
-                .orElseThrow(() -> new NoSuchElementFoundException(ERROR_WALLET_NOT_FOUND));
+                .orElseThrow(() -> new NoSuchElementFoundException(messageConfig.translate(ERROR_WALLET_NOT_FOUND)));
 
         // check if the iban is changed and new iban is already exists
         if (!request.getIban().equalsIgnoreCase(foundWallet.getIban()) &&
@@ -237,7 +237,7 @@ public class WalletService {
      */
     public void deleteById(long id) {
         final Wallet wallet = walletRepository.findById(id)
-                .orElseThrow(() -> new NoSuchElementFoundException(ERROR_WALLET_NOT_FOUND));
+                .orElseThrow(() -> new NoSuchElementFoundException(messageConfig.translate(ERROR_WALLET_NOT_FOUND)));
         walletRepository.delete(wallet);
         log.info(messageConfig.translate(INFO_WALLET_DELETED, wallet.getIban(), wallet.getName(), wallet.getBalance()));
     }
