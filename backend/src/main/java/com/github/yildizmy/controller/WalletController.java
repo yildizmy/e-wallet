@@ -19,7 +19,7 @@ import java.time.Clock;
 import java.time.Instant;
 import java.util.List;
 
-import static com.github.yildizmy.common.Constants.SUCCESS;
+import static com.github.yildizmy.common.MessageKeys.INFO_OPERATION_SUCCESS;
 
 @CrossOrigin(origins = "http://localhost:3000/")
 @RestController
@@ -40,7 +40,7 @@ public class WalletController {
     @GetMapping("/{id}")
     public ResponseEntity<ApiResponse<WalletResponse>> findById(@PathVariable long id) {
         final WalletResponse response = walletService.findById(id);
-        return ResponseEntity.ok(new ApiResponse<>(Instant.now(clock).toEpochMilli(), SUCCESS, true, response));
+        return ResponseEntity.ok(new ApiResponse<>(Instant.now(clock).toEpochMilli(), INFO_OPERATION_SUCCESS, true, response));
     }
 
     /**
@@ -53,7 +53,7 @@ public class WalletController {
     @GetMapping("/iban/{iban}")
     public ResponseEntity<ApiResponse<WalletResponse>> findByIban(@PathVariable String iban) {
         final WalletResponse response = walletService.findByIban(iban);
-        return ResponseEntity.ok(new ApiResponse<>(Instant.now(clock).toEpochMilli(), SUCCESS, true, response));
+        return ResponseEntity.ok(new ApiResponse<>(Instant.now(clock).toEpochMilli(), INFO_OPERATION_SUCCESS, true, response));
     }
 
     /**
@@ -66,7 +66,7 @@ public class WalletController {
     @GetMapping("/users/{userId}")
     public ResponseEntity<ApiResponse<List<WalletResponse>>> findByUserId(@PathVariable long userId) {
         final List<WalletResponse> response = walletService.findByUserId(userId);
-        return ResponseEntity.ok(new ApiResponse<>(Instant.now(clock).toEpochMilli(), SUCCESS, true, response));
+        return ResponseEntity.ok(new ApiResponse<>(Instant.now(clock).toEpochMilli(), INFO_OPERATION_SUCCESS, true, response));
     }
 
     /**
@@ -79,7 +79,7 @@ public class WalletController {
     @GetMapping
     public ResponseEntity<ApiResponse<Page<WalletResponse>>> findAll(Pageable pageable) {
         final Page<WalletResponse> response = walletService.findAll(pageable);
-        return ResponseEntity.ok(new ApiResponse<>(Instant.now(clock).toEpochMilli(), SUCCESS, true, response));
+        return ResponseEntity.ok(new ApiResponse<>(Instant.now(clock).toEpochMilli(), INFO_OPERATION_SUCCESS, true, response));
     }
 
     /**
@@ -94,7 +94,7 @@ public class WalletController {
         final CommandResponse response = walletService.create(request);
         return ResponseEntity
                 .status(HttpStatus.CREATED)
-                .body(new ApiResponse<>(Instant.now(clock).toEpochMilli(), SUCCESS, true, response));
+                .body(new ApiResponse<>(Instant.now(clock).toEpochMilli(), INFO_OPERATION_SUCCESS, true, response));
     }
 
     /**
@@ -109,7 +109,7 @@ public class WalletController {
         final CommandResponse response = walletService.transferFunds(request);
         return ResponseEntity
                 .status(HttpStatus.CREATED)
-                .body(new ApiResponse<>(Instant.now(clock).toEpochMilli(), SUCCESS, true, response));
+                .body(new ApiResponse<>(Instant.now(clock).toEpochMilli(), INFO_OPERATION_SUCCESS, true, response));
     }
 
     /**
@@ -124,7 +124,7 @@ public class WalletController {
         final CommandResponse response = walletService.addFunds(request);
         return ResponseEntity
                 .status(HttpStatus.CREATED)
-                .body(new ApiResponse<>(Instant.now(clock).toEpochMilli(), SUCCESS, true, response));
+                .body(new ApiResponse<>(Instant.now(clock).toEpochMilli(), INFO_OPERATION_SUCCESS, true, response));
     }
 
     /**
@@ -139,7 +139,7 @@ public class WalletController {
         final CommandResponse response = walletService.withdrawFunds(request);
         return ResponseEntity
                 .status(HttpStatus.CREATED)
-                .body(new ApiResponse<>(Instant.now(clock).toEpochMilli(), SUCCESS, true, response));
+                .body(new ApiResponse<>(Instant.now(clock).toEpochMilli(), INFO_OPERATION_SUCCESS, true, response));
     }
 
     /**
@@ -152,7 +152,7 @@ public class WalletController {
     @PutMapping("/{id}")
     public ResponseEntity<ApiResponse<CommandResponse>> update(@PathVariable long id, @Valid @RequestBody WalletRequest request) {
         final CommandResponse response = walletService.update(id, request);
-        return ResponseEntity.ok(new ApiResponse<>(Instant.now(clock).toEpochMilli(), SUCCESS, true, response));
+        return ResponseEntity.ok(new ApiResponse<>(Instant.now(clock).toEpochMilli(), INFO_OPERATION_SUCCESS, true, response));
     }
 
     /**
