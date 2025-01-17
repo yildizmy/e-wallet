@@ -8,7 +8,7 @@ import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
-import static com.github.yildizmy.common.Constants.FIELD_NOT_VALIDATED;
+import static com.github.yildizmy.common.MessageKeys.ERROR_FIELD_VALIDATION;
 import static java.lang.annotation.ElementType.*;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
@@ -21,7 +21,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Constraint(validatedBy = {IbanValidator.class})
 public @interface ValidIban {
 
-    String message() default FIELD_NOT_VALIDATED;
+    String message() default ERROR_FIELD_VALIDATION;
 
     Class<?>[] groups() default {};
 
