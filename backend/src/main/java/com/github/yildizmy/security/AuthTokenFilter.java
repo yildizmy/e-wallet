@@ -1,5 +1,6 @@
 package com.github.yildizmy.security;
 
+import com.github.yildizmy.config.MessageSourceConfig;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -26,6 +27,8 @@ import static com.github.yildizmy.common.MessageKeys.ERROR_AUTH_SETUP;
 @RequiredArgsConstructor
 public class AuthTokenFilter extends OncePerRequestFilter {
 
+    private final MessageSourceConfig messageConfig;
+
     private final JwtUtils jwtUtils;
 
     private final UserDetailsServiceImpl userDetailsService;
@@ -49,7 +52,7 @@ public class AuthTokenFilter extends OncePerRequestFilter {
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             }
         } catch (Exception e) {
-            log.error(ERROR_AUTH_SETUP, e);
+            log.error(messageConfig.translate(ERROR_AUTH_SETUP, e));
         }
         filterChain.doFilter(request, response);
     }
