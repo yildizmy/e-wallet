@@ -44,7 +44,7 @@ public class TransactionService {
     public TransactionResponse findById(long id) {
         return transactionRepository.findById(id)
                 .map(transactionResponseMapper::toDto)
-                .orElseThrow(() -> new NoSuchElementFoundException(ERROR_TRANSACTION_NOT_FOUND));
+                .orElseThrow(() -> new NoSuchElementFoundException(messageConfig.translate(ERROR_TRANSACTION_NOT_FOUND)));
     }
 
     /**
@@ -57,7 +57,7 @@ public class TransactionService {
     public TransactionResponse findByReferenceNumber(UUID referenceNumber) {
         return transactionRepository.findByReferenceNumber(referenceNumber)
                 .map(transactionResponseMapper::toDto)
-                .orElseThrow(() -> new NoSuchElementFoundException(ERROR_TRANSACTION_NOT_FOUND));
+                .orElseThrow(() -> new NoSuchElementFoundException(messageConfig.translate(ERROR_TRANSACTION_NOT_FOUND)));
     }
 
     /**
