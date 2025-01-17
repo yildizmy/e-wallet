@@ -19,7 +19,8 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 import java.util.Objects;
 
-import static com.github.yildizmy.common.Constants.*;
+import static com.github.yildizmy.common.Constants.TRACE;
+import static com.github.yildizmy.common.MessageKeys.*;
 
 /**
  * Global exception handler class for handling all the exceptions
@@ -50,11 +51,11 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
                                                                   HttpHeaders headers,
                                                                   HttpStatusCode statusCode,
                                                                   WebRequest request) {
-        ErrorResponse errorResponse = new ErrorResponse(HttpStatus.UNPROCESSABLE_ENTITY.value(), VALIDATION_ERROR);
+        ErrorResponse errorResponse = new ErrorResponse(HttpStatus.UNPROCESSABLE_ENTITY.value(), ERROR_VALIDATION);
         for (FieldError fieldError : ex.getBindingResult().getFieldErrors()) {
             errorResponse.addValidationError(fieldError.getField(), fieldError.getDefaultMessage());
         }
-        log.error(METHOD_ARGUMENT_NOT_VALID, ex);
+        log.error(ERROR_METHOD_ARGUMENT, ex);
         return ResponseEntity.unprocessableEntity().body(errorResponse);
     }
 
@@ -68,7 +69,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(NoSuchElementFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ResponseEntity<Object> handleNoSuchElementFoundException(NoSuchElementFoundException ex, WebRequest request) {
-        log.error(NOT_FOUND, ex);
+        log.error(ERROR_NOT_FOUND, ex);
         return buildErrorResponse(ex, HttpStatus.NOT_FOUND, request);
     }
 
@@ -82,7 +83,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(ElementAlreadyExistsException.class)
     @ResponseStatus(HttpStatus.CONFLICT)
     public ResponseEntity<Object> handleElementAlreadyExistsException(ElementAlreadyExistsException ex, WebRequest request) {
-        log.error(ALREADY_EXISTS, ex);
+        log.error(ERROR_ALREADY_EXISTS, ex);
         return buildErrorResponse(ex, HttpStatus.CONFLICT, request);
     }
 
@@ -96,7 +97,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(InsufficientFundsException.class)
     @ResponseStatus(HttpStatus.PRECONDITION_FAILED)
     public ResponseEntity<Object> handleInsufficientFundsException(InsufficientFundsException ex, WebRequest request) {
-        log.error(METHOD_ARGUMENT_NOT_VALID, ex);
+        log.error(ERROR_METHOD_ARGUMENT, ex);
         return buildErrorResponse(ex, HttpStatus.PRECONDITION_FAILED, request);
     }
 
@@ -110,7 +111,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(AuthenticationException.class)
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     public ResponseEntity<Object> handleAuthenticationException(AuthenticationException ex, WebRequest request) {
-        log.error(UNAUTHORIZED, ex);
+        log.error(ERROR_UNAUTHORIZED_DETAILS, ex);
         return buildErrorResponse(ex, HttpStatus.UNAUTHORIZED, request);
     }
 
@@ -124,7 +125,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(ConstraintViolationException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ResponseEntity<Object> handleConstraintValidationException(ConstraintViolationException ex, WebRequest request) {
-        log.warn(FIELD_NOT_VALIDATED, ex);
+        log.warn(ERROR_FIELD_VALIDATION, ex);
         return buildErrorResponse(ex, HttpStatus.BAD_REQUEST, request);
     }
 
