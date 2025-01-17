@@ -239,6 +239,6 @@ public class WalletService {
         final Wallet wallet = walletRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementFoundException(ERROR_WALLET_NOT_FOUND));
         walletRepository.delete(wallet);
-        log.info(INFO_WALLET_DELETED, wallet.getIban(), wallet.getName(), wallet.getBalance());
+        log.info(messageConfig.translate(INFO_WALLET_DELETED, wallet.getIban(), wallet.getName(), wallet.getBalance()));
     }
 }
