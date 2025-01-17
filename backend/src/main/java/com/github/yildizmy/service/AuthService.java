@@ -1,5 +1,6 @@
 package com.github.yildizmy.service;
 
+import com.github.yildizmy.config.MessageSourceConfig;
 import com.github.yildizmy.domain.entity.User;
 import com.github.yildizmy.dto.mapper.SignupRequestMapper;
 import com.github.yildizmy.dto.request.LoginRequest;
@@ -30,6 +31,7 @@ import static com.github.yildizmy.common.MessageKeys.*;
 @RequiredArgsConstructor
 public class AuthService {
 
+    private final MessageSourceConfig messageConfig;
     private final AuthenticationManager authenticationManager;
     private final JwtUtils jwtUtils;
     private final UserRepository userRepository;
@@ -53,7 +55,7 @@ public class AuthService {
                 .map(item -> item.getAuthority())
                 .toList();
 
-        log.info(INFO_USER_LOGIN, new Object[]{request.getUsername()});
+        log.info(messageConfig.translate(INFO_USER_LOGIN, request.getUsername()));
         return JwtResponse
                 .builder()
                 .token(jwt)
