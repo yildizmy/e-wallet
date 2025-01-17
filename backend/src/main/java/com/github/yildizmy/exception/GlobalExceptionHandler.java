@@ -1,6 +1,8 @@
 package com.github.yildizmy.exception;
 
+import com.github.yildizmy.config.MessageSourceConfig;
 import jakarta.validation.ConstraintViolationException;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.beans.factory.annotation.Value;
@@ -27,7 +29,10 @@ import static com.github.yildizmy.common.MessageKeys.*;
  */
 @Slf4j(topic = "GlobalExceptionHandler")
 @RestControllerAdvice
+@RequiredArgsConstructor
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
+
+    private final MessageSourceConfig messageConfig;
 
     /**
      * This parameter is used to print StackTrace while debugging. Its value is false by default.
@@ -111,7 +116,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(AuthenticationException.class)
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     public ResponseEntity<Object> handleAuthenticationException(AuthenticationException ex, WebRequest request) {
-        log.error(ERROR_UNAUTHORIZED_DETAILS, ex);
+        log.error(messageConfig.translate(ERROR_UNAUTHORIZED_DETAILS, ex));
         return buildErrorResponse(ex, HttpStatus.UNAUTHORIZED, request);
     }
 
