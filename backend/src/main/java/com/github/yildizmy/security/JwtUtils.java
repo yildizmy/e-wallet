@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
-import static com.github.yildizmy.common.Constants.*;
+import static com.github.yildizmy.common.MessageKeys.*;
 
 /**
  * Utility class for Jwt related tasks
@@ -42,15 +42,15 @@ public class JwtUtils {
             Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(authToken);
             return true;
         } catch (SignatureException e) {
-            log.error(INVALID_JWT_SIGN, e.getMessage());
+            log.error(ERROR_JWT_INVALID_SIGNATURE, e.getMessage());
         } catch (MalformedJwtException e) {
-            log.error(INVALID_JWT_TOKEN, e.getMessage());
+            log.error(ERROR_JWT_INVALID_TOKEN, e.getMessage());
         } catch (ExpiredJwtException e) {
-            log.error(JWT_EXPIRED, e.getMessage());
+            log.error(ERROR_JWT_EXPIRED, e.getMessage());
         } catch (UnsupportedJwtException e) {
-            log.error(JWT_UNSUPPORTED, e.getMessage());
+            log.error(ERROR_JWT_UNSUPPORTED, e.getMessage());
         } catch (IllegalArgumentException e) {
-            log.error(JWT_EMPTY, e.getMessage());
+            log.error(ERROR_JWT_EMPTY_CLAIMS, e.getMessage());
         }
         return false;
     }
