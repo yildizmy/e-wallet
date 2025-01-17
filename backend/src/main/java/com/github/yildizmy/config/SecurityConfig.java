@@ -2,6 +2,7 @@ package com.github.yildizmy.config;
 
 import com.github.yildizmy.security.AuthEntryPointJwt;
 import com.github.yildizmy.security.AuthTokenFilter;
+import com.github.yildizmy.security.JwtUtils;
 import com.github.yildizmy.security.UserDetailsServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -29,6 +30,8 @@ public class SecurityConfig {
 
     private final AuthEntryPointJwt authEntryPointJwt;
     private final UserDetailsServiceImpl userDetailsService;
+    private final MessageSourceConfig messageConfig;
+    private final JwtUtils jwtUtils;
 
     private static final String[] AUTH_WHITELIST = {
             "/api/v1/auth/**",
@@ -40,7 +43,7 @@ public class SecurityConfig {
 
     @Bean
     public AuthTokenFilter authenticationJwtTokenFilter() {
-        return new AuthTokenFilter();
+        return new AuthTokenFilter(messageConfig, jwtUtils, userDetailsService);
     }
 
     @Bean
