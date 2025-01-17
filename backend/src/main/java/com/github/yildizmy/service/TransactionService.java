@@ -44,7 +44,7 @@ public class TransactionService {
     public TransactionResponse findById(long id) {
         return transactionRepository.findById(id)
                 .map(transactionResponseMapper::toDto)
-                .orElseThrow(() -> new NoSuchElementFoundException(messageConfig.translate(ERROR_TRANSACTION_NOT_FOUND)));
+                .orElseThrow(() -> new NoSuchElementFoundException(messageConfig.getMessage(ERROR_TRANSACTION_NOT_FOUND)));
     }
 
     /**
@@ -57,7 +57,7 @@ public class TransactionService {
     public TransactionResponse findByReferenceNumber(UUID referenceNumber) {
         return transactionRepository.findByReferenceNumber(referenceNumber)
                 .map(transactionResponseMapper::toDto)
-                .orElseThrow(() -> new NoSuchElementFoundException(messageConfig.translate(ERROR_TRANSACTION_NOT_FOUND)));
+                .orElseThrow(() -> new NoSuchElementFoundException(messageConfig.getMessage(ERROR_TRANSACTION_NOT_FOUND)));
     }
 
     /**
@@ -70,7 +70,7 @@ public class TransactionService {
     public List<TransactionResponse> findAllByUserId(Long userId) {
         final List<Transaction> transactions = transactionRepository.findAllByUserId(userId);
         if (transactions.isEmpty())
-            throw new NoSuchElementFoundException(messageConfig.translate(ERROR_NO_RECORDS));
+            throw new NoSuchElementFoundException(messageConfig.getMessage(ERROR_NO_RECORDS));
 
         return transactions.stream().map(transactionResponseMapper::toDto)
                 .toList();
@@ -86,7 +86,7 @@ public class TransactionService {
     public Page<TransactionResponse> findAll(Pageable pageable) {
         final Page<Transaction> transactions = transactionRepository.findAll(pageable);
         if (transactions.isEmpty())
-            throw new NoSuchElementFoundException(messageConfig.translate(ERROR_NO_RECORDS));
+            throw new NoSuchElementFoundException(messageConfig.getMessage(ERROR_NO_RECORDS));
 
         return transactions.map(transactionResponseMapper::toDto);
     }
@@ -100,7 +100,7 @@ public class TransactionService {
     public CommandResponse create(TransactionRequest request) {
         final Transaction transaction = transactionRequestMapper.toEntity(request);
         transactionRepository.save(transaction);
-        log.info(messageConfig.translate(INFO_TRANSACTION_CREATED, transaction.getFromWallet().getIban(), transaction.getToWallet().getIban(), transaction.getAmount()));
+        log.info(messageConfig.getMessage(INFO_TRANSACTION_CREATED, transaction.getFromWallet().getIban(), transaction.getToWallet().getIban(), transaction.getAmount()));
         return CommandResponse.builder().id(transaction.getId()).build();
     }
 }

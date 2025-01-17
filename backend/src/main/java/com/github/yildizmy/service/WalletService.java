@@ -51,7 +51,7 @@ public class WalletService {
     public WalletResponse findById(long id) {
         return walletRepository.findById(id)
                 .map(walletResponseMapper::toDto)
-                .orElseThrow(() -> new NoSuchElementFoundException(messageConfig.translate(ERROR_WALLET_NOT_FOUND)));
+                .orElseThrow(() -> new NoSuchElementFoundException(messageConfig.getMessage(ERROR_WALLET_NOT_FOUND)));
     }
 
     /**
@@ -64,7 +64,7 @@ public class WalletService {
     public WalletResponse findByIban(String iban) {
         return walletRepository.findByIban(iban)
                 .map(walletResponseMapper::toDto)
-                .orElseThrow(() -> new NoSuchElementFoundException(messageConfig.translate(ERROR_WALLET_NOT_FOUND)));
+                .orElseThrow(() -> new NoSuchElementFoundException(messageConfig.getMessage(ERROR_WALLET_NOT_FOUND)));
     }
 
     /**
@@ -88,7 +88,7 @@ public class WalletService {
      */
     public Wallet getByIban(String iban) {
         return walletRepository.findByIban(iban)
-                .orElseThrow(() -> new NoSuchElementFoundException(messageConfig.translate(ERROR_WALLET_NOT_FOUND)));
+                .orElseThrow(() -> new NoSuchElementFoundException(messageConfig.getMessage(ERROR_WALLET_NOT_FOUND)));
     }
 
     /**
@@ -101,7 +101,7 @@ public class WalletService {
     public Page<WalletResponse> findAll(Pageable pageable) {
         final Page<Wallet> wallets = walletRepository.findAll(pageable);
         if (wallets.isEmpty())
-            throw new NoSuchElementFoundException(messageConfig.translate(ERROR_NO_RECORDS));
+            throw new NoSuchElementFoundException(messageConfig.getMessage(ERROR_NO_RECORDS));
         return wallets.map(walletResponseMapper::toDto);
     }
 
@@ -114,15 +114,15 @@ public class WalletService {
     @Transactional
     public CommandResponse create(WalletRequest request) {
         if (walletRepository.existsByIbanIgnoreCase(request.getIban()))
-            throw new ElementAlreadyExistsException(messageConfig.translate(ERROR_WALLET_IBAN_EXISTS));
+            throw new ElementAlreadyExistsException(messageConfig.getMessage(ERROR_WALLET_IBAN_EXISTS));
         if (walletRepository.existsByUserIdAndNameIgnoreCase(request.getUserId(), request.getName()))
-            throw new ElementAlreadyExistsException(messageConfig.translate(ERROR_WALLET_NAME_EXISTS));
+            throw new ElementAlreadyExistsException(messageConfig.getMessage(ERROR_WALLET_NAME_EXISTS));
 
         ibanValidator.isValid(request.getIban(), null);
 
         final Wallet wallet = walletRequestMapper.toEntity(request);
         walletRepository.save(wallet);
-        log.info(messageConfig.translate(INFO_WALLET_CREATED, wallet.getIban(), wallet.getName(), wallet.getBalance()));
+        log.info(messageConfig.getMessage(INFO_WALLET_CREATED, wallet.getIban(), wallet.getName(), wallet.getBalance()));
 
         // add this initial amount to the transactions
         transactionService.create(walletTransactionRequestMapper.toTransactionDto(request));
@@ -143,7 +143,7 @@ public class WalletService {
 
         // check if the balance of sender wallet has equal or higher to/than transfer amount
         if (fromWallet.getBalance().compareTo(request.getAmount()) < 0)
-            throw new InsufficientFundsException(messageConfig.translate(ERROR_INSUFFICIENT_FUNDS));
+            throw new InsufficientFundsException(messageConfig.getMessage(ERROR_INSUFFICIENT_FUNDS));
 
         // update balance of the sender wallet
         fromWallet.setBalance(fromWallet.getBalance().subtract(request.getAmount()));
@@ -152,7 +152,7 @@ public class WalletService {
         toWallet.setBalance(toWallet.getBalance().add(request.getAmount()));
 
         walletRepository.save(toWallet);
-        log.info(messageConfig.translate(INFO_WALLET_BALANCES_UPDATED, fromWallet.getBalance(), toWallet.getBalance()));
+        log.info(messageConfig.getMessage(INFO_WALLET_BALANCES_UPDATED, fromWallet.getBalance(), toWallet.getBalance()));
 
         final CommandResponse response = transactionService.create(request);
         return CommandResponse.builder().id(response.id()).build();
@@ -172,7 +172,7 @@ public class WalletService {
         toWallet.setBalance(toWallet.getBalance().add(request.getAmount()));
 
         walletRepository.save(toWallet);
-        log.info(messageConfig.translate(INFO_WALLET_BALANCE_UPDATED, toWallet.getBalance()));
+        log.info(messageConfig.getMessage(INFO_WALLET_BALANCE_UPDATED, toWallet.getBalance()));
 
         final CommandResponse response = transactionService.create(request);
         return CommandResponse.builder().id(response.id()).build();
@@ -190,13 +190,13 @@ public class WalletService {
 
         // check if the balance of sender wallet has equal or higher to/than transfer amount
         if (fromWallet.getBalance().compareTo(request.getAmount()) < 0)
-            throw new InsufficientFundsException(messageConfig.translate(ERROR_INSUFFICIENT_FUNDS));
+            throw new InsufficientFundsException(messageConfig.getMessage(ERROR_INSUFFICIENT_FUNDS));
 
         // update balance of the sender wallet
         fromWallet.setBalance(fromWallet.getBalance().subtract(request.getAmount()));
 
         walletRepository.save(fromWallet);
-        log.info(messageConfig.translate(INFO_WALLET_BALANCE_UPDATED, fromWallet.getBalance()));
+        log.info(messageConfig.getMessage(INFO_WALLET_BALANCE_UPDATED, fromWallet.getBalance()));
 
         final CommandResponse response = transactionService.create(request);
         return CommandResponse.builder().id(response.id()).build();
@@ -210,23 +210,23 @@ public class WalletService {
      */
     public CommandResponse update(long id, WalletRequest request) {
         final Wallet foundWallet = walletRepository.findById(id)
-                .orElseThrow(() -> new NoSuchElementFoundException(messageConfig.translate(ERROR_WALLET_NOT_FOUND)));
+                .orElseThrow(() -> new NoSuchElementFoundException(messageConfig.getMessage(ERROR_WALLET_NOT_FOUND)));
 
         // check if the iban is changed and new iban is already exists
         if (!request.getIban().equalsIgnoreCase(foundWallet.getIban()) &&
                 walletRepository.existsByIbanIgnoreCase(request.getIban()))
-            throw new ElementAlreadyExistsException(messageConfig.translate(ERROR_WALLET_IBAN_EXISTS));
+            throw new ElementAlreadyExistsException(messageConfig.getMessage(ERROR_WALLET_IBAN_EXISTS));
 
         // check if the name is changed and new name is already exists in user's wallets
         if (!request.getName().equalsIgnoreCase(foundWallet.getName()) &&
                 walletRepository.existsByUserIdAndNameIgnoreCase(request.getUserId(), request.getName()))
-            throw new ElementAlreadyExistsException(messageConfig.translate(ERROR_WALLET_NAME_EXISTS));
+            throw new ElementAlreadyExistsException(messageConfig.getMessage(ERROR_WALLET_NAME_EXISTS));
 
         ibanValidator.isValid(request.getIban(), null);
 
         final Wallet wallet = walletRequestMapper.toEntity(request);
         walletRepository.save(wallet);
-        log.info(messageConfig.translate(INFO_WALLET_UPDATED, wallet.getIban(), wallet.getName(), wallet.getBalance()));
+        log.info(messageConfig.getMessage(INFO_WALLET_UPDATED, wallet.getIban(), wallet.getName(), wallet.getBalance()));
         return CommandResponse.builder().id(id).build();
     }
 
@@ -237,8 +237,8 @@ public class WalletService {
      */
     public void deleteById(long id) {
         final Wallet wallet = walletRepository.findById(id)
-                .orElseThrow(() -> new NoSuchElementFoundException(messageConfig.translate(ERROR_WALLET_NOT_FOUND)));
+                .orElseThrow(() -> new NoSuchElementFoundException(messageConfig.getMessage(ERROR_WALLET_NOT_FOUND)));
         walletRepository.delete(wallet);
-        log.info(messageConfig.translate(INFO_WALLET_DELETED, wallet.getIban(), wallet.getName(), wallet.getBalance()));
+        log.info(messageConfig.getMessage(INFO_WALLET_DELETED, wallet.getIban(), wallet.getName(), wallet.getBalance()));
     }
 }

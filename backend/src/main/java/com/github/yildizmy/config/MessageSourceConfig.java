@@ -32,11 +32,11 @@ public class MessageSourceConfig {
         return bean;
     }
 
-    public String translate(String key) {
+    public String getMessage(String key) {
         return messageSource().getMessage(key, new Object[]{}, LocaleContextHolder.getLocale());
     }
 
-    public String translate(String key, Object... args) {
+    public String getMessage(String key, Object... args) {
         return messageSource().getMessage(key, args, LocaleContextHolder.getLocale());
     }
 }

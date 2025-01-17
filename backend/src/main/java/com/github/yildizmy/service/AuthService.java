@@ -55,7 +55,7 @@ public class AuthService {
                 .map(item -> item.getAuthority())
                 .toList();
 
-        log.info(messageConfig.translate(INFO_USER_LOGIN, request.getUsername()));
+        log.info(messageConfig.getMessage(INFO_USER_LOGIN, request.getUsername()));
         return JwtResponse
                 .builder()
                 .token(jwt)
@@ -74,13 +74,13 @@ public class AuthService {
      */
     public CommandResponse signup(SignupRequest request) {
         if (userRepository.existsByUsernameIgnoreCase(request.getUsername().trim()))
-            throw new ElementAlreadyExistsException(messageConfig.translate(ERROR_USERNAME_EXISTS));
+            throw new ElementAlreadyExistsException(messageConfig.getMessage(ERROR_USERNAME_EXISTS));
         if (userRepository.existsByEmailIgnoreCase(request.getEmail().trim()))
-            throw new ElementAlreadyExistsException(messageConfig.translate(ERROR_EMAIL_EXISTS));
+            throw new ElementAlreadyExistsException(messageConfig.getMessage(ERROR_EMAIL_EXISTS));
 
         final User user = signupRequestMapper.toEntity(request);
         userRepository.save(user);
-        log.info(messageConfig.translate(INFO_USER_CREATED, user.getUsername()));
+        log.info(messageConfig.getMessage(INFO_USER_CREATED, user.getUsername()));
         return CommandResponse.builder().id(user.getId()).build();
     }
 }
