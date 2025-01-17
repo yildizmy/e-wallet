@@ -19,25 +19,25 @@ public class SignupRequest {
 
     private Long id;
 
-    @Size(min = 3, max = 50, message = "{firstName.size}")
-    @NotBlank(message = "{firstName.notblank}")
+    @Size(min = 3, max = 50, message = "{validation.user.firstname.length}")
+    @NotBlank(message = "{validation.user.firstname.required}")
     private String firstName;
 
-    @Size(min = 3, max = 50, message = "{lastName.size}")
-    @NotBlank(message = "{lastName.notblank}")
+    @Size(min = 3, max = 50, message = "{validation.user.lastname.length}")
+    @NotBlank(message = "{validation.user.lastname.required}")
     private String lastName;
 
-    @Size(min = 3, max = 20, message = "{username.size}")
-    @NotBlank(message = "{username.notblank}")
+    @Size(min = 3, max = 20, message = "{validation.user.username.length}")
+    @NotBlank(message = "{validation.user.username.required}")
     private String username;
 
-    @Email(message = "email.acceptable")
-    @Size(min = 6, max = 50, message = "{email.size}")
-    @NotBlank(message = "email.notblank}")
+    @Email(message = "{validation.user.email.format}")
+    @Size(min = 6, max = 50, message = "{validation.user.email.length}")
+    @NotBlank(message = "{validation.user.email.required}")
     private String email;
 
-    @Size(min = 6, max = 100, message = "{password.size}")
-    @NotBlank(message = "password.notblank}")
+    @Size(min = 6, max = 100, message = "{validation.user.password.length}")
+    @NotBlank(message = "{validation.user.password.required}")
     private String password;
 
     private Set<String> roles;
