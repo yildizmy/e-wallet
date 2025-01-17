@@ -1,5 +1,6 @@
 package com.github.yildizmy.service;
 
+import com.github.yildizmy.config.MessageSourceConfig;
 import com.github.yildizmy.domain.entity.Wallet;
 import com.github.yildizmy.dto.mapper.WalletRequestMapper;
 import com.github.yildizmy.dto.mapper.WalletResponseMapper;
@@ -32,6 +33,7 @@ import static com.github.yildizmy.common.MessageKeys.*;
 @RequiredArgsConstructor
 public class WalletService {
 
+    private final MessageSourceConfig messageConfig;
     private final WalletRepository walletRepository;
     private final TransactionService transactionService;
     private final WalletRequestMapper walletRequestMapper;
@@ -120,7 +122,7 @@ public class WalletService {
 
         final Wallet wallet = walletRequestMapper.toEntity(request);
         walletRepository.save(wallet);
-        log.info(INFO_WALLET_CREATED, wallet.getIban(), wallet.getName(), wallet.getBalance());
+        log.info(messageConfig.translate(INFO_WALLET_CREATED, wallet.getIban(), wallet.getName(), wallet.getBalance()));
 
         // add this initial amount to the transactions
         transactionService.create(walletTransactionRequestMapper.toTransactionDto(request));
