@@ -143,7 +143,7 @@ public class WalletService {
 
         // check if the balance of sender wallet has equal or higher to/than transfer amount
         if (fromWallet.getBalance().compareTo(request.getAmount()) < 0)
-            throw new InsufficientFundsException(ERROR_INSUFFICIENT_FUNDS);
+            throw new InsufficientFundsException(messageConfig.translate(ERROR_INSUFFICIENT_FUNDS));
 
         // update balance of the sender wallet
         fromWallet.setBalance(fromWallet.getBalance().subtract(request.getAmount()));
@@ -190,7 +190,7 @@ public class WalletService {
 
         // check if the balance of sender wallet has equal or higher to/than transfer amount
         if (fromWallet.getBalance().compareTo(request.getAmount()) < 0)
-            throw new InsufficientFundsException(ERROR_INSUFFICIENT_FUNDS);
+            throw new InsufficientFundsException(messageConfig.translate(ERROR_INSUFFICIENT_FUNDS));
 
         // update balance of the sender wallet
         fromWallet.setBalance(fromWallet.getBalance().subtract(request.getAmount()));
