@@ -1,12 +1,12 @@
 package com.github.yildizmy.service;
 
+import com.github.yildizmy.domain.entity.User;
 import com.github.yildizmy.dto.mapper.SignupRequestMapper;
 import com.github.yildizmy.dto.request.LoginRequest;
 import com.github.yildizmy.dto.request.SignupRequest;
 import com.github.yildizmy.dto.response.CommandResponse;
 import com.github.yildizmy.dto.response.JwtResponse;
 import com.github.yildizmy.exception.ElementAlreadyExistsException;
-import com.github.yildizmy.domain.entity.User;
 import com.github.yildizmy.repository.UserRepository;
 import com.github.yildizmy.security.JwtUtils;
 import com.github.yildizmy.security.UserDetailsImpl;
@@ -20,7 +20,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import static com.github.yildizmy.common.Constants.*;
+import static com.github.yildizmy.common.MessageKeys.*;
 
 /**
  * Service used for Authentication related operations
@@ -53,7 +53,7 @@ public class AuthService {
                 .map(item -> item.getAuthority())
                 .toList();
 
-        log.info(LOGGED_IN_USER, new Object[]{request.getUsername()});
+        log.info(INFO_USER_LOGIN, new Object[]{request.getUsername()});
         return JwtResponse
                 .builder()
                 .token(jwt)
@@ -72,13 +72,13 @@ public class AuthService {
      */
     public CommandResponse signup(SignupRequest request) {
         if (userRepository.existsByUsernameIgnoreCase(request.getUsername().trim()))
-            throw new ElementAlreadyExistsException(ALREADY_EXISTS_USER_NAME);
+            throw new ElementAlreadyExistsException(ERROR_USERNAME_EXISTS);
         if (userRepository.existsByEmailIgnoreCase(request.getEmail().trim()))
-            throw new ElementAlreadyExistsException(ALREADY_EXISTS_USER_EMAIL);
+            throw new ElementAlreadyExistsException(ERROR_EMAIL_EXISTS);
 
         final User user = signupRequestMapper.toEntity(request);
         userRepository.save(user);
-        log.info(CREATED_USER, new Object[]{user.getUsername()});
+        log.info(INFO_USER_CREATED, new Object[]{user.getUsername()});
         return CommandResponse.builder().id(user.getId()).build();
     }
 }
