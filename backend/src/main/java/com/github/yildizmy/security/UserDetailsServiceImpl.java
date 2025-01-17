@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.text.MessageFormat;
 
-import static com.github.yildizmy.common.Constants.NOT_FOUND_USERNAME;
+import static com.github.yildizmy.common.MessageKeys.ERROR_USERNAME_NOT_FOUND;
 
 /**
  * Service used for UserDetails related operations
@@ -26,7 +26,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         final User user = userRepository.findByUsername(username)
-                .orElseThrow(() -> new UsernameNotFoundException(MessageFormat.format(NOT_FOUND_USERNAME, username)));
+                .orElseThrow(() -> new UsernameNotFoundException(MessageFormat.format(ERROR_USERNAME_NOT_FOUND, username)));
         return UserDetailsImpl.build(user);
     }
 }
