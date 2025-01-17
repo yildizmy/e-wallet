@@ -172,7 +172,7 @@ public class WalletService {
         toWallet.setBalance(toWallet.getBalance().add(request.getAmount()));
 
         walletRepository.save(toWallet);
-        log.info(INFO_WALLET_BALANCE_UPDATED, toWallet.getBalance());
+        log.info(messageConfig.translate(INFO_WALLET_BALANCE_UPDATED, toWallet.getBalance()));
 
         final CommandResponse response = transactionService.create(request);
         return CommandResponse.builder().id(response.id()).build();
@@ -196,7 +196,7 @@ public class WalletService {
         fromWallet.setBalance(fromWallet.getBalance().subtract(request.getAmount()));
 
         walletRepository.save(fromWallet);
-        log.info(INFO_WALLET_BALANCE_UPDATED, fromWallet.getBalance());
+        log.info(messageConfig.translate(INFO_WALLET_BALANCE_UPDATED, fromWallet.getBalance()));
 
         final CommandResponse response = transactionService.create(request);
         return CommandResponse.builder().id(response.id()).build();
