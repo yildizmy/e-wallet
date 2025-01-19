@@ -24,7 +24,7 @@ import static com.github.yildizmy.common.MessageKeys.ERROR_AUTH_SETUP;
  * that we will implement parsing & validating JWT, loading User details (using UserDetailsService),
  * checking Authorization (using UsernamePasswordAuthenticationToken).
  */
-@Slf4j(topic = "AuthTokenFilter")
+@Slf4j
 @Component
 @RequiredArgsConstructor
 public class AuthTokenFilter extends OncePerRequestFilter {

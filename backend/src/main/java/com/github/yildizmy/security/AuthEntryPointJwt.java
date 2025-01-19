@@ -21,7 +21,7 @@ import static com.github.yildizmy.common.MessageKeys.ERROR_UNAUTHORIZED_DETAILS;
 /**
  * Implements AuthenticationEntryPoint interface that is used for catching authentication errors.
  */
-@Slf4j(topic = "AuthEntryPointJwt")
+@Slf4j
 @Component
 @RequiredArgsConstructor
 public class AuthEntryPointJwt implements AuthenticationEntryPoint {

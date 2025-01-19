@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 /**
  * Service used for Type related operations.
  */
-@Slf4j(topic = "TypeService")
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class TypeService {

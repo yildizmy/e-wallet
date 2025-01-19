@@ -26,7 +26,7 @@ import static com.github.yildizmy.common.MessageKeys.*;
 /**
  * Service used for Authentication related operations.
  */
-@Slf4j(topic = "AuthService")
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class AuthService {

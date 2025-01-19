@@ -11,7 +11,7 @@ import static com.github.yildizmy.common.Constants.*;
 /**
  * Used for validating IBAN numbers.
  */
-@Slf4j(topic = "IbanValidator")
+@Slf4j
 @RequiredArgsConstructor
 @Component
 public class IbanValidator implements ConstraintValidator<ValidIban, String> {

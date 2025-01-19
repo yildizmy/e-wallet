@@ -27,7 +27,7 @@ import static com.github.yildizmy.common.MessageKeys.*;
 /**
  * Global exception handler class for handling all the exceptions.
  */
-@Slf4j(topic = "GlobalExceptionHandler")
+@Slf4j
 @RestControllerAdvice
 @RequiredArgsConstructor
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {

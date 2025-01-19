@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 /**
  * Service used for User related operations.
  */
-@Slf4j(topic = "UserService")
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class UserService {

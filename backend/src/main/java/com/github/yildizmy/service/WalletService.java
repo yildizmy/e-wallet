@@ -28,7 +28,7 @@ import static com.github.yildizmy.common.MessageKeys.*;
 /**
  * Service used for Wallet related operations.
  */
-@Slf4j(topic = "WalletService")
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class WalletService {

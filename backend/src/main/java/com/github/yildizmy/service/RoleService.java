@@ -13,7 +13,7 @@ import java.util.Set;
 /**
  * Service used for Role related operations.
  */
-@Slf4j(topic = "RoleService")
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class RoleService {

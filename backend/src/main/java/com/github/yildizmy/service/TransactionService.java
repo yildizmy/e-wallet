@@ -24,7 +24,7 @@ import static com.github.yildizmy.common.MessageKeys.*;
 /**
  * Service used for Transaction related operations.
  */
-@Slf4j(topic = "TransactionService")
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class TransactionService {
