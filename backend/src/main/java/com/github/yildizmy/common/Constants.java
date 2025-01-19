@@ -1,13 +1,12 @@
 package com.github.yildizmy.common;
 
-/**
- * Constant variables used in the project. A private constructor is added to prevent instantiation.
- */
-public final class Constants {
+import lombok.experimental.UtilityClass;
 
-    private Constants() {
-        throw new UnsupportedOperationException();
-    }
+/**
+ * Utility class to hold constant values used throughout the application.
+ */
+@UtilityClass
+public class Constants {
 
     public static final String TRACE = "trace";
     public static final String DATE_FORMAT = "dd.MM.yyyy";
