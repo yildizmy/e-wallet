@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 import static com.github.yildizmy.common.MessageKeys.ERROR_USERNAME_NOT_FOUND;
 
 /**
- * Service used for UserDetails related operations
+ * Service used for UserDetails related operations.
  */
 @Service
 @RequiredArgsConstructor

@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * Service used for Role related operations
+ * Service used for Role related operations.
  */
 @Slf4j(topic = "RoleService")
 @Service
@@ -21,7 +21,7 @@ public class RoleService {
     private final RoleRepository roleRepository;
 
     /**
-     * Fetches list of role (entity) by the given role types
+     * Fetches list of role (entity) by the given role types.
      *
      * @param types
      * @return List of Role
@@ -31,7 +31,7 @@ public class RoleService {
     }
 
     /**
-     * Fetches all roles as entity
+     * Fetches all roles as entity.
      *
      * @return List of Role
      */

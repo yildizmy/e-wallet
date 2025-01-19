@@ -7,7 +7,7 @@ import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
 
 /**
- * Mapper used for mapping from WalletRequest to TransactionRequest fields
+ * Mapper used for mapping from WalletRequest to TransactionRequest fields.
  */
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface WalletTransactionRequestMapper {

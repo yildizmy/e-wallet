@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 
 /**
- * Mapper used for mapping TransactionRequest fields
+ * Mapper used for mapping TransactionRequest fields.
  */
 @Mapper(componentModel = "spring",
         uses = {WalletService.class, TypeService.class},

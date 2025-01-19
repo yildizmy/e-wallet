@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import static com.github.yildizmy.common.Constants.*;
 
 /**
- * Used for validating IBAN numbers
+ * Used for validating IBAN numbers.
  */
 @Slf4j(topic = "IbanValidator")
 @RequiredArgsConstructor

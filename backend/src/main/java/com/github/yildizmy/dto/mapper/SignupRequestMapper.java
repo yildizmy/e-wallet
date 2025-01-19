@@ -13,7 +13,7 @@ import java.util.HashSet;
 import java.util.List;
 
 /**
- * Mapper used for mapping SignupRequest fields
+ * Mapper used for mapping SignupRequest fields.
  */
 @Mapper(componentModel = "spring",
         uses = {PasswordEncoder.class, RoleService.class},

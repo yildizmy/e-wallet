@@ -7,7 +7,7 @@ import org.mapstruct.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
- * Mapper used for mapping WalletRequest fields
+ * Mapper used for mapping WalletRequest fields.
  */
 @Mapper(componentModel = "spring",
         uses = {UserService.class},

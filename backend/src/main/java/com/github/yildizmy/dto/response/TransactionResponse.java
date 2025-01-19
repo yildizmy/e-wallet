@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 import java.util.UUID;
 
 /**
- * Data Transfer Object for Transaction response
+ * Data Transfer Object for Transaction response.
  */
 @Data
 public class TransactionResponse {

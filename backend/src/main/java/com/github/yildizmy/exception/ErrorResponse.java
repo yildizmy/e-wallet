@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Builds exception handler response in a proper format with status, message, stackTrace and errors
+ * Builds exception handler response in a proper format with status, message, stackTrace and errors.
  */
 @Data
 @RequiredArgsConstructor
@@ -25,7 +25,7 @@ public class ErrorResponse {
     }
 
     /**
-     * Adds validation error for handling unprocessable entity
+     * Adds validation error for handling unprocessable entity.
      *
      * @param field
      * @param message

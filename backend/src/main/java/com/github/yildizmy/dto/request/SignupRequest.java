@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 import java.util.Set;
 
 /**
- * Data Transfer Object for Signup request
+ * Data Transfer Object for signup request.
  */
 @Data
 @AllArgsConstructor

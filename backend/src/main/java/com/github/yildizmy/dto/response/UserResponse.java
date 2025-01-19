@@ -5,7 +5,7 @@ import lombok.Data;
 import java.util.Set;
 
 /**
- * Data Transfer Object for User response
+ * Data Transfer Object for User response.
  */
 @Data
 public class UserResponse {

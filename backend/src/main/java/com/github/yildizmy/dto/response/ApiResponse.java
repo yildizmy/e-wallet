@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 /**
- * Builds API response in a proper format with timestamp, message and data
+ * Builds API response in a proper format with timestamp, message and data.
  *
  * @param <T>
  */

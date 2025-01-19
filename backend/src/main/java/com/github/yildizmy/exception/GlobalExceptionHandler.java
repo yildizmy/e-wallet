@@ -25,7 +25,7 @@ import static com.github.yildizmy.common.Constants.TRACE;
 import static com.github.yildizmy.common.MessageKeys.*;
 
 /**
- * Global exception handler class for handling all the exceptions
+ * Global exception handler class for handling all the exceptions.
  */
 @Slf4j(topic = "GlobalExceptionHandler")
 @RestControllerAdvice
@@ -65,7 +65,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     /**
-     * Handles custom NoSuchElementFoundException
+     * Handles custom NoSuchElementFoundException.
      *
      * @param ex
      * @param request
@@ -79,7 +79,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     /**
-     * Handles custom ElementAlreadyExistsException
+     * Handles custom ElementAlreadyExistsException.
      *
      * @param ex
      * @param request
@@ -93,7 +93,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     /**
-     * Handles custom InsufficientFundsException
+     * Handles custom InsufficientFundsException.
      *
      * @param ex
      * @param request
@@ -107,7 +107,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     /**
-     * Handles AuthenticationException
+     * Handles AuthenticationException.
      *
      * @param ex
      * @param request
@@ -121,7 +121,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     /**
-     * Handles ConstraintViolationException during field validation
+     * Handles ConstraintViolationException during field validation.
      *
      * @param ex
      * @param request
@@ -135,7 +135,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     /**
-     * Handles all the uncaught exceptions that cannot be caught by the previous methods
+     * Handles all the uncaught exceptions that cannot be caught by the previous methods.
      *
      * @param ex
      * @param request
@@ -149,7 +149,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     /**
-     * Build error message by the given exception, status and request
+     * Build error message by the given exception, status and request.
      *
      * @param ex
      * @param statusCode
@@ -163,7 +163,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     /**
-     * Build error message by the given exception, message, status and request
+     * Build error message by the given exception, message, status and request.
      *
      * @param ex
      * @param message
@@ -183,7 +183,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     /**
-     * Checks the tracing parameter sent by request
+     * Checks the tracing parameter sent by request.
      *
      * @param request
      * @return the tracing status based on the request
@@ -196,7 +196,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     /**
-     * Handles internal exceptions
+     * Handles internal exceptions.
      *
      * @param ex
      * @param body

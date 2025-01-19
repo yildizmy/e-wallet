@@ -22,7 +22,7 @@ import java.util.UUID;
 import static com.github.yildizmy.common.MessageKeys.*;
 
 /**
- * Service used for Transaction related operations
+ * Service used for Transaction related operations.
  */
 @Slf4j(topic = "TransactionService")
 @Service
@@ -35,7 +35,7 @@ public class TransactionService {
     private final TransactionResponseMapper transactionResponseMapper;
 
     /**
-     * Fetches a single transaction by the given id
+     * Fetches a single transaction by the given id.
      *
      * @param id
      * @return TransactionResponse
@@ -48,7 +48,7 @@ public class TransactionService {
     }
 
     /**
-     * Fetches a single transaction by the given referenceNumber
+     * Fetches a single transaction by the given referenceNumber.
      *
      * @param referenceNumber
      * @return TransactionResponse
@@ -61,7 +61,7 @@ public class TransactionService {
     }
 
     /**
-     * Fetches all transaction by the given userId
+     * Fetches all transaction by the given userId.
      *
      * @param userId
      * @return List of TransactionResponse
@@ -77,7 +77,7 @@ public class TransactionService {
     }
 
     /**
-     * Fetches all transactions based on the given paging and sorting parameters
+     * Fetches all transactions based on the given paging and sorting parameters.
      *
      * @param pageable
      * @return List of TransactionResponse
@@ -92,7 +92,7 @@ public class TransactionService {
     }
 
     /**
-     * Creates a new transaction using the given request parameters
+     * Creates a new transaction using the given request parameters.
      *
      * @param request
      * @return id of the created transaction

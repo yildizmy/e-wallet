@@ -26,7 +26,7 @@ import java.util.List;
 import static com.github.yildizmy.common.MessageKeys.*;
 
 /**
- * Service used for Wallet related operations
+ * Service used for Wallet related operations.
  */
 @Slf4j(topic = "WalletService")
 @Service
@@ -42,7 +42,7 @@ public class WalletService {
     private final IbanValidator ibanValidator;
 
     /**
-     * Fetches a single wallet by the given id
+     * Fetches a single wallet by the given id.
      *
      * @param id
      * @return WalletResponse
@@ -55,7 +55,7 @@ public class WalletService {
     }
 
     /**
-     * Fetches a single wallet by the given iban
+     * Fetches a single wallet by the given iban.
      *
      * @param iban
      * @return WalletResponse
@@ -68,7 +68,7 @@ public class WalletService {
     }
 
     /**
-     * Fetches a single wallet by the given userId
+     * Fetches a single wallet by the given userId.
      *
      * @param userId
      * @return WalletResponse
@@ -81,7 +81,7 @@ public class WalletService {
     }
 
     /**
-     * Fetches a single wallet reference (entity) by the given id
+     * Fetches a single wallet reference (entity) by the given id.
      *
      * @param iban
      * @return Wallet
@@ -92,7 +92,7 @@ public class WalletService {
     }
 
     /**
-     * Fetches all wallets based on the given paging and sorting parameters
+     * Fetches all wallets based on the given paging and sorting parameters.
      *
      * @param pageable
      * @return List of WalletResponse
@@ -106,7 +106,7 @@ public class WalletService {
     }
 
     /**
-     * Creates a new wallet using the given request parameters
+     * Creates a new wallet using the given request parameters.
      *
      * @param request
      * @return id of the created wallet
@@ -131,7 +131,7 @@ public class WalletService {
     }
 
     /**
-     * Transfer funds between wallets
+     * Transfer funds between wallets.
      *
      * @param request
      * @return id of the transaction
@@ -159,7 +159,7 @@ public class WalletService {
     }
 
     /**
-     * Adds funds to the given wallet
+     * Adds funds to the given wallet.
      *
      * @param request
      * @return id of the transaction
@@ -179,7 +179,7 @@ public class WalletService {
     }
 
     /**
-     * Withdraw funds from the given wallet
+     * Withdraw funds from the given wallet.
      *
      * @param request
      * @return id of the transaction
@@ -203,7 +203,7 @@ public class WalletService {
     }
 
     /**
-     * Updates wallet using the given request parameters
+     * Updates wallet using the given request parameters.
      *
      * @param request
      * @return id of the updated wallet
@@ -231,7 +231,7 @@ public class WalletService {
     }
 
     /**
-     * Deletes wallet by the given id
+     * Deletes wallet by the given id.
      *
      * @param id
      */

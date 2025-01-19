@@ -7,7 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * Data Transfer Object for Login request
+ * Data Transfer Object for Login request.
  */
 @Data
 @AllArgsConstructor

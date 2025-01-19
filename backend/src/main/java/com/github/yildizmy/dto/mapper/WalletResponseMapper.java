@@ -11,7 +11,7 @@ import org.mapstruct.MappingTarget;
 import java.text.MessageFormat;
 
 /**
- * Mapper used for mapping WalletResponse fields
+ * Mapper used for mapping WalletResponse fields.
  */
 @Mapper(componentModel = "spring")
 public interface WalletResponseMapper {

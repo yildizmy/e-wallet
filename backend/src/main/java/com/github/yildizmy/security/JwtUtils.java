@@ -13,7 +13,7 @@ import java.util.Date;
 import static com.github.yildizmy.common.MessageKeys.*;
 
 /**
- * Utility class for Jwt related tasks
+ * Utility class for Jwt related tasks.
  */
 @Slf4j(topic = "JwtUtils")
 @Component

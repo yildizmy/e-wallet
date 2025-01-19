@@ -6,7 +6,7 @@ import lombok.Getter;
 import java.util.List;
 
 /**
- * Data Transfer Object used for authentication response
+ * Data Transfer Object used for authentication response.
  */
 @Getter
 @Builder

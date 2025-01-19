@@ -24,7 +24,7 @@ import java.util.List;
 import static com.github.yildizmy.common.MessageKeys.*;
 
 /**
- * Service used for Authentication related operations
+ * Service used for Authentication related operations.
  */
 @Slf4j(topic = "AuthService")
 @Service
@@ -38,7 +38,7 @@ public class AuthService {
     private final SignupRequestMapper signupRequestMapper;
 
     /**
-     * Authenticates users by their credentials
+     * Authenticates users by their credentials.
      *
      * @param request
      * @return JwtResponse
@@ -67,7 +67,7 @@ public class AuthService {
     }
 
     /**
-     * Registers a user by provided credentials and user info
+     * Registers a user by provided credentials and user info.
      *
      * @param request
      * @return id of the registered user

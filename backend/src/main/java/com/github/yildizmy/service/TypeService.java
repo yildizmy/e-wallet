@@ -7,7 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 /**
- * Service used for Type related operations
+ * Service used for Type related operations.
  */
 @Slf4j(topic = "TypeService")
 @Service
@@ -17,7 +17,7 @@ public class TypeService {
     private final TypeRepository typeRepository;
 
     /**
-     * Fetches a single type reference (entity) by the given id
+     * Fetches a single type reference (entity) by the given id.
      *
      * @param id
      * @return Type

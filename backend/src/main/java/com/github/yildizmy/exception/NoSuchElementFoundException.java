@@ -1,7 +1,7 @@
 package com.github.yildizmy.exception;
 
 /**
- * Custom exception class used for when there is no record for the given filter parameters
+ * Custom exception class used for when there is no record for the given filter parameters.
  */
 public class NoSuchElementFoundException extends RuntimeException {
 

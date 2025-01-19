@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import java.math.BigDecimal;
 
 /**
- * Data Transfer Object for Wallet response
+ * Data Transfer Object for Wallet response.
  */
 @Data
 @AllArgsConstructor

@@ -13,7 +13,7 @@ import java.time.Instant;
 import java.util.UUID;
 
 /**
- * Data Transfer Object for Transaction request
+ * Data Transfer Object for Transaction request.
  */
 @Data
 @AllArgsConstructor

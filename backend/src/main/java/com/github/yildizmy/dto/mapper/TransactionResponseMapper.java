@@ -14,7 +14,7 @@ import java.time.format.DateTimeFormatter;
 import static com.github.yildizmy.common.Constants.DATE_TIME_FORMAT;
 
 /**
- * Mapper used for mapping TransactionResponse fields
+ * Mapper used for mapping TransactionResponse fields.
  */
 @Mapper(componentModel = "spring")
 public interface TransactionResponseMapper {

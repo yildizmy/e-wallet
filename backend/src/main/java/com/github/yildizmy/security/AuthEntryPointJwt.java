@@ -19,7 +19,7 @@ import static com.github.yildizmy.common.MessageKeys.ERROR_UNAUTHORIZED;
 import static com.github.yildizmy.common.MessageKeys.ERROR_UNAUTHORIZED_DETAILS;
 
 /**
- * Implements AuthenticationEntryPoint interface that is used for catching authentication errors
+ * Implements AuthenticationEntryPoint interface that is used for catching authentication errors.
  */
 @Slf4j(topic = "AuthEntryPointJwt")
 @Component

@@ -27,7 +27,7 @@ public class AuthController {
     private final AuthService authService;
 
     /**
-     * Authenticates users by their credentials
+     * Authenticates users by their credentials.
      *
      * @param request
      * @return JwtResponse
@@ -39,7 +39,7 @@ public class AuthController {
     }
 
     /**
-     * Registers users using their credentials and user info
+     * Registers users using their credentials and user info.
      *
      * @param request
      * @return id of the registered user

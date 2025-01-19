@@ -4,7 +4,7 @@ import com.github.yildizmy.domain.enums.RoleType;
 import lombok.Data;
 
 /**
- * Data Transfer Object for Role response
+ * Data Transfer Object for Role response.
  */
 @Data
 public class RoleResponse {

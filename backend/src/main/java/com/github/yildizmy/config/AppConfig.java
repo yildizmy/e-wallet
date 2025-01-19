@@ -12,7 +12,7 @@ import static com.github.yildizmy.common.Constants.DATE_FORMAT;
 import static com.github.yildizmy.common.Constants.DATE_TIME_FORMAT;
 
 /**
- * Configuration file used to configure settings of the application
+ * Configuration file used to configure settings of the application.
  */
 @Configuration
 public class AppConfig {

@@ -1,7 +1,7 @@
 package com.github.yildizmy.exception;
 
 /**
- * Custom exception class thrown when transfer amount is higher than account balance of sender
+ * Custom exception class thrown when transfer amount is higher than account balance of sender.
  */
 public class InsufficientFundsException extends RuntimeException {
 

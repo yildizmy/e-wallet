@@ -10,7 +10,7 @@ import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import java.util.Locale;
 
 /**
- * Configuration file used for displaying validation messages
+ * Configuration file used for displaying validation and exception messages.
  */
 @Configuration
 public class MessageSourceConfig {

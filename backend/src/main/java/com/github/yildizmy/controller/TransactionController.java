@@ -27,7 +27,7 @@ public class TransactionController {
     private final TransactionService transactionService;
 
     /**
-     * Fetches a single transaction by the given id
+     * Fetches a single transaction by the given id.
      *
      * @param id
      * @return TransactionResponse wrapped by ResponseEntity<ApiResponse<T>>
@@ -40,7 +40,7 @@ public class TransactionController {
     }
 
     /**
-     * Fetches a single transaction by the given referenceNumber
+     * Fetches a single transaction by the given referenceNumber.
      *
      * @param referenceNumber
      * @return TransactionResponse wrapped by ResponseEntity<ApiResponse<T>>
@@ -53,7 +53,7 @@ public class TransactionController {
     }
 
     /**
-     * Fetches all transaction by the given userId
+     * Fetches all transaction by the given userId.
      *
      * @param userId
      * @return List of TransactionResponse wrapped by ResponseEntity<ApiResponse<T>>
@@ -66,7 +66,7 @@ public class TransactionController {
     }
 
     /**
-     * Fetches all transactions based on the given paging and sorting parameters
+     * Fetches all transactions based on the given paging and sorting parameters.
      *
      * @param pageable
      * @return List of TransactionResponse wrapped by ResponseEntity<ApiResponse<T>>

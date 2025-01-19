@@ -31,7 +31,7 @@ public class WalletController {
     private final WalletService walletService;
 
     /**
-     * Fetches a single wallet by the given id
+     * Fetches a single wallet by the given id.
      *
      * @param id
      * @return WalletResponse wrapped by ResponseEntity<ApiResponse<T>>
@@ -44,7 +44,7 @@ public class WalletController {
     }
 
     /**
-     * Fetches a single wallet by the given iban
+     * Fetches a single wallet by the given iban.
      *
      * @param iban
      * @return WalletResponse wrapped by ResponseEntity<ApiResponse<T>>
@@ -57,7 +57,7 @@ public class WalletController {
     }
 
     /**
-     * Fetches a single wallet by the given userId
+     * Fetches a single wallet by the given userId.
      *
      * @param userId
      * @return WalletResponse wrapped by ResponseEntity<ApiResponse<T>>
@@ -70,7 +70,7 @@ public class WalletController {
     }
 
     /**
-     * Fetches all wallets based on the given paging and sorting parameters
+     * Fetches all wallets based on the given paging and sorting parameters.
      *
      * @param pageable
      * @return List of WalletResponse wrapped by ResponseEntity<ApiResponse<T>>
@@ -83,7 +83,7 @@ public class WalletController {
     }
 
     /**
-     * Creates a new wallet using the given request parameters
+     * Creates a new wallet using the given request parameters.
      *
      * @param request
      * @return id of the created wallet wrapped by ResponseEntity<ApiResponse<T>>
@@ -98,7 +98,7 @@ public class WalletController {
     }
 
     /**
-     * Transfer funds between wallets
+     * Transfer funds between wallets.
      *
      * @param request
      * @return id of the created transaction wrapped by ResponseEntity<ApiResponse<T>>
@@ -113,7 +113,7 @@ public class WalletController {
     }
 
     /**
-     * Adds funds to the given wallet
+     * Adds funds to the given wallet.
      *
      * @param request
      * @return id of the created transaction wrapped by ResponseEntity<ApiResponse<T>>
@@ -128,7 +128,7 @@ public class WalletController {
     }
 
     /**
-     * Withdraw funds from the given wallet
+     * Withdraw funds from the given wallet.
      *
      * @param request
      * @return id of the created transaction wrapped by ResponseEntity<ApiResponse<T>>
@@ -143,7 +143,7 @@ public class WalletController {
     }
 
     /**
-     * Updates wallet using the given request parameters
+     * Updates wallet using the given request parameters.
      *
      * @param request
      * @return id of the updated wallet wrapped by ResponseEntity<ApiResponse<T>>
@@ -156,7 +156,7 @@ public class WalletController {
     }
 
     /**
-     * Deletes wallet by the given id
+     * Deletes wallet by the given id.
      *
      * @param id
      * @return ResponseEntity<ApiResponse < Void>>

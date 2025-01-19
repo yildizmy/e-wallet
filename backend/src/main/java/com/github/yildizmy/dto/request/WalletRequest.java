@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 import java.math.BigDecimal;
 
 /**
- * Data Transfer Object for Wallet request
+ * Data Transfer Object for Wallet request.
  */
 @Data
 @AllArgsConstructor

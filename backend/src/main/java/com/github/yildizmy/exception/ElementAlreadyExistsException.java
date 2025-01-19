@@ -1,7 +1,7 @@
 package com.github.yildizmy.exception;
 
 /**
- * Custom exception class used for when the requested record is already exists
+ * Custom exception class used for when the requested record is already exists.
  */
 public class ElementAlreadyExistsException extends RuntimeException {
 
