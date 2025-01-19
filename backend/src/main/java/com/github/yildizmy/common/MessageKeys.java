@@ -10,7 +10,6 @@ public final class MessageKeys {
     }
 
     // info messages
-    public static final String INFO_OPERATION_SUCCESS = "info.operation.success";
     public static final String INFO_USER_LOGIN = "info.user.login";
     public static final String INFO_USER_CREATED = "info.user.created";
     public static final String INFO_WALLET_CREATED = "info.wallet.created";
