@@ -2,12 +2,15 @@ package com.github.yildizmy.common;
 
 import lombok.experimental.UtilityClass;
 
+import java.util.Arrays;
+
 /**
  * Utility class to hold constant values used throughout the application.
  */
 @UtilityClass
 public class Constants {
 
+    public static final String ALLOWED_ORIGIN = "http://localhost:3000";
     public static final String TRACE = "trace";
     public static final String DATE_FORMAT = "dd.MM.yyyy";
     public static final String DATE_TIME_FORMAT = "dd.MM.yyyy HH:mm:ss";

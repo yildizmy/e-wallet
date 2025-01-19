@@ -17,7 +17,6 @@ import java.time.Instant;
 
 import static com.github.yildizmy.common.MessageKeys.INFO_OPERATION_SUCCESS;
 
-@CrossOrigin(origins = "http://localhost:3000/")
 @RestController
 @RequestMapping("/api/v1/auth")
 @RequiredArgsConstructor
