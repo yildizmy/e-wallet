@@ -1,3 +1,4 @@
+name: e-wallet
 services:
   frontend:
     container_name: e-wallet-frontend

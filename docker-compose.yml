@@ -1,3 +1,4 @@
+name: e-wallet
 services:
   db:
     container_name: e-wallet-db
