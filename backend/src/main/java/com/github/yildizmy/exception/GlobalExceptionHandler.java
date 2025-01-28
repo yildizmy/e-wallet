@@ -149,6 +149,27 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     /**
+     * Handles internal exceptions.
+     *
+     * @param ex
+     * @param body
+     * @param headers
+     * @param statusCode
+     * @param request
+     * @return ResponseEntity<Object> with detailed information related to the error
+     */
+    @Override
+    public ResponseEntity<Object> handleExceptionInternal(
+            Exception ex,
+            Object body,
+            HttpHeaders headers,
+            HttpStatusCode statusCode,
+            WebRequest request) {
+
+        return buildErrorResponse(ex, statusCode, request);
+    }
+
+    /**
      * Build error message by the given exception, status and request.
      *
      * @param ex
@@ -193,26 +214,5 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return Objects.nonNull(value)
                 && value.length > 0
                 && value[0].contentEquals("true");
-    }
-
-    /**
-     * Handles internal exceptions.
-     *
-     * @param ex
-     * @param body
-     * @param headers
-     * @param statusCode
-     * @param request
-     * @return ResponseEntity<Object> with detailed information related to the error
-     */
-    @Override
-    public ResponseEntity<Object> handleExceptionInternal(
-            Exception ex,
-            Object body,
-            HttpHeaders headers,
-            HttpStatusCode statusCode,
-            WebRequest request) {
-
-        return buildErrorResponse(ex, statusCode, request);
     }
 }
