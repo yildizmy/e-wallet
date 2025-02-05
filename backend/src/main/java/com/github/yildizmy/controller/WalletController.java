@@ -109,9 +109,7 @@ public class WalletController {
      */
     @PreAuthorize("hasRole(T(com.github.yildizmy.domain.enums.RoleType).ROLE_USER)")
     @PostMapping("/addFunds")
-    public ResponseEntity<CommandResponse>
-
-    addFunds(@Valid @RequestBody TransactionRequest request) {
+    public ResponseEntity<CommandResponse> addFunds(@Valid @RequestBody TransactionRequest request) {
         final CommandResponse response = walletService.addFunds(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
@@ -124,9 +122,7 @@ public class WalletController {
      */
     @PreAuthorize("hasRole(T(com.github.yildizmy.domain.enums.RoleType).ROLE_USER)")
     @PostMapping("/withdrawFunds")
-    public ResponseEntity<CommandResponse>
-
-    withdrawFunds(@Valid @RequestBody TransactionRequest request) {
+    public ResponseEntity<CommandResponse> withdrawFunds(@Valid @RequestBody TransactionRequest request) {
         final CommandResponse response = walletService.withdrawFunds(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
@@ -139,9 +135,7 @@ public class WalletController {
      */
     @PreAuthorize("hasRole(T(com.github.yildizmy.domain.enums.RoleType).ROLE_USER)")
     @PutMapping("/{id}")
-    public ResponseEntity<CommandResponse>
-
-    update(@PathVariable long id, @Valid @RequestBody WalletRequest request) {
+    public ResponseEntity<CommandResponse> update(@PathVariable long id, @Valid @RequestBody WalletRequest request) {
         final CommandResponse response = walletService.update(id, request);
         return ResponseEntity.ok(response);
     }
@@ -154,9 +148,7 @@ public class WalletController {
      */
     @PreAuthorize("hasRole(T(com.github.yildizmy.domain.enums.RoleType).ROLE_USER)")
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void>
-
-    deleteById(@PathVariable long id) {
+    public ResponseEntity<Void> deleteById(@PathVariable long id) {
         walletService.deleteById(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
