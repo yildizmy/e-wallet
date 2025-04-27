@@ -31,6 +31,9 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 class AuthServiceTest {
 
+    @InjectMocks
+    private AuthService authService;
+
     @Mock
     private AuthenticationManager authenticationManager;
 
@@ -45,9 +48,6 @@ class AuthServiceTest {
 
     @Mock
     private MessageSourceConfig messageConfig;
-
-    @InjectMocks
-    private AuthService authService;
 
     private LoginRequest loginRequest;
     private UserDetailsImpl userDetails;
@@ -82,8 +82,8 @@ class AuthServiceTest {
 
     @Test
     void signup_shouldCreateNewUser() {
-        SignupRequest signupRequest =
-                new SignupRequest(1L, "New", "User", "newuser", "new@example.com", "password", Set.of("ROLE_USER"));
+        SignupRequest signupRequest = new SignupRequest(1L, "New", "User", "newuser",
+                "new@example.com", "password", Set.of("ROLE_USER"));
         User newUser = new User();
         newUser.setId(2L);
         newUser.setUsername("newuser");
@@ -106,8 +106,8 @@ class AuthServiceTest {
     @Test
     void signup_shouldThrowExceptionWhenUsernameExists() {
         SignupRequest signupRequest =
-                new SignupRequest(1L, "Existing", "User", "existinguser", "existing@example.com", "password",
-                        Set.of("ROLE_USER"));
+                new SignupRequest(1L, "Existing", "User", "existinguser",
+                        "existing@example.com", "password", Set.of("ROLE_USER"));
         when(userRepository.existsByUsernameIgnoreCase("existinguser")).thenReturn(true);
 
         assertThrows(ElementAlreadyExistsException.class, () -> authService.signup(signupRequest));
@@ -121,8 +121,8 @@ class AuthServiceTest {
     @Test
     void signup_shouldThrowExceptionWhenEmailExists() {
         SignupRequest signupRequest =
-                new SignupRequest(1L, "New", "User", "newuser", "existing@example.com", "password",
-                        Set.of("ROLE_USER"));
+                new SignupRequest(1L, "New", "User", "newuser",
+                        "existing@example.com", "password", Set.of("ROLE_USER"));
         when(userRepository.existsByUsernameIgnoreCase("newuser")).thenReturn(false);
         when(userRepository.existsByEmailIgnoreCase("existing@example.com")).thenReturn(true);
 
@@ -133,5 +133,4 @@ class AuthServiceTest {
         verify(signupRequestMapper, never()).toUser(any());
         verify(userRepository, never()).save(any());
     }
-
 }
