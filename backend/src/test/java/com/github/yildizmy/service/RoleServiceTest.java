@@ -17,11 +17,11 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 class RoleServiceTest {
 
-    @Mock
-    private RoleRepository roleRepository;
-
     @InjectMocks
     private RoleService roleService;
+
+    @Mock
+    private RoleRepository roleRepository;
 
     @Test
     void getReferenceByTypeIsIn_shouldReturnRolesForGivenTypes() {
