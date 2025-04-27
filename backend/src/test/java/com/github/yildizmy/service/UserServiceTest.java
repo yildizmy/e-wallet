@@ -23,27 +23,29 @@ class UserServiceTest {
 
     @Test
     void getReferenceById_shouldReturnUserReference() {
-        long userId = 1L;
-        User expectedUser = new User();
+        var userId = 1L;
+        var expectedUser = new User();
         expectedUser.setId(userId);
+
         when(userRepository.getReferenceById(userId)).thenReturn(expectedUser);
 
-        User result = userService.getReferenceById(userId);
+        var result = userService.getReferenceById(userId);
 
         assertNotNull(result);
         assertEquals(userId, result.getId());
-        verify(userRepository, times(1)).getReferenceById(userId);
+
+        verify(userRepository).getReferenceById(userId);
     }
 
     @Test
     void getReferenceById_shouldThrowExceptionWhenUserNotFound() {
-        long nonExistentUserId = 999L;
+        var nonExistentUserId = 999L;
+
         when(userRepository.getReferenceById(nonExistentUserId))
                 .thenThrow(new EntityNotFoundException("User not found"));
 
-        assertThrows(EntityNotFoundException.class, () -> {
-            userService.getReferenceById(nonExistentUserId);
-        });
-        verify(userRepository, times(1)).getReferenceById(nonExistentUserId);
+        assertThrows(EntityNotFoundException.class, () -> userService.getReferenceById(nonExistentUserId));
+
+        verify(userRepository).getReferenceById(nonExistentUserId);
     }
 }
