@@ -1,5 +1,6 @@
 package com.github.yildizmy.service;
 
+import com.github.yildizmy.config.MessageSourceConfig;
 import com.github.yildizmy.dto.mapper.TransactionRequestMapper;
 import com.github.yildizmy.dto.mapper.TransactionResponseMapper;
 import com.github.yildizmy.dto.request.TransactionRequest;
@@ -36,6 +37,9 @@ class TransactionServiceTest {
 
     @Mock
     private TransactionResponseMapper transactionResponseMapper;
+
+    @Mock
+    private MessageSourceConfig messageConfig;
 
     @InjectMocks
     private TransactionService transactionService;
