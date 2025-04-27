@@ -177,7 +177,7 @@ class WalletServiceTest {
         when(walletRepository.existsByUserIdAndNameIgnoreCase(anyLong(), anyString())).thenReturn(false);
         when(walletRequestMapper.toWallet(request)).thenReturn(wallet);
         when(walletRepository.save(wallet)).thenReturn(wallet);
-        when(walletTransactionRequestMapper.toTransactionDto(request)).thenReturn(new TransactionRequest());
+        when(walletTransactionRequestMapper.toTransactionRequest(request)).thenReturn(new TransactionRequest());
         when(transactionService.create(any(TransactionRequest.class))).thenReturn(new CommandResponse(1L));
 
         CommandResponse result = walletService.create(request);

@@ -125,7 +125,7 @@ public class WalletService {
         log.info(messageConfig.getMessage(INFO_WALLET_CREATED, wallet.getIban(), wallet.getName(), wallet.getBalance()));
 
         // add this initial amount to the transactions
-        transactionService.create(walletTransactionRequestMapper.toTransactionDto(request));
+        transactionService.create(walletTransactionRequestMapper.toTransactionRequest(request));
 
         return CommandResponse.builder().id(wallet.getId()).build();
     }
