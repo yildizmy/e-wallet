@@ -120,7 +120,7 @@ public class WalletService {
 
         ibanValidator.isValid(request.getIban(), null);
 
-        final Wallet wallet = walletRequestMapper.toEntity(request);
+        final Wallet wallet = walletRequestMapper.toWallet(request);
         walletRepository.save(wallet);
         log.info(messageConfig.getMessage(INFO_WALLET_CREATED, wallet.getIban(), wallet.getName(), wallet.getBalance()));
 
@@ -224,7 +224,7 @@ public class WalletService {
 
         ibanValidator.isValid(request.getIban(), null);
 
-        final Wallet wallet = walletRequestMapper.toEntity(request);
+        final Wallet wallet = walletRequestMapper.toWallet(request);
         walletRepository.save(wallet);
         log.info(messageConfig.getMessage(INFO_WALLET_UPDATED, wallet.getIban(), wallet.getName(), wallet.getBalance()));
         return CommandResponse.builder().id(id).build();

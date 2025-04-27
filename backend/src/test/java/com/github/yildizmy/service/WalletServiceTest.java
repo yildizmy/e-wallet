@@ -175,7 +175,7 @@ class WalletServiceTest {
 
         when(walletRepository.existsByIbanIgnoreCase(anyString())).thenReturn(false);
         when(walletRepository.existsByUserIdAndNameIgnoreCase(anyLong(), anyString())).thenReturn(false);
-        when(walletRequestMapper.toEntity(request)).thenReturn(wallet);
+        when(walletRequestMapper.toWallet(request)).thenReturn(wallet);
         when(walletRepository.save(wallet)).thenReturn(wallet);
         when(walletTransactionRequestMapper.toTransactionDto(request)).thenReturn(new TransactionRequest());
         when(transactionService.create(any(TransactionRequest.class))).thenReturn(new CommandResponse(1L));
@@ -187,7 +187,7 @@ class WalletServiceTest {
         verify(walletRepository).existsByIbanIgnoreCase(request.getIban());
         verify(walletRepository).existsByUserIdAndNameIgnoreCase(request.getUserId(), request.getName());
         verify(ibanValidator).isValid(request.getIban(), null);
-        verify(walletRequestMapper).toEntity(request);
+        verify(walletRequestMapper).toWallet(request);
         verify(walletRepository).save(wallet);
         verify(transactionService).create(any(TransactionRequest.class));
     }
@@ -288,7 +288,7 @@ class WalletServiceTest {
         when(walletRepository.findById(walletId)).thenReturn(Optional.of(existingWallet));
         when(walletRepository.existsByIbanIgnoreCase(anyString())).thenReturn(false);
         when(walletRepository.existsByUserIdAndNameIgnoreCase(anyLong(), anyString())).thenReturn(false);
-        when(walletRequestMapper.toEntity(request)).thenReturn(updatedWallet);
+        when(walletRequestMapper.toWallet(request)).thenReturn(updatedWallet);
         when(walletRepository.save(updatedWallet)).thenReturn(updatedWallet);
 
         CommandResponse result = walletService.update(walletId, request);
@@ -299,7 +299,7 @@ class WalletServiceTest {
         verify(walletRepository).existsByIbanIgnoreCase(request.getIban());
         verify(walletRepository).existsByUserIdAndNameIgnoreCase(request.getUserId(), request.getName());
         verify(ibanValidator).isValid(request.getIban(), null);
-        verify(walletRequestMapper).toEntity(request);
+        verify(walletRequestMapper).toWallet(request);
         verify(walletRepository).save(updatedWallet);
     }
 
