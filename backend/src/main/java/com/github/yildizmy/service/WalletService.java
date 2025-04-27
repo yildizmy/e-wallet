@@ -50,7 +50,7 @@ public class WalletService {
     @Transactional(readOnly = true)
     public WalletResponse findById(long id) {
         return walletRepository.findById(id)
-                .map(walletResponseMapper::toDto)
+                .map(walletResponseMapper::toWalletResponse)
                 .orElseThrow(() -> new NoSuchElementFoundException(messageConfig.getMessage(ERROR_WALLET_NOT_FOUND)));
     }
 
@@ -63,7 +63,7 @@ public class WalletService {
     @Transactional(readOnly = true)
     public WalletResponse findByIban(String iban) {
         return walletRepository.findByIban(iban)
-                .map(walletResponseMapper::toDto)
+                .map(walletResponseMapper::toWalletResponse)
                 .orElseThrow(() -> new NoSuchElementFoundException(messageConfig.getMessage(ERROR_WALLET_NOT_FOUND)));
     }
 
@@ -76,7 +76,7 @@ public class WalletService {
     @Transactional(readOnly = true)
     public List<WalletResponse> findByUserId(long userId) {
         return walletRepository.findByUserId(userId).stream()
-                .map(walletResponseMapper::toDto)
+                .map(walletResponseMapper::toWalletResponse)
                 .toList();
     }
 
@@ -102,7 +102,7 @@ public class WalletService {
         final Page<Wallet> wallets = walletRepository.findAll(pageable);
         if (wallets.isEmpty())
             throw new NoSuchElementFoundException(messageConfig.getMessage(ERROR_NO_RECORDS));
-        return wallets.map(walletResponseMapper::toDto);
+        return wallets.map(walletResponseMapper::toWalletResponse);
     }
 
     /**

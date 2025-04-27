@@ -61,14 +61,14 @@ class WalletServiceTest {
         WalletResponse expectedResponse = createTestWalletResponse(1L, "TEST123", "Test Wallet", BigDecimal.valueOf(1000));
 
         when(walletRepository.findById(1L)).thenReturn(Optional.of(wallet));
-        when(walletResponseMapper.toDto(wallet)).thenReturn(expectedResponse);
+        when(walletResponseMapper.toWalletResponse(wallet)).thenReturn(expectedResponse);
 
         WalletResponse result = walletService.findById(1L);
 
         assertNotNull(result);
         assertEquals(expectedResponse, result);
         verify(walletRepository).findById(1L);
-        verify(walletResponseMapper).toDto(wallet);
+        verify(walletResponseMapper).toWalletResponse(wallet);
     }
 
     @Test
@@ -85,14 +85,14 @@ class WalletServiceTest {
         WalletResponse expectedResponse = createTestWalletResponse(1L, "TEST123", "Test Wallet", BigDecimal.valueOf(1000));
 
         when(walletRepository.findByIban("TEST123")).thenReturn(Optional.of(wallet));
-        when(walletResponseMapper.toDto(wallet)).thenReturn(expectedResponse);
+        when(walletResponseMapper.toWalletResponse(wallet)).thenReturn(expectedResponse);
 
         WalletResponse result = walletService.findByIban("TEST123");
 
         assertNotNull(result);
         assertEquals(expectedResponse, result);
         verify(walletRepository).findByIban("TEST123");
-        verify(walletResponseMapper).toDto(wallet);
+        verify(walletResponseMapper).toWalletResponse(wallet);
     }
 
     @Test
@@ -107,7 +107,7 @@ class WalletServiceTest {
         );
 
         when(walletRepository.findByUserId(1L)).thenReturn(wallets);
-        when(walletResponseMapper.toDto(any(Wallet.class))).thenReturn(expectedResponses.get(0), expectedResponses.get(1));
+        when(walletResponseMapper.toWalletResponse(any(Wallet.class))).thenReturn(expectedResponses.get(0), expectedResponses.get(1));
 
         List<WalletResponse> result = walletService.findByUserId(1L);
 
@@ -115,7 +115,7 @@ class WalletServiceTest {
         assertEquals(2, result.size());
         assertEquals(expectedResponses, result);
         verify(walletRepository).findByUserId(1L);
-        verify(walletResponseMapper, times(2)).toDto(any(Wallet.class));
+        verify(walletResponseMapper, times(2)).toWalletResponse(any(Wallet.class));
     }
 
     @Test
@@ -148,7 +148,7 @@ class WalletServiceTest {
         WalletResponse expectedResponse = createTestWalletResponse(1L, "TEST123", "Test Wallet", BigDecimal.valueOf(1000));
 
         when(walletRepository.findAll(pageable)).thenReturn(walletPage);
-        when(walletResponseMapper.toDto(any(Wallet.class))).thenReturn(expectedResponse);
+        when(walletResponseMapper.toWalletResponse(any(Wallet.class))).thenReturn(expectedResponse);
 
         Page<WalletResponse> result = walletService.findAll(pageable);
 
@@ -156,7 +156,7 @@ class WalletServiceTest {
         assertEquals(1, result.getContent().size());
         assertEquals(expectedResponse, result.getContent().get(0));
         verify(walletRepository).findAll(pageable);
-        verify(walletResponseMapper).toDto(any(Wallet.class));
+        verify(walletResponseMapper).toWalletResponse(any(Wallet.class));
     }
 
     @Test

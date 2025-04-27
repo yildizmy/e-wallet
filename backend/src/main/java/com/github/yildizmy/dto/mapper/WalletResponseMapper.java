@@ -16,9 +16,9 @@ import java.text.MessageFormat;
 @Mapper(componentModel = "spring")
 public interface WalletResponseMapper {
 
-    Wallet toEntity(WalletResponse dto);
+    Wallet toWallet(WalletResponse dto);
 
-    WalletResponse toDto(Wallet entity);
+    WalletResponse toWalletResponse(Wallet entity);
 
     @AfterMapping
     default void setFullName(@MappingTarget UserResponse dto, User entity) {
