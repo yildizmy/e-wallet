@@ -43,7 +43,7 @@ public class TransactionService {
     @Transactional(readOnly = true)
     public TransactionResponse findById(long id) {
         return transactionRepository.findById(id)
-                .map(transactionResponseMapper::toDto)
+                .map(transactionResponseMapper::toTransactionResponse)
                 .orElseThrow(() -> new NoSuchElementFoundException(messageConfig.getMessage(ERROR_TRANSACTION_NOT_FOUND)));
     }
 
@@ -56,7 +56,7 @@ public class TransactionService {
     @Transactional(readOnly = true)
     public TransactionResponse findByReferenceNumber(UUID referenceNumber) {
         return transactionRepository.findByReferenceNumber(referenceNumber)
-                .map(transactionResponseMapper::toDto)
+                .map(transactionResponseMapper::toTransactionResponse)
                 .orElseThrow(() -> new NoSuchElementFoundException(messageConfig.getMessage(ERROR_TRANSACTION_NOT_FOUND)));
     }
 
@@ -72,7 +72,7 @@ public class TransactionService {
         if (transactions.isEmpty())
             throw new NoSuchElementFoundException(messageConfig.getMessage(ERROR_NO_RECORDS));
 
-        return transactions.stream().map(transactionResponseMapper::toDto)
+        return transactions.stream().map(transactionResponseMapper::toTransactionResponse)
                 .toList();
     }
 
@@ -88,7 +88,7 @@ public class TransactionService {
         if (transactions.isEmpty())
             throw new NoSuchElementFoundException(messageConfig.getMessage(ERROR_NO_RECORDS));
 
-        return transactions.map(transactionResponseMapper::toDto);
+        return transactions.map(transactionResponseMapper::toTransactionResponse);
     }
 
     /**

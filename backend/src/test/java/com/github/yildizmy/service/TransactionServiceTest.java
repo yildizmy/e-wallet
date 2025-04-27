@@ -59,14 +59,14 @@ class TransactionServiceTest {
     @Test
     void findById_shouldReturnTransactionResponse() {
         when(transactionRepository.findById(1L)).thenReturn(Optional.of(testTransaction));
-        when(transactionResponseMapper.toDto(testTransaction)).thenReturn(testTransactionResponse);
+        when(transactionResponseMapper.toTransactionResponse(testTransaction)).thenReturn(testTransactionResponse);
 
         TransactionResponse result = transactionService.findById(1L);
 
         assertNotNull(result);
         assertEquals(testTransactionResponse, result);
         verify(transactionRepository).findById(1L);
-        verify(transactionResponseMapper).toDto(testTransaction);
+        verify(transactionResponseMapper).toTransactionResponse(testTransaction);
     }
 
     @Test
@@ -81,14 +81,14 @@ class TransactionServiceTest {
     void findByReferenceNumber_shouldReturnTransactionResponse() {
         UUID referenceNumber = testTransaction.getReferenceNumber();
         when(transactionRepository.findByReferenceNumber(referenceNumber)).thenReturn(Optional.of(testTransaction));
-        when(transactionResponseMapper.toDto(testTransaction)).thenReturn(testTransactionResponse);
+        when(transactionResponseMapper.toTransactionResponse(testTransaction)).thenReturn(testTransactionResponse);
 
         TransactionResponse result = transactionService.findByReferenceNumber(referenceNumber);
 
         assertNotNull(result);
         assertEquals(testTransactionResponse, result);
         verify(transactionRepository).findByReferenceNumber(referenceNumber);
-        verify(transactionResponseMapper).toDto(testTransaction);
+        verify(transactionResponseMapper).toTransactionResponse(testTransaction);
     }
 
     @Test
@@ -105,7 +105,7 @@ class TransactionServiceTest {
         Long userId = 1L;
         List<Transaction> transactions = Arrays.asList(testTransaction, testTransaction);
         when(transactionRepository.findAllByUserId(userId)).thenReturn(transactions);
-        when(transactionResponseMapper.toDto(any(Transaction.class))).thenReturn(testTransactionResponse);
+        when(transactionResponseMapper.toTransactionResponse(any(Transaction.class))).thenReturn(testTransactionResponse);
 
         List<TransactionResponse> result = transactionService.findAllByUserId(userId);
 
@@ -114,7 +114,7 @@ class TransactionServiceTest {
         assertEquals(testTransactionResponse, result.get(0));
         assertEquals(testTransactionResponse, result.get(1));
         verify(transactionRepository).findAllByUserId(userId);
-        verify(transactionResponseMapper, times(2)).toDto(any(Transaction.class));
+        verify(transactionResponseMapper, times(2)).toTransactionResponse(any(Transaction.class));
     }
 
     @Test
@@ -131,7 +131,7 @@ class TransactionServiceTest {
         Pageable pageable = Pageable.unpaged();
         Page<Transaction> transactionPage = new PageImpl<>(Collections.singletonList(testTransaction));
         when(transactionRepository.findAll(pageable)).thenReturn(transactionPage);
-        when(transactionResponseMapper.toDto(testTransaction)).thenReturn(testTransactionResponse);
+        when(transactionResponseMapper.toTransactionResponse(testTransaction)).thenReturn(testTransactionResponse);
 
         Page<TransactionResponse> result = transactionService.findAll(pageable);
 
@@ -139,7 +139,7 @@ class TransactionServiceTest {
         assertEquals(1, result.getContent().size());
         assertEquals(testTransactionResponse, result.getContent().get(0));
         verify(transactionRepository).findAll(pageable);
-        verify(transactionResponseMapper).toDto(testTransaction);
+        verify(transactionResponseMapper).toTransactionResponse(testTransaction);
     }
 
     @Test

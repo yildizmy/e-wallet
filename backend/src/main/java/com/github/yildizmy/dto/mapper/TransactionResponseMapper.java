@@ -19,10 +19,10 @@ import static com.github.yildizmy.common.Constants.DATE_TIME_FORMAT;
 @Mapper(componentModel = "spring")
 public interface TransactionResponseMapper {
 
-    Transaction toEntity(TransactionResponse dto);
+    Transaction toTransaction(TransactionResponse dto);
 
     @Mapping(target = "createdAt", ignore = true)
-    TransactionResponse toDto(Transaction entity);
+    TransactionResponse toTransactionResponse(Transaction entity);
 
     @AfterMapping
     default void formatCreatedAt(@MappingTarget TransactionResponse dto, Transaction entity) {
