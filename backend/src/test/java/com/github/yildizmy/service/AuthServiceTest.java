@@ -1,12 +1,13 @@
 package com.github.yildizmy.service;
 
+import com.github.yildizmy.config.MessageSourceConfig;
+import com.github.yildizmy.domain.entity.User;
 import com.github.yildizmy.dto.mapper.SignupRequestMapper;
 import com.github.yildizmy.dto.request.LoginRequest;
 import com.github.yildizmy.dto.request.SignupRequest;
 import com.github.yildizmy.dto.response.CommandResponse;
 import com.github.yildizmy.dto.response.JwtResponse;
 import com.github.yildizmy.exception.ElementAlreadyExistsException;
-import com.github.yildizmy.domain.entity.User;
 import com.github.yildizmy.repository.UserRepository;
 import com.github.yildizmy.security.JwtUtils;
 import com.github.yildizmy.security.UserDetailsImpl;
@@ -42,6 +43,9 @@ class AuthServiceTest {
     @Mock
     private SignupRequestMapper signupRequestMapper;
 
+    @Mock
+    private MessageSourceConfig messageConfig;
+
     @InjectMocks
     private AuthService authService;
 
@@ -59,7 +63,8 @@ class AuthServiceTest {
 
     @Test
     void login_shouldReturnJwtResponse() {
-        when(authenticationManager.authenticate(any(UsernamePasswordAuthenticationToken.class))).thenReturn(authentication);
+        when(authenticationManager.authenticate(any(UsernamePasswordAuthenticationToken.class))).thenReturn(
+                authentication);
         when(jwtUtils.generateJwtToken(authentication)).thenReturn("test.jwt.token");
 
         JwtResponse response = authService.login(loginRequest);
@@ -71,14 +76,14 @@ class AuthServiceTest {
         assertEquals("Test", response.getFirstName());
         assertEquals("User", response.getLastName());
         assertEquals(Collections.singletonList("ROLE_USER"), response.getRoles());
-
         verify(authenticationManager).authenticate(any(UsernamePasswordAuthenticationToken.class));
         verify(jwtUtils).generateJwtToken(authentication);
     }
 
     @Test
     void signup_shouldCreateNewUser() {
-        SignupRequest signupRequest = new SignupRequest(1L, "New", "User", "newuser", "new@example.com", "password", Set.of("ROLE_USER"));
+        SignupRequest signupRequest =
+                new SignupRequest(1L, "New", "User", "newuser", "new@example.com", "password", Set.of("ROLE_USER"));
         User newUser = new User();
         newUser.setId(2L);
         newUser.setUsername("newuser");
@@ -92,7 +97,6 @@ class AuthServiceTest {
 
         assertNotNull(response);
         assertEquals(2L, response.id());
-
         verify(userRepository).existsByUsernameIgnoreCase("newuser");
         verify(userRepository).existsByEmailIgnoreCase("new@example.com");
         verify(signupRequestMapper).toUser(signupRequest);
@@ -101,10 +105,13 @@ class AuthServiceTest {
 
     @Test
     void signup_shouldThrowExceptionWhenUsernameExists() {
-        SignupRequest signupRequest = new SignupRequest(1L, "Existing", "User", "existinguser", "existing@example.com", "password", Set.of("ROLE_USER"));
+        SignupRequest signupRequest =
+                new SignupRequest(1L, "Existing", "User", "existinguser", "existing@example.com", "password",
+                        Set.of("ROLE_USER"));
         when(userRepository.existsByUsernameIgnoreCase("existinguser")).thenReturn(true);
 
         assertThrows(ElementAlreadyExistsException.class, () -> authService.signup(signupRequest));
+
         verify(userRepository).existsByUsernameIgnoreCase("existinguser");
         verify(userRepository, never()).existsByEmailIgnoreCase(anyString());
         verify(signupRequestMapper, never()).toUser(any());
@@ -113,14 +120,18 @@ class AuthServiceTest {
 
     @Test
     void signup_shouldThrowExceptionWhenEmailExists() {
-        SignupRequest signupRequest = new SignupRequest(1L, "New", "User", "newuser", "existing@example.com", "password", Set.of("ROLE_USER"));
+        SignupRequest signupRequest =
+                new SignupRequest(1L, "New", "User", "newuser", "existing@example.com", "password",
+                        Set.of("ROLE_USER"));
         when(userRepository.existsByUsernameIgnoreCase("newuser")).thenReturn(false);
         when(userRepository.existsByEmailIgnoreCase("existing@example.com")).thenReturn(true);
 
         assertThrows(ElementAlreadyExistsException.class, () -> authService.signup(signupRequest));
+
         verify(userRepository).existsByUsernameIgnoreCase("newuser");
         verify(userRepository).existsByEmailIgnoreCase("existing@example.com");
         verify(signupRequestMapper, never()).toUser(any());
         verify(userRepository, never()).save(any());
     }
+
 }
