@@ -1,5 +1,6 @@
 package com.github.yildizmy.service;
 
+import com.github.yildizmy.config.MessageSourceConfig;
 import com.github.yildizmy.dto.mapper.WalletRequestMapper;
 import com.github.yildizmy.dto.mapper.WalletResponseMapper;
 import com.github.yildizmy.dto.mapper.WalletTransactionRequestMapper;
@@ -51,6 +52,9 @@ class WalletServiceTest {
 
     @Mock
     private IbanValidator ibanValidator;
+
+    @Mock
+    private MessageSourceConfig messageConfig;
 
     @InjectMocks
     private WalletService walletService;
