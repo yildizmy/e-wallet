@@ -35,6 +35,9 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 class WalletServiceTest {
 
+    @InjectMocks
+    private WalletService walletService;
+
     @Mock
     private WalletRepository walletRepository;
 
@@ -55,9 +58,6 @@ class WalletServiceTest {
 
     @Mock
     private MessageSourceConfig messageConfig;
-
-    @InjectMocks
-    private WalletService walletService;
 
     @Test
     void findById_shouldReturnWalletResponse() {
