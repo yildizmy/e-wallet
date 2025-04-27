@@ -4,7 +4,6 @@ import com.github.yildizmy.config.MessageSourceConfig;
 import com.github.yildizmy.dto.mapper.TransactionRequestMapper;
 import com.github.yildizmy.dto.mapper.TransactionResponseMapper;
 import com.github.yildizmy.dto.request.TransactionRequest;
-import com.github.yildizmy.dto.response.CommandResponse;
 import com.github.yildizmy.dto.response.TransactionResponse;
 import com.github.yildizmy.exception.NoSuchElementFoundException;
 import com.github.yildizmy.domain.entity.Transaction;
@@ -65,10 +64,11 @@ class TransactionServiceTest {
         when(transactionRepository.findById(1L)).thenReturn(Optional.of(testTransaction));
         when(transactionResponseMapper.toTransactionResponse(testTransaction)).thenReturn(testTransactionResponse);
 
-        TransactionResponse result = transactionService.findById(1L);
+        var result = transactionService.findById(1L);
 
         assertNotNull(result);
         assertEquals(testTransactionResponse, result);
+
         verify(transactionRepository).findById(1L);
         verify(transactionResponseMapper).toTransactionResponse(testTransaction);
     }
@@ -78,91 +78,105 @@ class TransactionServiceTest {
         when(transactionRepository.findById(1L)).thenReturn(Optional.empty());
 
         assertThrows(NoSuchElementFoundException.class, () -> transactionService.findById(1L));
+
         verify(transactionRepository).findById(1L);
     }
 
     @Test
     void findByReferenceNumber_shouldReturnTransactionResponse() {
-        UUID referenceNumber = testTransaction.getReferenceNumber();
+        var referenceNumber = testTransaction.getReferenceNumber();
+
         when(transactionRepository.findByReferenceNumber(referenceNumber)).thenReturn(Optional.of(testTransaction));
         when(transactionResponseMapper.toTransactionResponse(testTransaction)).thenReturn(testTransactionResponse);
 
-        TransactionResponse result = transactionService.findByReferenceNumber(referenceNumber);
+        var result = transactionService.findByReferenceNumber(referenceNumber);
 
         assertNotNull(result);
         assertEquals(testTransactionResponse, result);
+
         verify(transactionRepository).findByReferenceNumber(referenceNumber);
         verify(transactionResponseMapper).toTransactionResponse(testTransaction);
     }
 
     @Test
     void findByReferenceNumber_shouldThrowExceptionWhenTransactionNotFound() {
-        UUID referenceNumber = UUID.randomUUID();
+        var referenceNumber = UUID.randomUUID();
+
         when(transactionRepository.findByReferenceNumber(referenceNumber)).thenReturn(Optional.empty());
 
         assertThrows(NoSuchElementFoundException.class, () -> transactionService.findByReferenceNumber(referenceNumber));
+
         verify(transactionRepository).findByReferenceNumber(referenceNumber);
     }
 
     @Test
     void findAllByUserId_shouldReturnListOfTransactionResponses() {
-        Long userId = 1L;
-        List<Transaction> transactions = Arrays.asList(testTransaction, testTransaction);
+        var userId = 1L;
+        var transactions = List.of(testTransaction, testTransaction);
+
         when(transactionRepository.findAllByUserId(userId)).thenReturn(transactions);
         when(transactionResponseMapper.toTransactionResponse(any(Transaction.class))).thenReturn(testTransactionResponse);
 
-        List<TransactionResponse> result = transactionService.findAllByUserId(userId);
+        var result = transactionService.findAllByUserId(userId);
 
         assertNotNull(result);
         assertEquals(2, result.size());
         assertEquals(testTransactionResponse, result.get(0));
         assertEquals(testTransactionResponse, result.get(1));
+
         verify(transactionRepository).findAllByUserId(userId);
         verify(transactionResponseMapper, times(2)).toTransactionResponse(any(Transaction.class));
     }
 
     @Test
     void findAllByUserId_shouldThrowExceptionWhenNoTransactionsFound() {
-        Long userId = 1L;
+        var userId = 1L;
+
         when(transactionRepository.findAllByUserId(userId)).thenReturn(Collections.emptyList());
 
         assertThrows(NoSuchElementFoundException.class, () -> transactionService.findAllByUserId(userId));
+
         verify(transactionRepository).findAllByUserId(userId);
     }
 
     @Test
     void findAll_shouldReturnPageOfTransactionResponses() {
-        Pageable pageable = Pageable.unpaged();
-        Page<Transaction> transactionPage = new PageImpl<>(Collections.singletonList(testTransaction));
+        var pageable = Pageable.unpaged();
+        var transactionPage = new PageImpl<>(List.of(testTransaction));
+
         when(transactionRepository.findAll(pageable)).thenReturn(transactionPage);
         when(transactionResponseMapper.toTransactionResponse(testTransaction)).thenReturn(testTransactionResponse);
 
-        Page<TransactionResponse> result = transactionService.findAll(pageable);
+        var result = transactionService.findAll(pageable);
 
         assertNotNull(result);
         assertEquals(1, result.getContent().size());
         assertEquals(testTransactionResponse, result.getContent().get(0));
+
         verify(transactionRepository).findAll(pageable);
         verify(transactionResponseMapper).toTransactionResponse(testTransaction);
     }
 
     @Test
     void findAll_shouldThrowExceptionWhenNoTransactionsFound() {
-        Pageable pageable = Pageable.unpaged();
+        var pageable = Pageable.unpaged();
+
         when(transactionRepository.findAll(pageable)).thenReturn(Page.empty());
 
         assertThrows(NoSuchElementFoundException.class, () -> transactionService.findAll(pageable));
+
         verify(transactionRepository).findAll(pageable);
     }
 
     @Test
     void create_shouldCreateNewTransaction() {
-        TransactionRequest request = new TransactionRequest();
+        var request = new TransactionRequest();
         request.setAmount(BigDecimal.valueOf(100));
 
-        Wallet fromWallet = new Wallet();
+        var fromWallet = new Wallet();
         fromWallet.setIban("FROM123");
-        Wallet toWallet = new Wallet();
+
+        var toWallet = new Wallet();
         toWallet.setIban("TO123");
 
         testTransaction.setFromWallet(fromWallet);
@@ -171,10 +185,11 @@ class TransactionServiceTest {
         when(transactionRequestMapper.toTransaction(request)).thenReturn(testTransaction);
         when(transactionRepository.save(testTransaction)).thenReturn(testTransaction);
 
-        CommandResponse result = transactionService.create(request);
+        var result = transactionService.create(request);
 
         assertNotNull(result);
         assertEquals(1L, result.id());
+
         verify(transactionRequestMapper).toTransaction(request);
         verify(transactionRepository).save(testTransaction);
     }
