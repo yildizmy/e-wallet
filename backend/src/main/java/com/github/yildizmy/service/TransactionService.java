@@ -98,7 +98,7 @@ public class TransactionService {
      * @return id of the created transaction
      */
     public CommandResponse create(TransactionRequest request) {
-        final Transaction transaction = transactionRequestMapper.toEntity(request);
+        final Transaction transaction = transactionRequestMapper.toTransaction(request);
         transactionRepository.save(transaction);
         log.info(messageConfig.getMessage(INFO_TRANSACTION_CREATED, transaction.getFromWallet().getIban(), transaction.getToWallet().getIban(), transaction.getAmount()));
         return CommandResponse.builder().id(transaction.getId()).build();

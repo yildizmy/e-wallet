@@ -164,14 +164,14 @@ class TransactionServiceTest {
         testTransaction.setFromWallet(fromWallet);
         testTransaction.setToWallet(toWallet);
 
-        when(transactionRequestMapper.toEntity(request)).thenReturn(testTransaction);
+        when(transactionRequestMapper.toTransaction(request)).thenReturn(testTransaction);
         when(transactionRepository.save(testTransaction)).thenReturn(testTransaction);
 
         CommandResponse result = transactionService.create(request);
 
         assertNotNull(result);
         assertEquals(1L, result.id());
-        verify(transactionRequestMapper).toEntity(request);
+        verify(transactionRequestMapper).toTransaction(request);
         verify(transactionRepository).save(testTransaction);
     }
 }

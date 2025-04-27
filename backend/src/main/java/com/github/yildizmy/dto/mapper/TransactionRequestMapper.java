@@ -36,9 +36,9 @@ public abstract class TransactionRequestMapper {
     @Mapping(target = "fromWallet", ignore = true)
     @Mapping(target = "toWallet", ignore = true)
     @Mapping(target = "type", ignore = true)
-    public abstract Transaction toEntity(TransactionRequest dto);
+    public abstract Transaction toTransaction(TransactionRequest dto);
 
-    public abstract TransactionRequest toDto(Transaction entity);
+    public abstract TransactionRequest toTransactionRequest(Transaction entity);
 
     @AfterMapping
     void setToEntityFields(@MappingTarget Transaction entity, TransactionRequest dto) {
