@@ -15,11 +15,11 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 class TypeServiceTest {
 
-    @Mock
-    private TypeRepository typeRepository;
-
     @InjectMocks
     private TypeService typeService;
+
+    @Mock
+    private TypeRepository typeRepository;
 
     @Test
     void getReferenceById_shouldReturnTypeReference() {
