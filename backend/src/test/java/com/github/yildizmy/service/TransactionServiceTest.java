@@ -29,6 +29,9 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 class TransactionServiceTest {
 
+    @InjectMocks
+    private TransactionService transactionService;
+
     @Mock
     private TransactionRepository transactionRepository;
 
@@ -40,9 +43,6 @@ class TransactionServiceTest {
 
     @Mock
     private MessageSourceConfig messageConfig;
-
-    @InjectMocks
-    private TransactionService transactionService;
 
     private Transaction testTransaction;
     private TransactionResponse testTransactionResponse;
