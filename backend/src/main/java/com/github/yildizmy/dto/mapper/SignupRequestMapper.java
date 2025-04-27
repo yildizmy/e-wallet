@@ -39,7 +39,7 @@ public abstract class SignupRequestMapper {
     @Mapping(target = "email", expression = "java(dto.getEmail().trim().toLowerCase())")
     @Mapping(target = "password", ignore = true)
     @Mapping(target = "roles", ignore = true)
-    public abstract User toEntity(SignupRequest dto);
+    public abstract User toUser(SignupRequest dto);
 
     @AfterMapping
     void setToEntityFields(@MappingTarget User entity, SignupRequest dto) {

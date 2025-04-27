@@ -78,7 +78,7 @@ public class AuthService {
         if (userRepository.existsByEmailIgnoreCase(request.getEmail().trim()))
             throw new ElementAlreadyExistsException(messageConfig.getMessage(ERROR_EMAIL_EXISTS));
 
-        final User user = signupRequestMapper.toEntity(request);
+        final User user = signupRequestMapper.toUser(request);
         userRepository.save(user);
         log.info(messageConfig.getMessage(INFO_USER_CREATED, user.getUsername()));
         return CommandResponse.builder().id(user.getId()).build();

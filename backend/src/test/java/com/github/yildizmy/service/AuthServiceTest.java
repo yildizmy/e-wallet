@@ -85,7 +85,7 @@ class AuthServiceTest {
 
         when(userRepository.existsByUsernameIgnoreCase("newuser")).thenReturn(false);
         when(userRepository.existsByEmailIgnoreCase("new@example.com")).thenReturn(false);
-        when(signupRequestMapper.toEntity(signupRequest)).thenReturn(newUser);
+        when(signupRequestMapper.toUser(signupRequest)).thenReturn(newUser);
         when(userRepository.save(newUser)).thenReturn(newUser);
 
         CommandResponse response = authService.signup(signupRequest);
@@ -95,7 +95,7 @@ class AuthServiceTest {
 
         verify(userRepository).existsByUsernameIgnoreCase("newuser");
         verify(userRepository).existsByEmailIgnoreCase("new@example.com");
-        verify(signupRequestMapper).toEntity(signupRequest);
+        verify(signupRequestMapper).toUser(signupRequest);
         verify(userRepository).save(newUser);
     }
 
@@ -107,7 +107,7 @@ class AuthServiceTest {
         assertThrows(ElementAlreadyExistsException.class, () -> authService.signup(signupRequest));
         verify(userRepository).existsByUsernameIgnoreCase("existinguser");
         verify(userRepository, never()).existsByEmailIgnoreCase(anyString());
-        verify(signupRequestMapper, never()).toEntity(any());
+        verify(signupRequestMapper, never()).toUser(any());
         verify(userRepository, never()).save(any());
     }
 
@@ -120,7 +120,7 @@ class AuthServiceTest {
         assertThrows(ElementAlreadyExistsException.class, () -> authService.signup(signupRequest));
         verify(userRepository).existsByUsernameIgnoreCase("newuser");
         verify(userRepository).existsByEmailIgnoreCase("existing@example.com");
-        verify(signupRequestMapper, never()).toEntity(any());
+        verify(signupRequestMapper, never()).toUser(any());
         verify(userRepository, never()).save(any());
     }
 }
