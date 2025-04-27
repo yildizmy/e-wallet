@@ -25,63 +25,71 @@ class RoleServiceTest {
 
     @Test
     void getReferenceByTypeIsIn_shouldReturnRolesForGivenTypes() {
-        Set<RoleType> types = new HashSet<>(Arrays.asList(RoleType.ROLE_ADMIN, RoleType.ROLE_USER));
-        List<Role> expectedRoles = Arrays.asList(
+        var types = Set.of(RoleType.ROLE_ADMIN, RoleType.ROLE_USER);
+        var expectedRoles = List.of(
                 createRole(1L, RoleType.ROLE_ADMIN),
                 createRole(2L, RoleType.ROLE_USER)
         );
+
         when(roleRepository.getReferenceByTypeIsIn(types)).thenReturn(expectedRoles);
 
-        List<Role> result = roleService.getReferenceByTypeIsIn(types);
+        var result = roleService.getReferenceByTypeIsIn(types);
 
         assertNotNull(result);
         assertEquals(2, result.size());
         assertTrue(result.stream().anyMatch(role -> role.getType() == RoleType.ROLE_ADMIN));
         assertTrue(result.stream().anyMatch(role -> role.getType() == RoleType.ROLE_USER));
-        verify(roleRepository, times(1)).getReferenceByTypeIsIn(types);
+
+        verify(roleRepository).getReferenceByTypeIsIn(types);
     }
 
     @Test
     void getReferenceByTypeIsIn_shouldReturnEmptyListForNonExistentTypes() {
-        Set<RoleType> nonExistentTypes = new HashSet<>(Collections.emptySet());
-        when(roleRepository.getReferenceByTypeIsIn(nonExistentTypes)).thenReturn(Collections.emptyList());
+        var nonExistentTypes = Collections.<RoleType>emptySet();
 
-        List<Role> result = roleService.getReferenceByTypeIsIn(nonExistentTypes);
+        when(roleRepository.getReferenceByTypeIsIn(nonExistentTypes))
+                .thenReturn(Collections.emptyList());
+
+        var result = roleService.getReferenceByTypeIsIn(nonExistentTypes);
 
         assertNotNull(result);
         assertTrue(result.isEmpty());
-        verify(roleRepository, times(1)).getReferenceByTypeIsIn(nonExistentTypes);
+
+        verify(roleRepository).getReferenceByTypeIsIn(nonExistentTypes);
     }
 
     @Test
     void findAll_shouldReturnAllRoles() {
-        List<Role> expectedRoles = Arrays.asList(
+        var expectedRoles = List.of(
                 createRole(1L, RoleType.ROLE_ADMIN),
                 createRole(2L, RoleType.ROLE_USER)
         );
+
         when(roleRepository.findAll()).thenReturn(expectedRoles);
 
-        List<Role> result = roleService.findAll();
+        var result = roleService.findAll();
 
         assertNotNull(result);
         assertEquals(2, result.size());
         assertEquals(expectedRoles, result);
-        verify(roleRepository, times(1)).findAll();
+
+        verify(roleRepository).findAll();
     }
 
     @Test
     void findAll_shouldReturnEmptyListWhenNoRolesExist() {
         when(roleRepository.findAll()).thenReturn(Collections.emptyList());
 
-        List<Role> result = roleService.findAll();
+        var result = roleService.findAll();
 
         assertNotNull(result);
         assertTrue(result.isEmpty());
-        verify(roleRepository, times(1)).findAll();
+
+        verify(roleRepository).findAll();
     }
 
     private Role createRole(Long id, RoleType type) {
-        Role role = new Role();
+        var role = new Role();
         role.setId(id);
         role.setType(type);
         return role;
