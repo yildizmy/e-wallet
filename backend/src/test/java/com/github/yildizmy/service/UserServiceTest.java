@@ -15,11 +15,11 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 class UserServiceTest {
 
-    @Mock
-    private UserRepository userRepository;
-
     @InjectMocks
     private UserService userService;
+
+    @Mock
+    private UserRepository userRepository;
 
     @Test
     void getReferenceById_shouldReturnUserReference() {
