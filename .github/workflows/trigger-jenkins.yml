@@ -28,7 +28,7 @@ jobs:
           curl -X POST "$JENKINS_URL/job/$JENKINS_JOB_NAME/buildWithParameters" \
             --user "$JENKINS_USER:$JENKINS_API_TOKEN" \
             -H "Jenkins-Crumb: $CRUMB" \
-            --data-urlencode "BRANCH_NAME={{ github.head_ref }}" \
+            --data-urlencode "BRANCH_NAME=${{ github.head_ref }}" \
             --data-urlencode "GIT_URL=https://github.com/Abdelkoddouss-Ybnelhaj/e-wallet.git" \
             --data-urlencode "CRENDANTAILS_ID=git-creds" \
             --data-urlencode "BUILD_TOOL=maven" \
