@@ -1,0 +1,41 @@
+name: trigger-jenkins.yml
+
+on:
+  pull_request:
+    branches: [ "master" ]
+    paths:
+      - 'backend/**'  
+
+jobs:
+  trigger-jenkins:
+    runs-on: ubuntu-latest
+
+    env:
+      JENKINS_URL: ${{ secrets.JENKINS_URL }}
+      JENKINS_JOB_NAME: ${{ secrets.JENKINS_JOB }}
+      JENKINS_USER: ${{ secrets.JENKINS_USER }}
+      JENKINS_API_TOKEN: ${{ secrets.JENKINS_API_TOKEN }}
+
+    steps:
+      - name: Get Jenkins Crumb
+        id: get_crumb
+        run: |
+          crumb_json=$(curl -s --user "$JENKINS_USER:$JENKINS_API_TOKEN" "$JENKINS_URL/crumbIssuer/api/json")
+          echo "CRUMB=$(echo $crumb_json | jq -r .crumb)" >> $GITHUB_ENV
+
+      - name: Trigger Jenkins job
+        run: |
+          curl -X POST "$JENKINS_URL/job/$JENKINS_JOB_NAME/buildWithParameters" \
+            --user "$JENKINS_USER:$JENKINS_API_TOKEN" \
+            -H "Jenkins-Crumb: $CRUMB" \
+            --data-urlencode "BRANCH_NAME=${{ github.ref_name }}" \
+            --data-urlencode "GIT_URL=https://github.com/Abdelkoddouss-Ybnelhaj/e-wallet.git" \
+            --data-urlencode "CRENDANTAILS_ID=git-creds" \
+            --data-urlencode "BUILD_TOOL=maven" \
+            --data-urlencode "RUN_OWASP_DEPENDENCY_CHECK=true" \
+            --data-urlencode "PROJECT_PATH=./backend" \
+            --data-urlencode "PROJECT_NAME=e-wallet" \
+            --data-urlencode "RUN_UNIT_TESTS=true" \
+            --data-urlencode "INTEGRATE_STATIC_CODE_ANALYSIS=true" \
+            --data-urlencode "SONARQUBE_CONNECTION=sonarqube-server" \
+            --data-urlencode "PROJECT_KEY=e-wallet-backend"
