@@ -25,4 +25,24 @@ public class UserService {
     public User getReferenceById(long id) {
         return userRepository.getReferenceById(id);
     }
+
+
+    // /**
+    //  * ❌ Example of SQL Injection via dynamic query string
+    //  * DO NOT DO THIS IN REAL CODE!
+    //  */
+    // public void searchUserByName(String name) {
+    //     String query = "SELECT u FROM User u WHERE u.name = '" + name + "'";
+    //     log.info("Running query: " + query); // ❌ Info leak
+    // }
+
+    // /**
+    //  * ❌ Example of logging sensitive information
+    //  */
+    // public void login(String username, String password) {
+    //     // ❌ Logging sensitive data (credentials)
+    //     log.info("User tried to login with username={} and password={}", username, password);
+
+    //     log.info("✅ User {} logged in", username);
+    // }
 }
