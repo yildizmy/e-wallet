@@ -32,15 +32,15 @@ jobs:
             --data-urlencode "GIT_URL=https://github.com/Abdelkoddouss-Ybnelhaj/e-wallet.git" \
             --data-urlencode "CRENDANTAILS_ID=git-creds" \
             --data-urlencode "PROJECT_PATH=./backend" \
-            --data-urlencode "BUILD_TOOL=maven"
-            --data-urlencode "PROJECT_NAME=e-wallet"
-            --data-urlencode "NEXUS_URL=http://192.168.1.117:8081"
-            --data-urlencode "GROUP_PATH=com/github/yildizmy/e-wallet"
-            --data-urlencode "REPOSITORY=maven-snapshots"
-            --data-urlencode "SNAPSHOT_VERSION=0.0.1-SNAPSHOT"
-            --data-urlencode "SSH_KEY=vm-key"
-            --data-urlencode "REMOTE_HOST=192.168.122.120"
-            --data-urlencode "REMOTE_USER=user"
-            --data-urlencode "TARGET_DIR=/home/user/deployments"
-            --data-urlencode "ENV_VARS=env-vars"
+            --data-urlencode "BUILD_TOOL=maven" \
+            --data-urlencode "PROJECT_NAME=e-wallet" \
+            --data-urlencode "NEXUS_URL=http://192.168.1.117:8081" \
+            --data-urlencode "GROUP_PATH=com/github/yildizmy/e-wallet" \
+            --data-urlencode "REPOSITORY=maven-snapshots" \
+            --data-urlencode "SNAPSHOT_VERSION=0.0.1-SNAPSHOT" \
+            --data-urlencode "SSH_KEY=vm-key" \
+            --data-urlencode "REMOTE_HOST=192.168.122.120" \
+            --data-urlencode "REMOTE_USER=user" \
+            --data-urlencode "TARGET_DIR=/home/user/deployments" \
+            --data-urlencode "ENV_VARS=env-vars" 
             
