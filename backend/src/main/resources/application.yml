@@ -58,7 +58,7 @@ logging:
     org.springframework.security: error
 
 server:
-  port: 8080
+  port: 8085
   error:
     include-message: always
     include-binding-errors: always
@@ -72,3 +72,8 @@ app:
   security:
     jwtSecret: ${jwt_secret}
     jwtExpirationMs: 3600000
+  weather:
+    api:
+      base-url: https://api.openweathermap.org/data/2.5/weather
+      key: dummy-api-key
+
