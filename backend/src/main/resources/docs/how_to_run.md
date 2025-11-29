@@ -48,7 +48,7 @@ cd e-wallet
 4. Run the following command to compose and start up database container of the application on Docker. 
 
 > [!NOTE]
-> If you want to use different environment variables than predefined, you can update them via `.env` file located in the project root before running this command.
+> If you want to use different environment variables than predefined, you can update them via `.env.properties` file located in the project root before running this command.
 
 ```shell
 docker compose up --build
@@ -147,7 +147,7 @@ By using Postman, etc. API endpoints can also be tested. For this purpose, see t
 <br/>
 
 > [!TIP]
-> For connecting to the application database, the following url and the credentials given in the `.env` file can be used. 
+> For connecting to the application database, the following url and the credentials given in the `.env.properties` file can be used. 
 
 ```
 url: jdbc:postgresql://localhost:5432/<${db_name}>

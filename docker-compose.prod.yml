@@ -4,7 +4,7 @@ services:
     container_name: e-wallet-frontend
     build: ./frontend
     restart: always
-    env_file: ./.env
+    env_file: ./.env.properties
     ports:
       - '3000:3000'
     depends_on:
@@ -20,7 +20,7 @@ services:
   backend:
     container_name: e-wallet-backend
     build: ./backend
-    env_file: ./.env
+    env_file: ./.env.properties
     restart: always
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/${db_name}

@@ -4,7 +4,7 @@ services:
     container_name: e-wallet-db
     image: postgres:14.6-alpine
     restart: always
-    env_file: ./.env
+    env_file: ./.env.properties
     environment:
       POSTGRES_DB: ${db_name}
       POSTGRES_USER: ${db_username}
